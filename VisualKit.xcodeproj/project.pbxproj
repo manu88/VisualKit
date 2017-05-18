@@ -13,6 +13,7 @@
 		59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */; };
 		59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */; };
 		59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */; };
+		59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,8 @@
 		59E0D36A1ECE17C600BF10C4 /* CLApplication.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLApplication.hpp; sourceTree = "<group>"; };
 		59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKView.cpp; sourceTree = "<group>"; };
 		59E0D36F1ECE1C4E00BF10C4 /* VKView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKView.hpp; sourceTree = "<group>"; };
+		59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKButton.cpp; sourceTree = "<group>"; };
+		59E0D3741ECE2B5600BF10C4 /* VKButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKButton.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				59E0D34E1ECE0AD700BF10C4 /* main.cpp */,
+				59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */,
+				59E0D3741ECE2B5600BF10C4 /* VKButton.hpp */,
 				59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */,
 				59E0D36F1ECE1C4E00BF10C4 /* VKView.hpp */,
 				59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */,
@@ -202,6 +207,7 @@
 				59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */,
 				59E0D34F1ECE0AD700BF10C4 /* main.cpp in Sources */,
 				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
+				59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */,
 				59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

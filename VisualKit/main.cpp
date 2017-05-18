@@ -14,6 +14,8 @@
 #include "VKWindow.hpp"
 #include "CLApplication.hpp"
 
+#include "VKButton.hpp"
+
 
 
 static void renderScreen( GXRenderer *render , Display* disp , GXContext *ctx)
@@ -31,8 +33,7 @@ int main()
     
     Display disp;
     {
-        VKWindow mainWin;
-        CLApplication app;
+        
         
         /**/
         if( DisplayInit(&disp , 1000 , 800) == 0)
@@ -61,6 +62,12 @@ int main()
         pxRatio = (float)fbWidth / (float)winWidth;
         
         GXContext ctx;
+
+        VKWindow mainWin;
+        CLApplication app;
+        
+        mainWin.id = 0;
+        app._view.id = 1;
         
         DisplayGetWindowSize( &disp, &winWidth, &winHeight);
         DisplayGetFramebufferSize(&disp, &fbWidth, &fbHeight);
@@ -72,6 +79,10 @@ int main()
         
         app._view.bounds = GXRectMake(0, 10, winWidth, winHeight - 40);
         mainWin.addChild(&app._view);
+        
+        VKButton btton;
+        btton.bounds = GXRectMake(10, 10, 200, 100);
+        mainWin.addChild(  &btton);
 
         GB::RunLoop runL;
         
@@ -82,11 +93,6 @@ int main()
         t.setInterval(40);
         t.setCallback([&](GB::Timer &timer)
                       {
-                          /*
-                           GLint defaultFBO = -1;
-                           glGetIntegerv(GL_FRAMEBUFFER_BINDING, &defaultFBO);
-                           assert(defaultFBO == 0);
-                           */
                           renderScreen(&render , &disp , &ctx);
                           
                           if( DisplayShouldClose( &disp ))
