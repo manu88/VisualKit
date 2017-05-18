@@ -11,7 +11,7 @@
 
 VKButton::VKButton()
 {
-    background = GXColorMake(1, 0, 0 , 0);
+    background = GXColorMake(1, 0, 0 );
     id = 3;
 }
 
@@ -22,13 +22,12 @@ VKButton::~VKButton()
 
 void VKButton::paint( GXContext* context , const GXRect& bounds)
 {
-    context->beginPath();
     context->addRect(bounds);
     context->setStrokeColor( GXColors::Blue);
     context->setFillColor(GXColors::Green);
     context->fill();
     context->stroke();
-    /*
+    
     const GXFontHandle font = context->createFont("Roboto-Regular.ttf");
     
     context->setFontId( font );
@@ -40,5 +39,5 @@ void VKButton::paint( GXContext* context , const GXRect& bounds)
     
     
     context->addTextBox(GXPointMake( 10 ,20), 100, "Hello");
-    */
+    
 }

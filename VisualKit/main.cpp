@@ -84,6 +84,7 @@ int main()
         btton.bounds = GXRectMake(10, 10, 200, 100);
         mainWin.addChild(  &btton);
 
+        //render.setRoot( &btton );
         GB::RunLoop runL;
         
         app._runLoop = &runL;
