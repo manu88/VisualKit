@@ -29,7 +29,7 @@ void VKWindow::setWindowTitle( const std::string &title) noexcept
 
 void VKWindow::paint( GXContext* context , const GXRect& bounds)
 {
-    const GXFontHandle font = context->createFont(  VKDefaults::DefaultFont );
+    const GXFontHandle font = context->getFontManager().getFont(VKDefaults::DefaultFont);//context->createFont(  VKDefaults::DefaultFont );
     
     context->setFontId( font );
     context->setTextSize( 20 );
