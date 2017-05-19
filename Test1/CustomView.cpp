@@ -97,6 +97,7 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
 
 bool CustomView::touchBegan( const GXTouch &t)
 {
+    printf("Touch began at %i %i \n" , t.center.x , t.center.y);
     _touchLoc = t.center;
     setNeedsDisplay();
     
