@@ -12,11 +12,13 @@
 #include "../../GX/include/Display.h"
 #include <GroundBase.hpp>
 #include "VKWindow.hpp"
+#include "VKCursor.hpp"
 #include "CLApplication.hpp"
 
 #include "CustomView.hpp"
 
-
+VKWindow* _mainWin;
+VKCursor* _cursor;
 
 static void renderScreen( GXRenderer *render , Display* disp , GXContext *ctx)
 {
@@ -26,6 +28,18 @@ static void renderScreen( GXRenderer *render , Display* disp , GXContext *ctx)
     DisplayPollEvents( disp );
 }
 
+
+static void eventListener(void* disp , const GXEvent *evt)
+{
+    
+    if(evt->type == GXEventTypeMouse)
+    {
+        const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
+        _cursor->setCenter( GXPointMake(mouse->x, mouse->y));
+    }
+            
+    CLApplication::s_onGXEvent(disp , evt);
+}
 
 int main()
 {
@@ -65,10 +79,13 @@ int main()
         GXContext ctx;
 
         VKWindow mainWin;
+        _mainWin = &mainWin;
+        VKCursor cursor;
+        _cursor = &cursor;
         CLApplication app;
         
         DisplaySetUserContext(&disp, &app);
-        DisplaySetEventCallback(&disp, CLApplication::s_onGXEvent);
+        DisplaySetEventCallback(&disp, eventListener);
         
         mainWin.setWindowTitle("My APP");
         mainWin.id = 0;
@@ -85,7 +102,7 @@ int main()
         
         app._view->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
         mainWin.addChild( app._view );
-        
+        mainWin.addChild( &cursor);
     
         
         /**/

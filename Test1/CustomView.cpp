@@ -88,9 +88,8 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     
     context->addTextBox(GXPointMake(bounds.size.width /2 , 20), 100, _test);
     
-    context->addCircle( _touchLoc, 5);
-    context->setFillColor(GXColors::Red);
-    context->fill();
+    
+    
 }
 
 bool CustomView::touchBegan( const GXTouch &t)

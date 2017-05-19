@@ -18,6 +18,7 @@
 		59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3821ECED85200BF10C4 /* CustomView.cpp */; };
 		59E0D3861ECED85200BF10C4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3841ECED85200BF10C4 /* main.cpp */; };
 		59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */; };
+		59E0D3921ECF406700BF10C4 /* VKCursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3901ECF406700BF10C4 /* VKCursor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		59E0D3841ECED85200BF10C4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKAlertView.cpp; sourceTree = "<group>"; };
 		59E0D38E1ECEFB7A00BF10C4 /* VKAlertView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKAlertView.hpp; sourceTree = "<group>"; };
+		59E0D3901ECF406700BF10C4 /* VKCursor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKCursor.cpp; sourceTree = "<group>"; };
+		59E0D3911ECF406700BF10C4 /* VKCursor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKCursor.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 		59E0D34D1ECE0AD700BF10C4 /* VisualKit */ = {
 			isa = PBXGroup;
 			children = (
+				59E0D3901ECF406700BF10C4 /* VKCursor.cpp */,
+				59E0D3911ECF406700BF10C4 /* VKCursor.hpp */,
 				59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */,
 				59E0D38E1ECEFB7A00BF10C4 /* VKAlertView.hpp */,
 				59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */,
@@ -236,6 +241,7 @@
 				59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */,
 				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
 				59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */,
+				59E0D3921ECF406700BF10C4 /* VKCursor.cpp in Sources */,
 				59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */,
 				59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */,
 				59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */,
