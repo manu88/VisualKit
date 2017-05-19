@@ -6,12 +6,12 @@ CFLAGS= $(BUILD_CONFIG)  -c -Wall -Wextra
 CFLAGS+= -std=c++11 -pedantic 
 
 
-CFLAGS+= -I/usr/local/include/GroundBase -I../GX/include/
+CFLAGS+= -I/usr/local/include/GroundBase -I../GX/include/ -IVisualKit/
 
 LDFLAGS= -L/usr/local/lib/ -L../GX/ -lGX -lGroundBase-cpp
 
 
-SOURCES=$(wildcard VisualKit/*.cpp)
+SOURCES=$(wildcard VisualKit/*.cpp) $(wildcard Test1/*.cpp)
 
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE= Test
