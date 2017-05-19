@@ -32,11 +32,16 @@ bool VKView::touchBegan( const GXTouch &t)
             
             if( del)
             {
-                del->touchBegan({ t.center - l->getBounds().origin ,  GXTouch::Phase::Began });
+                if(del->touchBegan({ t.center - l->getBounds().origin ,  GXTouch::Phase::Began }))
+                {
+                    return true;
+                }
             }
             
         }
     }
+    
+    
     
     return true;
 }

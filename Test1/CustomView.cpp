@@ -82,18 +82,22 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     
     context->setFontId( font );
     context->setTextSize( 20 );
-    context->setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE );
+    //context->setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE );
     
     
     context->setFillColor(GXColors::Black);
     
     
     context->addTextBox(GXPointMake(bounds.size.width /2 , 20), 100, _test);
+    
+    context->addCircle( _touchLoc, 5);
+    context->setFillColor(GXColors::Red);
+    context->fill();
 }
 
 bool CustomView::touchBegan( const GXTouch &t)
 {
-    //_test = std::to_string(t.center.x) + " " + std::to_string(t.center.y);
+    _touchLoc = t.center;
     setNeedsDisplay();
     
     return VKView::touchBegan(t);

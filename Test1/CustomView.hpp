@@ -32,6 +32,8 @@ protected:
     VKButton bttonOk;
     VKButton bttonCancel;
     
+    GXPoint _touchLoc;
+    
     VKAlertView *alert;
     
     GB::FDSource input;
