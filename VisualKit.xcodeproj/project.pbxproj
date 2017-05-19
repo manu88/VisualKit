@@ -14,6 +14,8 @@
 		59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */; };
 		59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */; };
 		59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */; };
+		59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3781ECECD6D00BF10C4 /* VK.cpp */; };
+		59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +60,10 @@
 		59E0D36F1ECE1C4E00BF10C4 /* VKView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKView.hpp; sourceTree = "<group>"; };
 		59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKButton.cpp; sourceTree = "<group>"; };
 		59E0D3741ECE2B5600BF10C4 /* VKButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKButton.hpp; sourceTree = "<group>"; };
+		59E0D3781ECECD6D00BF10C4 /* VK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VK.cpp; sourceTree = "<group>"; };
+		59E0D3791ECECD6D00BF10C4 /* VK.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VK.hpp; sourceTree = "<group>"; };
+		59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKTouch.cpp; sourceTree = "<group>"; };
+		59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTouch.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				59E0D34E1ECE0AD700BF10C4 /* main.cpp */,
+				59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */,
+				59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */,
+				59E0D3781ECECD6D00BF10C4 /* VK.cpp */,
+				59E0D3791ECECD6D00BF10C4 /* VK.hpp */,
 				59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */,
 				59E0D3741ECE2B5600BF10C4 /* VKButton.hpp */,
 				59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */,
@@ -204,9 +214,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */,
 				59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */,
 				59E0D34F1ECE0AD700BF10C4 /* main.cpp in Sources */,
 				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
+				59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */,
 				59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */,
 				59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */,
 			);

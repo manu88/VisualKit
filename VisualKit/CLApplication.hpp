@@ -11,6 +11,7 @@
 
 #include <GBRunLoop.hpp>
 #include "VKView.hpp"
+#include "../../GX/include/GXEvent.h"
 
 class CLApplication
 {
@@ -18,6 +19,11 @@ public:
     VKView _view;
     
     GB::RunLoop* _runLoop;
+    
+    static void s_onGXEvent(void* disp , const GXEvent *evt);
+    
+protected:
+    
 };
 
 #endif /* CLApplication_hpp */

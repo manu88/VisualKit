@@ -36,7 +36,7 @@ int main()
         
         
         /**/
-        if( DisplayInit(&disp , 1000 , 800) == 0)
+        if( DisplayInit(&disp , 1280 , 750) == 0)
         {
             printf("Display init error \n");
             return -1;
@@ -56,7 +56,7 @@ int main()
         DisplayGetWindowSize( &disp, &winWidth, &winHeight);
         DisplayGetFramebufferSize( &disp , &fbWidth, &fbHeight);
         
-        //DisplaySetEventCallback(&disp, eventListener);
+        
         
         // Calculate pixel ration for hi-dpi devices.
         pxRatio = (float)fbWidth / (float)winWidth;
@@ -66,6 +66,10 @@ int main()
         VKWindow mainWin;
         CLApplication app;
         
+        DisplaySetUserContext(&disp, &app);
+        DisplaySetEventCallback(&disp, CLApplication::s_onGXEvent);
+        
+        mainWin.setWindowTitle("My APP");
         mainWin.id = 0;
         app._view.id = 1;
         
@@ -77,14 +81,10 @@ int main()
         mainWin.bounds = GXRectMake(0, 0, winWidth, winHeight);
         render.setRoot( &mainWin );
         
-        app._view.bounds = GXRectMake(0, 10, winWidth, winHeight - 40);
+        app._view.bounds = GXRectMake(0, 20, winWidth, winHeight - 20);
         mainWin.addChild(&app._view);
         
-        VKButton btton;
-        btton.bounds = GXRectMake(10, 10, 200, 100);
-        mainWin.addChild(  &btton);
-
-        //render.setRoot( &btton );
+    
         GB::RunLoop runL;
         
         app._runLoop = &runL;
@@ -104,6 +104,25 @@ int main()
         
         runL.addSource(t);
 
+        /**/
+        /*
+        GB::Timer tT;
+        tT.setInterval(2000);
+        tT.setCallback([&](GB::Timer &timer)
+        {
+            if( app._view.hasParent())
+            {
+                assert(mainWin.removeChild( &app._view ));
+                printf("Remove view \n");
+            }
+            else
+            {
+                assert(mainWin.addChild( &app._view ));
+                printf("Add view \n");
+            }
+        });
+        runL.addSource(tT);
+        */
         
         runL.run();
     }

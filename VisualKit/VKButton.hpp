@@ -17,9 +17,17 @@ class VKButton : public GXLayer
 public:
     VKButton();
     virtual ~VKButton();
+    
+    void setText( const std::string &t) noexcept;
+    const std::string &getText() const noexcept
+    {
+        return _text;
+    }
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
 private:
+    
+    std::string _text;
 };
 
 #endif /* VKButton_hpp */
