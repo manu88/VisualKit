@@ -25,6 +25,7 @@ protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     
     bool touchBegan( const GXTouch &t) override;
+    bool touchMoved( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
     
     std::string _test;

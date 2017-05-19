@@ -82,9 +82,7 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     
     context->setFontId( font );
     context->setTextSize( 20 );
-    //context->setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE );
-    
-    
+
     context->setFillColor(GXColors::Black);
     
     
@@ -97,11 +95,16 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
 
 bool CustomView::touchBegan( const GXTouch &t)
 {
-    printf("Touch began at %i %i \n" , t.center.x , t.center.y);
-    _touchLoc = t.center;
-    setNeedsDisplay();
+    
+    
     
     return VKView::touchBegan(t);
+}
+bool CustomView::touchMoved( const GXTouch &t)
+{
+    _touchLoc = t.center;
+    setNeedsDisplay();
+    return VKView::touchMoved(t);
 }
 
 bool CustomView::touchEnded( const GXTouch &t)
