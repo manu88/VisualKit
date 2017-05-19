@@ -16,7 +16,7 @@
 class CLApplication
 {
 public:
-    VKView _view;
+    VKView *_view;
     
     GB::RunLoop* _runLoop;
     

@@ -19,13 +19,14 @@ public:
     VKView();
     virtual ~VKView();
 protected:
-    void paint( GXContext* context , const GXRect& bounds) override;
+    
     
     bool touchBegan( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
+    
 private:
     
-    std::string _test;
+    
 };
 
 #endif /* VKView_hpp */

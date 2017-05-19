@@ -29,6 +29,7 @@ struct GXTouch
 
 class VKTouchDelegate
 {
+    friend class VKView;
 public:
     virtual ~VKTouchDelegate()
     {}

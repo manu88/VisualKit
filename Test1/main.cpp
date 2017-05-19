@@ -14,7 +14,7 @@
 #include "VKWindow.hpp"
 #include "CLApplication.hpp"
 
-#include "VKButton.hpp"
+#include "CustomView.hpp"
 
 
 
@@ -71,7 +71,8 @@ int main()
         
         mainWin.setWindowTitle("My APP");
         mainWin.id = 0;
-        app._view.id = 1;
+        app._view = new CustomView();
+        
         
         DisplayGetWindowSize( &disp, &winWidth, &winHeight);
         DisplayGetFramebufferSize(&disp, &fbWidth, &fbHeight);
@@ -81,8 +82,8 @@ int main()
         mainWin.bounds = GXRectMake(0, 0, winWidth, winHeight);
         render.setRoot( &mainWin );
         
-        app._view.bounds = GXRectMake(0, 20, winWidth, winHeight - 20);
-        mainWin.addChild(&app._view);
+        app._view->bounds = GXRectMake(0, 20, winWidth, winHeight - 20);
+        mainWin.addChild( app._view );
         
     
         GB::RunLoop runL;

@@ -25,16 +25,16 @@
             
             const GXPoint center = GXPointMake( mouse->x , mouse->y );
             
-            if( rectContainsPoint(self->_view.bounds, center))
+            if( rectContainsPoint(self->_view->bounds, center))
             {
-                const GXPoint realPoint = center - self->_view.bounds.origin;
+                const GXPoint realPoint = center - self->_view->bounds.origin;
                 if( mouse->state == GXMouseStatePressed)
                 {
-                    self->_view.touchBegan( { realPoint , GXTouch::Phase::Began  });
+                    self->_view->touchBegan( { realPoint , GXTouch::Phase::Began  });
                 }
                 else if( mouse->state == GXMouseStateReleased)
                 {
-                    self->_view.touchEnded( { realPoint , GXTouch::Phase::Ended  });
+                    self->_view->touchEnded( { realPoint , GXTouch::Phase::Ended  });
                 }
             }
             

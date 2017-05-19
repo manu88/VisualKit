@@ -9,7 +9,8 @@
 #include "VKButton.hpp"
 #include "VK.hpp"
 
-VKButton::VKButton()
+VKButton::VKButton():
+_state( Inactive )
 {
     background = GXColorMake(1, 0, 0 );
     id = 3;
@@ -30,8 +31,8 @@ void VKButton::setText( const std::string &t) noexcept
 void VKButton::paint( GXContext* context , const GXRect& bounds)
 {
     context->addRoundedRect(bounds , 5);
-    context->setStrokeColor( GXColorMake(0.85f, 0.85f, 0.85f)); //[UIColor colorWithWhite:0.85f alpha:1.0f];
-    context->setFillColor( GXColorMake(0.98f, 0.98f, 0.98f) ); //[UIColor colorWithWhite:0.98f alpha:1.0f];
+    context->setStrokeColor( GXColorMake(0.85f, 0.85f, 0.85f));
+    context->setFillColor( GXColorMake(0.98f, 0.98f, 0.98f) );
     context->fill();
     context->stroke();
     
@@ -46,4 +47,43 @@ void VKButton::paint( GXContext* context , const GXRect& bounds)
     
     context->addTextBox(GXPointMake( 0 ,10), 60, _text );
     
+    if( _state == Highlighted)
+    {
+        context->addRoundedRect(bounds , 5);
+        
+        GXColor c = GXColors::DarkGray;
+        c.a = 0.5;
+        context->setFillColor( c);
+        
+        context->fill();
+        
+    }
+    
+}
+
+bool VKButton::touchBegan( const GXTouch &t)
+{
+    if( _state == Inactive)
+    {
+        _state = Highlighted;
+    }
+    else if( _state == Highlighted)
+    {
+        _state = Inactive;
+    }
+    setNeedsDisplay();
+    return true;
+}
+bool VKButton::touchEnded( const GXTouch &t)
+{
+    if( _state == Inactive)
+    {
+        _state = Highlighted;
+    }
+    else if( _state == Highlighted)
+    {
+        _state = Inactive;
+    }
+    setNeedsDisplay();
+    return  true;
 }

@@ -9,12 +9,23 @@
 #ifndef VKButton_hpp
 #define VKButton_hpp
 
-#include "../../GX/include/GXLayer.hpp"
 
-class VKButton : public GXLayer
+#include <functional>
+#include "../../GX/include/GXLayer.hpp"
+#include "VKView.hpp"
+
+
+
+class VKButton : public VKView
 {
-    
 public:
+    
+    enum State
+    {
+        Inactive = 0,
+        Highlighted = 1
+    };
+    
     VKButton();
     virtual ~VKButton();
     
@@ -25,8 +36,12 @@ public:
     }
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
+    
+    bool touchBegan( const GXTouch &t) override;
+    bool touchEnded( const GXTouch &t) override;
 private:
     
+    State _state;
     std::string _text;
 };
 

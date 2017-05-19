@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59E0D34F1ECE0AD700BF10C4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D34E1ECE0AD700BF10C4 /* main.cpp */; };
 		59E0D35E1ECE0B3800BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
 		59E0D3641ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */; };
 		59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */; };
@@ -16,6 +15,8 @@
 		59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */; };
 		59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3781ECECD6D00BF10C4 /* VK.cpp */; };
 		59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */; };
+		59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3821ECED85200BF10C4 /* CustomView.cpp */; };
+		59E0D3861ECED85200BF10C4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3841ECED85200BF10C4 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +50,6 @@
 
 /* Begin PBXFileReference section */
 		59E0D34B1ECE0AD700BF10C4 /* VisualKit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VisualKit; sourceTree = BUILT_PRODUCTS_DIR; };
-		59E0D34E1ECE0AD700BF10C4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59E0D3551ECE0AE200BF10C4 /* GX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GX.xcodeproj; path = ../GX/GX.xcodeproj; sourceTree = "<group>"; };
 		59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libGroundBase-cpp.dylib"; path = "../../../../../../usr/local/lib/libGroundBase-cpp.dylib"; sourceTree = "<group>"; };
 		59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKWindow.cpp; sourceTree = "<group>"; };
@@ -64,6 +64,9 @@
 		59E0D3791ECECD6D00BF10C4 /* VK.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VK.hpp; sourceTree = "<group>"; };
 		59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKTouch.cpp; sourceTree = "<group>"; };
 		59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTouch.hpp; sourceTree = "<group>"; };
+		59E0D3821ECED85200BF10C4 /* CustomView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomView.cpp; sourceTree = "<group>"; };
+		59E0D3831ECED85200BF10C4 /* CustomView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CustomView.hpp; sourceTree = "<group>"; };
+		59E0D3841ECED85200BF10C4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,7 @@
 			children = (
 				59E0D3551ECE0AE200BF10C4 /* GX.xcodeproj */,
 				59E0D34D1ECE0AD700BF10C4 /* VisualKit */,
+				59E0D3811ECED85200BF10C4 /* Test1 */,
 				59E0D34C1ECE0AD700BF10C4 /* Products */,
 				59E0D3621ECE0C5F00BF10C4 /* Frameworks */,
 			);
@@ -100,7 +104,6 @@
 		59E0D34D1ECE0AD700BF10C4 /* VisualKit */ = {
 			isa = PBXGroup;
 			children = (
-				59E0D34E1ECE0AD700BF10C4 /* main.cpp */,
 				59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */,
 				59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */,
 				59E0D3781ECECD6D00BF10C4 /* VK.cpp */,
@@ -132,6 +135,16 @@
 				59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59E0D3811ECED85200BF10C4 /* Test1 */ = {
+			isa = PBXGroup;
+			children = (
+				59E0D3821ECED85200BF10C4 /* CustomView.cpp */,
+				59E0D3831ECED85200BF10C4 /* CustomView.hpp */,
+				59E0D3841ECED85200BF10C4 /* main.cpp */,
+			);
+			path = Test1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -216,11 +229,12 @@
 			files = (
 				59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */,
 				59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */,
-				59E0D34F1ECE0AD700BF10C4 /* main.cpp in Sources */,
 				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
 				59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */,
 				59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */,
 				59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */,
+				59E0D3861ECED85200BF10C4 /* main.cpp in Sources */,
+				59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
