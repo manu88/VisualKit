@@ -36,7 +36,7 @@ void VKButton::paint( GXContext* context , const GXRect& bounds)
     context->fill();
     context->stroke();
     
-    const GXFontHandle font = context->createFont( VKDefaults::DefaultFont );
+    const GXFontHandle font =  context->getFontManager().getFont(VKDefaults::DefaultFont);// context->createFont( VKDefaults::DefaultFont );
     
     context->setFontId( font );
     context->setTextSize( 20 );
