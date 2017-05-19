@@ -18,7 +18,7 @@ class CLApplication
 public:
     VKView *_view;
     
-    GB::RunLoop* _runLoop;
+    static GB::RunLoop* runLoop;
     
     static void s_onGXEvent(void* disp , const GXEvent *evt);
     

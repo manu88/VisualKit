@@ -8,26 +8,76 @@
 
 #include "CustomView.hpp"
 #include "VK.hpp"
-#include "VKButton.hpp"
+#include "CLApplication.hpp"
 
-CustomView::CustomView()
+CustomView::CustomView():
+input(STDIN_FILENO)
 {
     background = GXColors::LightGray;
     
-    VKButton *bttonOk = new VKButton();
-    bttonOk->setText("Ok");
-    bttonOk->bounds = GXRectMake(10, 10, 60, 20);
-    addChild( bttonOk );
+    
+    bttonOk.setText("Show");
+    bttonOk.setBounds( GXRectMake(10, 10, 60, 20));
+    addChild( &bttonOk );
+
+    bttonCancel.setText("Close");
+    bttonCancel.setBounds(GXRectMake(80, 10, 60, 20));
+    addChild( &bttonCancel );
     
     
-    VKButton *bttonCancel = new VKButton();
-    bttonCancel->setText("Cancel");
-    bttonCancel->bounds = GXRectMake(80, 10, 60, 20);
-    addChild( bttonCancel );
+    bttonOk.onClic = std::bind(&CustomView::buttonClicked, this , std::placeholders::_1);
+    bttonCancel.onClic = std::bind(&CustomView::buttonClicked, this , std::placeholders::_1);
     
+    
+    alert = nullptr;
+    
+    
+    input.notification = [this]( GBRunLoopSourceNotification notif )
+    {
+      if( notif == GBRunLoopSourceCanRead)
+      {
+          char buf[128];
+          const GBSize r = input.read(buf, 128);
+          if( r)
+          {
+              buf[r-1] = 0;
+              printf("Read '%s'\n" , buf);
+              _test = buf;
+              setNeedsDisplay();
+          }
+          
+      }
+    };
+    CLApplication::runLoop->addSource( input);
 }
+
+void CustomView::buttonClicked( VKButton* button)
+{
+    if( button == &bttonOk)
+    {
+        printf("OK\n");
+        if( !alert)
+        {
+            alert = new VKAlertView();
+            alert->setTitle("Hello");
+            alert->setCenter( GXPointMake(getSize().width /2, getSize().height/2));
+            addChild( alert);
+        }
+    }
+    else if( button == &bttonCancel)
+    {
+        printf("Cancel\n");
+        removeChild( alert );
+        delete alert;
+        alert = nullptr;
+    }
+}
+
 void CustomView::paint( GXContext* context , const GXRect& bounds)
 {
+
+    
+    
     const GXFontHandle font = context->getFontManager().getFont(VKDefaults::DefaultFont);// context->createFont(  VKDefaults::DefaultFont );
     
     context->setFontId( font );
@@ -43,7 +93,7 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
 
 bool CustomView::touchBegan( const GXTouch &t)
 {
-    _test = std::to_string(t.center.x) + " " + std::to_string(t.center.y);
+    //_test = std::to_string(t.center.x) + " " + std::to_string(t.center.y);
     setNeedsDisplay();
     
     return VKView::touchBegan(t);

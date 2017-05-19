@@ -17,7 +17,6 @@ public:
     VKWindow();
     virtual ~VKWindow();
     
-    
     void setWindowTitle( const std::string &) noexcept;
     const std::string &getWindowTitle() const noexcept
     {

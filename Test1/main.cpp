@@ -33,7 +33,8 @@ int main()
     
     Display disp;
     {
-        
+        GB::RunLoop runL;
+        CLApplication::runLoop = &runL;
         
         /**/
         if( DisplayInit(&disp , 1280 , 750) == 0)
@@ -79,16 +80,14 @@ int main()
         pxRatio = (float)fbWidth / (float)winWidth;
         
         
-        mainWin.bounds = GXRectMake(0, 0, winWidth, winHeight);
+        mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
         render.setRoot( &mainWin );
         
-        app._view->bounds = GXRectMake(0, 20, winWidth, winHeight - 20);
+        app._view->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
         mainWin.addChild( app._view );
         
     
-        GB::RunLoop runL;
         
-        app._runLoop = &runL;
         /**/
         
         GB::Timer t;

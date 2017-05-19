@@ -6,16 +6,20 @@
 //  Copyright © 2017 Unlimited Development. All rights reserved.
 //
 
+#include "CLApplication.hpp"
 #include "VKButton.hpp"
 #include "VK.hpp"
 
 VKButton::VKButton():
+_triggerAction (false),
 _state( Inactive )
 {
     background = GXColorMake(1, 0, 0 );
     id = 3;
     
     setOpaque(false);
+    
+    onClic = nullptr;
 }
 
 VKButton::~VKButton()
@@ -28,9 +32,10 @@ void VKButton::setText( const std::string &t) noexcept
     _text = t;
 }
 
-void VKButton::paint( GXContext* context , const GXRect& bounds)
+void VKButton::paint( GXContext* context , const GXRect& _bounds)
 {
-    context->addRoundedRect(bounds , 5);
+    context->beginPath();
+    context->addRoundedRect( _bounds , 5);
     context->setStrokeColor( GXColorMake(0.85f, 0.85f, 0.85f));
     context->setFillColor( GXColorMake(0.98f, 0.98f, 0.98f) );
     context->fill();
@@ -45,11 +50,11 @@ void VKButton::paint( GXContext* context , const GXRect& bounds)
     
     context->setFillColor(GXColors::Black);
     
-    context->addTextBox(GXPointMake( 0 ,10), 60, _text );
+    context->addTextBox(GXPointMake( 0 ,10), _bounds.size.width, _text );
     
     if( _state == Highlighted)
     {
-        context->addRoundedRect(bounds , 5);
+        context->addRoundedRect( _bounds , 5);
         
         GXColor c = GXColors::DarkGray;
         c.a = 0.5;
@@ -59,31 +64,38 @@ void VKButton::paint( GXContext* context , const GXRect& bounds)
         
     }
     
+    
+    if( _triggerAction)
+    {
+        _triggerAction = false;
+        CLApplication::runLoop->dispatchAsync([ this]()
+                                              {
+                                                  onClic(this);
+                                              });
+        
+    }
 }
 
 bool VKButton::touchBegan( const GXTouch &t)
 {
-    if( _state == Inactive)
-    {
-        _state = Highlighted;
-    }
-    else if( _state == Highlighted)
-    {
-        _state = Inactive;
-    }
+    
+    _state = Highlighted;
     setNeedsDisplay();
     return true;
 }
 bool VKButton::touchEnded( const GXTouch &t)
 {
-    if( _state == Inactive)
-    {
-        _state = Highlighted;
-    }
-    else if( _state == Highlighted)
-    {
-        _state = Inactive;
-    }
+    
+    _state = Inactive;
+    
+    
     setNeedsDisplay();
+    
+    if( onClic)
+    {
+        onClic(this);
+    }
+    
+
     return  true;
 }

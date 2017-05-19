@@ -20,6 +20,8 @@ class VKButton : public VKView
 {
 public:
     
+    typedef std::function<void(VKButton*)> Action;
+    
     enum State
     {
         Inactive = 0,
@@ -34,6 +36,8 @@ public:
     {
         return _text;
     }
+    
+    Action onClic;
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     
@@ -41,6 +45,7 @@ protected:
     bool touchEnded( const GXTouch &t) override;
 private:
     
+    bool _triggerAction;
     State _state;
     std::string _text;
 };

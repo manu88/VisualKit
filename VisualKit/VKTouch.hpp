@@ -39,6 +39,7 @@ protected:
     {}
     
     virtual bool touchBegan( const GXTouch &t);
+    virtual bool touchMoved( const GXTouch &t);
     virtual bool touchEnded( const GXTouch &t);
     
 };

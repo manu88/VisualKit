@@ -26,13 +26,13 @@ bool VKView::touchBegan( const GXTouch &t)
 {
     for (GXLayer* l : getChildren())
     {
-        if( rectContainsPoint(l->bounds, t.center))
+        if( rectContainsPoint(l->getBounds(), t.center))
         {
             VKTouchDelegate* del  = dynamic_cast<VKTouchDelegate*>(l);
             
             if( del)
             {
-                del->touchBegan({ t.center - bounds.origin ,  t.phase });
+                del->touchBegan({ t.center - l->getBounds().origin ,  GXTouch::Phase::Began });
             }
             
         }
@@ -45,14 +45,14 @@ bool VKView::touchEnded( const GXTouch &t)
 {
     for (GXLayer* l : getChildren())
     {
-        if( rectContainsPoint(l->bounds, t.center))
+        if( rectContainsPoint(l->getBounds(), t.center))
         {
             VKTouchDelegate* del  = dynamic_cast<VKTouchDelegate*>(l);
             
             if( del)
             {
-                del->touchEnded({ t.center - bounds.origin ,  t.phase });
-            }   
+                del->touchEnded({ t.center - l->getBounds().origin ,  GXTouch::Phase::Ended });
+            }
         }
     }
     

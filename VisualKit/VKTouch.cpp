@@ -18,3 +18,8 @@ bool VKTouchDelegate::touchEnded( const GXTouch &t)
 {
     return false;
 }
+
+bool VKTouchDelegate::touchMoved( const GXTouch &t)
+{
+    return false;
+}
