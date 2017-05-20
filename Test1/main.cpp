@@ -74,11 +74,11 @@ int main()
         
         if(DisplayGetType(&disp) == DisplayGLFW)
         {
-            DefaultLayout = FrenchMac;
+            SetDefaultLayout( FrenchMac );
         }
         else if(DisplayGetType(&disp) == DisplayDispman)
         {
-            DefaultLayout = FrenchPC;
+            SetDefaultLayout( FrenchPC );
         }
         
         // Calculate pixel ration for hi-dpi devices.

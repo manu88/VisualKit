@@ -9,6 +9,14 @@
 #include "VKKeyboard.hpp"
 #include "../../GX/include/GXKey.h"
 
+
+VKKeyboardLayout DefaultLayout = FrenchMac;
+
+void SetDefaultLayout( VKKeyboardLayout layout)
+{
+    DefaultLayout = layout;
+}
+
 static std::string toFrenchMac(int key ,int mods)
 {
     const bool shift = mods & GXKeyMod_SHIFT;

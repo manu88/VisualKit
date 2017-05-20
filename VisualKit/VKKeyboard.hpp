@@ -19,7 +19,9 @@ typedef enum
     FrenchPC   = 2
 } VKKeyboardLayout;
 
-static VKKeyboardLayout DefaultLayout = FrenchMac;
+
+extern VKKeyboardLayout DefaultLayout;
+void SetDefaultLayout( VKKeyboardLayout layout);
 
 struct GXKey
 {
