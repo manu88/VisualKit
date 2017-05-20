@@ -159,7 +159,7 @@ static std::string toFrenchPC(int key ,int mods)
         case GXKey_7:
             return alt? "`" :(shift? "7" : "è");
         case GXKey_8:
-            return alt? "\\" :(shift? "8" : "!");
+            return alt? "\\" :(shift? "8" : "_");
         case GXKey_9:
             return alt? "^" :(shift? "9" : "ç");
         case GXKey_SEMICOLON:

@@ -19,13 +19,15 @@ typedef enum
     FrenchPC   = 2
 } VKKeyboardLayout;
 
+static VKKeyboardLayout DefaultLayout = FrenchMac;
+
 struct GXKey
 {
     int key;
     int modifiers;
     
     bool isCharacter() const;
-    std::string toStr( VKKeyboardLayout layout = Default ) const ;
+    std::string toStr( VKKeyboardLayout layout = DefaultLayout ) const ;
     
 };
 

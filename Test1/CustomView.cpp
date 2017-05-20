@@ -117,7 +117,7 @@ bool CustomView::keyPressed( const GXKey &key )
     }
     else
     {
-        c.append( key.toStr(VKKeyboardLayout::FrenchPC ) );
+        c.append( key.toStr() );
     }
     textInput.setContent(c);
     textInput.setNeedsDisplay();

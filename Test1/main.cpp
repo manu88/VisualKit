@@ -72,6 +72,14 @@ int main()
         DisplayGetFramebufferSize( &disp , &fbWidth, &fbHeight);
         
         
+        if(DisplayGetType(&disp) == DisplayGLFW)
+        {
+            DefaultLayout = FrenchMac;
+        }
+        else if(DisplayGetType(&disp) == DisplayDispman)
+        {
+            DefaultLayout = FrenchPC;
+        }
         
         // Calculate pixel ration for hi-dpi devices.
         pxRatio = (float)fbWidth / (float)winWidth;
