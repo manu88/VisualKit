@@ -20,7 +20,6 @@ public:
     virtual ~VKView();
 protected:
     
-    
     bool touchBegan( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
     

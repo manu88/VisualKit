@@ -105,7 +105,10 @@ bool CustomView::keyPressed( const GXKey &key )
     
     if( key.key == GXKey_BACKSPACE)
     {
-        c.pop_back();
+        if( !c.empty())
+        {
+            c.pop_back();
+        }
     }
     else if( key.key == GXKey_ENTER)
     {
