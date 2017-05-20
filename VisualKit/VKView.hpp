@@ -11,8 +11,8 @@
 
 #include "../../GX/include/GXLayer.hpp"
 #include "VKTouch.hpp"
-
-class VKView : public GXLayer , public VKTouchDelegate
+#include "VKKeyboard.hpp"
+class VKView : public GXLayer , public VKTouchDelegate , public VKKeyboardDelegate
 {
     friend class CLApplication;
 public:
@@ -25,10 +25,12 @@ protected:
 
     // def false
     virtual bool handleFocus();
-    
+    virtual void focusChanged();
     
     bool touchBegan( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
+    
+    bool keyPressed(  const GXKey &key ) override;
     
 private:
     

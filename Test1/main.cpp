@@ -23,8 +23,10 @@ VKCursor* _cursor;
 static void renderScreen( GXRenderer *render , Display* disp , GXContext *ctx)
 {
     
-    render->draw( ctx );
-    DisplaySwap( disp );
+    if(render->draw( ctx ))
+    {
+        DisplaySwap( disp );
+    }
     DisplayPollEvents( disp );
 }
 
@@ -35,7 +37,12 @@ static void eventListener(void* disp , const GXEvent *evt)
     if(evt->type == GXEventTypeMouse)
     {
         const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
-        _cursor->setPos( GXPointMake(mouse->x, mouse->y));
+        const GXPoint p =GXPointMake(mouse->x, mouse->y);
+        if( _cursor->getPos() != p)
+        {
+            _cursor->setPos( p);
+            _cursor->setNeedsDisplay();
+        }
     }
             
     CLApplication::s_onGXEvent(disp , evt);

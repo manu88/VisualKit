@@ -9,8 +9,9 @@
 #ifndef VKTextInput_hpp
 #define VKTextInput_hpp
 
+#include <GBTimer.hpp>
 #include "VKView.hpp"
-
+#include "VKKeyboard.hpp"
 
 
 class VKTextInput : public VKView
@@ -29,11 +30,18 @@ public:
     }
     
 protected:
+    bool keyPressed(  const GXKey &key ) override;
+    bool touchBegan( const GXTouch &t) override;
+    
     void paint( GXContext* context , const GXRect& bounds) override;
+    void focusChanged() override;
     
     GXLayer _block;
     
+    GB::Timer tBlock;
+    
     std::string _content;
+    GXPoint _cursorPos;
 };
 
 #endif /* VKTextInput_hpp */

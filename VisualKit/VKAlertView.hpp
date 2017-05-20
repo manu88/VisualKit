@@ -50,6 +50,7 @@ private:
     std::string _content;
     VKButton bttonOk;
     VKButton bttonCancel;
+
 };
 
 #endif /* VKAlertView_hpp */

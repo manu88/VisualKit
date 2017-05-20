@@ -34,25 +34,11 @@ input(STDIN_FILENO)
     textInput.setBounds(GXRectMake(20, 80, 400, 200));
     addChild( &textInput);
     
-    /*
-    input.notification = [this]( GBRunLoopSourceNotification notif )
-    {
-      if( notif == GBRunLoopSourceCanRead)
-      {
-          char buf[128];
-          const GBSize r = input.read(buf, 128);
-          if( r)
-          {
-              buf[r-1] = 0;
-              printf("Read '%s'\n" , buf);
-              _test = buf;
-              setNeedsDisplay();
-          }
-          
-      }
-    };
-    CLApplication::runLoop->addSource( input);
-     */
+    textInput2.setBounds(GXRectMake(600, 80, 400, 200));
+    addChild( &textInput2);
+
+    
+
 }
 
 void CustomView::buttonClicked( VKButton* button)
@@ -94,51 +80,18 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     
     
     context->addTextBox(GXPointMake(bounds.size.width /2 , 20), 100, _test);
-    
-    
-    
+
 }
 
-bool CustomView::keyPressed( const GXKey &key )
-{
-    if( !textInput.hasFocus())
-        return false;
-    
-    std::string c = textInput.getContent();
-    
-    if( key.key == GXKey_BACKSPACE)
-    {
-        if( !c.empty())
-        {
-            c.pop_back();
-        }
-    }
-    else if( key.key == GXKey_ENTER)
-    {
-        c.append("\n");
-    }
-    else
-    {
-        c.append( key.toStr() );
-    }
-    textInput.setContent(c);
-    textInput.setNeedsDisplay();
-    
-    
-    return true;
-}
+
 
 bool CustomView::touchBegan( const GXTouch &t)
-{
-    
-    
-    
+{    
     return VKView::touchBegan(t);
 }
 bool CustomView::touchMoved( const GXTouch &t)
 {
-    _touchLoc = t.center;
-    setNeedsDisplay();
+    
     return VKView::touchMoved(t);
 }
 

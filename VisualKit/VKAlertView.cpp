@@ -15,7 +15,7 @@ VKAlertView::VKAlertView():
 onReturn(nullptr)
 {
     setOpaque(false);
-    setSize( GXSizeMake(400, 200) );
+    setSize( GXSizeMake(300, 150) );
     //background = GXColorMake(0.0, 0.0, 0.0 , 0.1);
     
     bttonOk.setText("Ok");
@@ -26,12 +26,14 @@ onReturn(nullptr)
     //= GXRectMake(10, 30, 60, 20);
     //bttonCancel.bounds = GXRectMake(70, 30, 60, 20);
     
-    addChild( &bttonOk );
+    
     addChild( &bttonCancel );
-
+    addChild( &bttonOk );
     bttonOk.onClic = std::bind(&VKAlertView::buttonClicked, this , std::placeholders::_1);
     bttonCancel.onClic = std::bind(&VKAlertView::buttonClicked, this , std::placeholders::_1);
     
+    bttonOk.id = 9;
+    bttonCancel.id = 10;
 }
 
 void VKAlertView::buttonClicked( VKButton* button)
@@ -44,8 +46,11 @@ void VKAlertView::buttonClicked( VKButton* button)
 }
 void VKAlertView::paint( GXContext* context , const GXRect& bounds)
 {
+    
     bttonOk.setPos( GXPointMake(bounds.size.width/2 - 40, bounds.size.height - 40));
     bttonCancel.setPos( GXPointMake(bounds.size.width/2 + 40, bounds.size.height - 40));
+    
+    
     
     context->addRoundedRect(bounds, 5);
     context->setFillColor( GXColorMake(0.3, 0.3, 0.3 , 0.3));

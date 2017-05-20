@@ -25,6 +25,8 @@ VKView::~VKView()
 void VKView::setFocus(bool focus) noexcept
 {
     _hasFocus = focus;
+    
+    focusChanged();
 }
 bool VKView::hasFocus() const noexcept
 {
@@ -34,6 +36,26 @@ bool VKView::hasFocus() const noexcept
 bool VKView::handleFocus()
 {
     return false;
+}
+
+void VKView::focusChanged()
+{
+    
+}
+
+bool VKView::keyPressed(  const GXKey &key )
+{
+    for (GXLayer* l : getChildren())
+    {
+        VKView* view  = dynamic_cast<VKView*>(l);
+        
+        if( view->hasFocus())
+        {
+            view->keyPressed(key);
+        }
+    }
+    
+    return true;
 }
 
 bool VKView::touchBegan( const GXTouch &t)
@@ -56,13 +78,8 @@ bool VKView::touchBegan( const GXTouch &t)
             {
                 del->setFocus(false);
             }
-        }
-        
-        
+        }   
     }
-    
-    
-    
     return true;
 }
 
