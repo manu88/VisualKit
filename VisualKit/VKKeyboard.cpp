@@ -144,7 +144,7 @@ static std::string toFrenchPC(int key ,int mods)
         case GXKey_COMMA:
             return shift? "." : ";";
         case GXKey_MINUS:
-            return shift? "°" : ")";
+            return alt? "]" :(shift? "°" : ")");
         case GXKey_PERIOD:
             return shift? "/" : ":";
         case GXKey_SLASH:
