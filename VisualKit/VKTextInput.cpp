@@ -58,16 +58,19 @@ bool VKTextInput::keyPressed(  const GXKey &key )
     {
         if( !c.empty())
         {
-            c.pop_back();
+            c.erase(c.begin() + _insertPoint-1);
+            //c.pop_back();
         }
     }
     else if( key.key == GXKey_ENTER)
     {
-        c.append("\n");
+        c.insert(_insertPoint, "\n");
+        _insertPoint+=1;
     }
     else
     {
-        c.append( key.toStr() );
+        c.insert(_insertPoint,  key.toStr() );
+        _insertPoint+=1;
     }
     setContent(c);
     setNeedsDisplay();
@@ -144,7 +147,13 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
                     float x1 = (j+1 < nglyphs) ? glyphs[j+1].x : x+row->width;
                     float gx = x0 * 0.3f + x1 * 0.7f;
                     if (_cursorPos.x >= px && _cursorPos.x < gx)
+                    {
+                        const char*p = glyphs[j].str;
+                        _insertPoint = p-c;
+                        
+                        printf("At pos %li \n" , p-c);
                         caretx = glyphs[j].x;
+                    }
                     px = gx;
                 }
                 _block.setPos(GXPointMake(caretx, y));
@@ -169,6 +178,6 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
         start = rows[nrows-1].next;
     }
     
-    printf("Rows : %i\n" , totalRows );
+    
     
 }

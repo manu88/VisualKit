@@ -16,6 +16,7 @@
 #include "CLApplication.hpp"
 
 #include "CustomView.hpp"
+#include "AppDelegate.hpp"
 
 VKWindow* _mainWin;
 VKCursor* _cursor;
@@ -48,7 +49,7 @@ static void eventListener(void* disp , const GXEvent *evt)
     CLApplication::s_onGXEvent(disp , evt);
 }
 
-int main()
+int main(int argc , char* argv[])
 {
     GXRenderer render;
     
@@ -98,6 +99,9 @@ int main()
         VKCursor cursor;
         _cursor = &cursor;
         CLApplication app;
+        AppDelegate appDelegate;
+        
+        app.setDelegate(&appDelegate);
         
         DisplaySetUserContext(&disp, &app);
         DisplaySetEventCallback(&disp, eventListener);
@@ -105,7 +109,7 @@ int main()
         mainWin.setWindowTitle("My APP");
         mainWin.id = 0;
         CustomView* cView = new CustomView();
-        app._view = cView;
+        app.setView( cView );
         app.setKeyboardResponder( cView );
         
         
@@ -118,8 +122,8 @@ int main()
         mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
         render.setRoot( &mainWin );
         
-        app._view->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
-        mainWin.addChild( app._view );
+        app.getCurrentView()->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
+        mainWin.addChild( app.getCurrentView() );
         mainWin.addChild( &cursor);
     
         
@@ -138,26 +142,6 @@ int main()
                       });
         
         runL.addSource(t);
-
-        /**/
-        /*
-        GB::Timer tT;
-        tT.setInterval(2000);
-        tT.setCallback([&](GB::Timer &timer)
-        {
-            if( app._view.hasParent())
-            {
-                assert(mainWin.removeChild( &app._view ));
-                printf("Remove view \n");
-            }
-            else
-            {
-                assert(mainWin.addChild( &app._view ));
-                printf("Add view \n");
-            }
-        });
-        runL.addSource(tT);
-        */
         
         runL.run();
     }

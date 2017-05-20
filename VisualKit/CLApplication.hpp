@@ -15,12 +15,28 @@
 
 #include "VKKeyboard.hpp"
 
+class CLApplicationDelegate;
+
 class CLApplication
 {
 public:
     CLApplication();
-    VKView *_view;
     
+    void setView( VKView* v) noexcept;
+    VKView* getCurrentView() const noexcept
+    {
+        return _view;
+    }
+    
+    void setDelegate( CLApplicationDelegate* delegate) noexcept
+    {
+        _delegate = delegate;
+    }
+    
+    CLApplicationDelegate* getDelegate() const noexcept
+    {
+        return _delegate;
+    }
     
     void setKeyboardResponder( VKKeyboardDelegate* resp) noexcept
     {
@@ -28,6 +44,8 @@ public:
     }
     
     static GB::RunLoop* runLoop;
+    
+    int main(int argc , char* argv[]);
     
     static void s_onGXEvent(void* disp , const GXEvent *evt);
     
@@ -37,7 +55,9 @@ protected:
     void handleKeyEvent( const GXEventKey* evt);
     
     VKKeyboardDelegate *_keyResponder;
-    
+private:
+    CLApplicationDelegate *_delegate;
+    VKView *_view;
 };
 
 #endif /* CLApplication_hpp */

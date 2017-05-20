@@ -19,6 +19,10 @@ _keyResponder(nullptr)
     
 }
 
+void CLApplication::setView( VKView* v) noexcept
+{
+    _view = v;
+}
 
 void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
 {
@@ -85,4 +89,9 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
             break;
     }
     
+}
+
+int CLApplication::main(int argc , char* argv[])
+{
+    return 0;
 }

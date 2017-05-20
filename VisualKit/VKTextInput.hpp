@@ -41,6 +41,7 @@ protected:
     GB::Timer tBlock;
     
     std::string _content;
+    size_t _insertPoint;
     GXPoint _cursorPos;
 };
 
