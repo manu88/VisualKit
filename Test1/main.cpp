@@ -35,7 +35,7 @@ static void eventListener(void* disp , const GXEvent *evt)
     if(evt->type == GXEventTypeMouse)
     {
         const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
-        _cursor->setCenter( GXPointMake(mouse->x, mouse->y));
+        _cursor->setPos( GXPointMake(mouse->x, mouse->y));
     }
             
     CLApplication::s_onGXEvent(disp , evt);

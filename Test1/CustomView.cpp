@@ -31,7 +31,10 @@ input(STDIN_FILENO)
     
     alert = nullptr;
     
+    textInput.setBounds(GXRectMake(20, 80, 400, 200));
+    addChild( &textInput);
     
+    /*
     input.notification = [this]( GBRunLoopSourceNotification notif )
     {
       if( notif == GBRunLoopSourceCanRead)
@@ -49,6 +52,7 @@ input(STDIN_FILENO)
       }
     };
     CLApplication::runLoop->addSource( input);
+     */
 }
 
 void CustomView::buttonClicked( VKButton* button)
@@ -61,6 +65,15 @@ void CustomView::buttonClicked( VKButton* button)
             alert = new VKAlertView();
             alert->setTitle("Hello");
             alert->setCenter( GXPointMake(getSize().width /2, getSize().height/2));
+            
+            alert->onReturn = [ this ]( VKAlertView* _alert , int code)
+            {
+                assert(_alert == alert);
+                printf("Alert returned with code %i\n" , code);
+                _alert->removeFromParent();
+                delete alert;
+                alert = nullptr;
+            };
             addChild( alert);
         }
     }
@@ -76,8 +89,6 @@ void CustomView::buttonClicked( VKButton* button)
 void CustomView::paint( GXContext* context , const GXRect& bounds)
 {
 
-    
-    
     const GXFontHandle font = context->getFontManager().getFont(VKDefaults::DefaultFont);// context->createFont(  VKDefaults::DefaultFont );
     
     context->setFontId( font );

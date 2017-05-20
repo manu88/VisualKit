@@ -13,9 +13,14 @@
 
 #include "VKButton.hpp"
 
+#include <functional>
+
 class VKAlertView : public VKView
 {
 public:
+    
+    typedef std::function<void( VKAlertView*, int)> VKAlertViewDidReturn;
+    
     VKAlertView();
     
     void setTitle( const std::string &t) noexcept
@@ -27,6 +32,8 @@ public:
     {
         _content = t;
     }
+    
+    VKAlertViewDidReturn onReturn;
     
 protected:
     void buttonClicked( VKButton* button);

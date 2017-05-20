@@ -13,6 +13,7 @@
 #include "VKView.hpp"
 #include "VKButton.hpp"
 #include "VKAlertView.hpp"
+#include "VKTextInput.hpp"
 
 class CustomView : public VKView
 {
@@ -38,6 +39,8 @@ protected:
     VKAlertView *alert;
     
     GB::FDSource input;
+    
+    VKTextInput textInput;
     
 };
 

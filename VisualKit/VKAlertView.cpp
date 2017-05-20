@@ -11,7 +11,8 @@
 #include "VKAlertView.hpp"
 
 
-VKAlertView::VKAlertView()
+VKAlertView::VKAlertView():
+onReturn(nullptr)
 {
     setOpaque(false);
     setSize( GXSizeMake(400, 200) );
@@ -35,7 +36,11 @@ VKAlertView::VKAlertView()
 
 void VKAlertView::buttonClicked( VKButton* button)
 {
-    removeFromParent();
+    
+    if( onReturn)
+    {
+        onReturn(this , button == &bttonOk? 1 : 0);
+    }
 }
 void VKAlertView::paint( GXContext* context , const GXRect& bounds)
 {
