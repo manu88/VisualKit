@@ -12,14 +12,21 @@
 
 #include <string>
 
-
+typedef enum
+{
+    Default = 0,
+    FrenchMac  = 1,
+    FrenchPC   = 2
+} VKKeyboardLayout;
 
 struct GXKey
 {
     int key;
     int modifiers;
     
-    std::string toStr() const ;
+    bool isCharacter() const;
+    std::string toStr( VKKeyboardLayout layout = Default ) const ;
+    
 };
 
 class VKKeyboardDelegate

@@ -101,6 +101,7 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
 
 bool CustomView::keyPressed( const GXKey &key )
 {
+    
     std::string c = textInput.getContent();
     
     if( key.key == GXKey_BACKSPACE)
@@ -116,7 +117,7 @@ bool CustomView::keyPressed( const GXKey &key )
     }
     else
     {
-        c.append( key.toStr() );
+        c.append( key.toStr(VKKeyboardLayout::FrenchPC ) );
     }
     textInput.setContent(c);
     textInput.setNeedsDisplay();
