@@ -13,16 +13,30 @@
 #include "VKView.hpp"
 #include "../../GX/include/GXEvent.h"
 
+#include "VKKeyboard.hpp"
+
 class CLApplication
 {
 public:
+    CLApplication();
     VKView *_view;
+    
+    
+    void setKeyboardResponder( VKKeyboardDelegate* resp) noexcept
+    {
+        _keyResponder = resp;
+    }
     
     static GB::RunLoop* runLoop;
     
     static void s_onGXEvent(void* disp , const GXEvent *evt);
     
 protected:
+    
+    void handleMouseEvent( const GXEventMouse* evt);
+    void handleKeyEvent( const GXEventKey* evt);
+    
+    VKKeyboardDelegate *_keyResponder;
     
 };
 

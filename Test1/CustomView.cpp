@@ -59,7 +59,6 @@ void CustomView::buttonClicked( VKButton* button)
 {
     if( button == &bttonOk)
     {
-        printf("OK\n");
         if( !alert)
         {
             alert = new VKAlertView();
@@ -79,10 +78,7 @@ void CustomView::buttonClicked( VKButton* button)
     }
     else if( button == &bttonCancel)
     {
-        printf("Cancel\n");
-        removeChild( alert );
-        delete alert;
-        alert = nullptr;
+        CLApplication::runLoop->stop();
     }
 }
 
@@ -101,6 +97,29 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     
     
     
+}
+
+bool CustomView::keyPressed( const GXKey &key )
+{
+    std::string c = textInput.getContent();
+    
+    if( key.key == GXKey_BACKSPACE)
+    {
+        c.pop_back();
+    }
+    else if( key.key == GXKey_ENTER)
+    {
+        c.append("\n");
+    }
+    else
+    {
+        c.append( key.toStr() );
+    }
+    textInput.setContent(c);
+    textInput.setNeedsDisplay();
+    
+    
+    return true;
 }
 
 bool CustomView::touchBegan( const GXTouch &t)

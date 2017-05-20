@@ -20,6 +20,7 @@
 		59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */; };
 		59E0D3921ECF406700BF10C4 /* VKCursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3901ECF406700BF10C4 /* VKCursor.cpp */; };
 		59E0D3951ECF641900BF10C4 /* VKTextInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */; };
+		59E0D3981ED034A600BF10C4 /* VKKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		59E0D3911ECF406700BF10C4 /* VKCursor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKCursor.hpp; sourceTree = "<group>"; };
 		59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKTextInput.cpp; sourceTree = "<group>"; };
 		59E0D3941ECF641900BF10C4 /* VKTextInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTextInput.hpp; sourceTree = "<group>"; };
+		59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKKeyboard.cpp; sourceTree = "<group>"; };
+		59E0D3971ED034A600BF10C4 /* VKKeyboard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKKeyboard.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 				59E0D38E1ECEFB7A00BF10C4 /* VKAlertView.hpp */,
 				59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */,
 				59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */,
+				59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */,
+				59E0D3971ED034A600BF10C4 /* VKKeyboard.hpp */,
 				59E0D3781ECECD6D00BF10C4 /* VK.cpp */,
 				59E0D3791ECECD6D00BF10C4 /* VK.hpp */,
 				59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */,
@@ -243,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */,
+				59E0D3981ED034A600BF10C4 /* VKKeyboard.cpp in Sources */,
 				59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */,
 				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
 				59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */,

@@ -15,7 +15,9 @@
 #include "VKAlertView.hpp"
 #include "VKTextInput.hpp"
 
-class CustomView : public VKView
+#include "VKKeyboard.hpp"
+
+class CustomView : public VKView , public VKKeyboardDelegate
 {
 public:
     CustomView();
@@ -28,6 +30,8 @@ protected:
     bool touchBegan( const GXTouch &t) override;
     bool touchMoved( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
+    
+    bool keyPressed(  const GXKey &key ) override;
     
     std::string _test;
     

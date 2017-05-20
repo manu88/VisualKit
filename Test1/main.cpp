@@ -89,7 +89,10 @@ int main()
         
         mainWin.setWindowTitle("My APP");
         mainWin.id = 0;
-        app._view = new CustomView();
+        CustomView* cView = new CustomView();
+        app._view = cView;
+        app.setKeyboardResponder( cView );
+        
         
         
         DisplayGetWindowSize( &disp, &winWidth, &winHeight);
