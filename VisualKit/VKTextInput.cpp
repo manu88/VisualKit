@@ -39,13 +39,13 @@ void VKTextInput::focusChanged()
         addChild(&_block);
         
         _block.setVisible(true);
-        CLApplication::runLoop->addSource(tBlock);
+        CLApplication::instance()->getRunLoop()->addSource(tBlock);
         setNeedsDisplay();
     }
     else
     {
         removeChild(&_block);
-        CLApplication::runLoop->removeSource(tBlock);
+        CLApplication::instance()->getRunLoop()->removeSource(tBlock);
         setNeedsDisplay();
     }
 }

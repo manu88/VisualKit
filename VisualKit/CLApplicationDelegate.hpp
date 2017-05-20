@@ -9,11 +9,16 @@
 #ifndef CLApplicationDelegate_hpp
 #define CLApplicationDelegate_hpp
 
+class CLApplication;
+
 class CLApplicationDelegate
 {
+    friend class CLApplication;
 public:
 protected:
     
+    virtual void applicationWillLoad( CLApplication* app);
+    virtual void applicationDidLoad( CLApplication* app);
 private:
     
 };

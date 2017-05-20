@@ -13,11 +13,11 @@
 int main(int argc , char* argv[])
 {
     
-    CLApplication app;
+    
     AppDelegate appDelegate;
     
-    app.setDelegate(&appDelegate);
+    CLApplication::instance()->setDelegate(&appDelegate);
     
-    return app.main(argc, argv);
+    return CLApplication::instance()->main(argc, argv);
     
 }

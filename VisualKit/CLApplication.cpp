@@ -10,17 +10,18 @@
 #include <GroundBase.hpp>
 
 #include "CLApplication.hpp"
+#include "CLApplicationDelegate.hpp"
 #include "../../GX/include/Display.h"
 #include "../../GX/include/GXLayer.hpp"
 #include "../../GX/include/GXRenderer.hpp"
 
-#include "CustomView.hpp"
-
 #include "VKCursor.hpp"
 #include "VKWindow.hpp"
 
+VKCursor* _cursor;
 
-/*static*/ GB::RunLoop* CLApplication::runLoop = nullptr;
+/*static*/ CLApplication* CLApplication::s_instance = nullptr;
+
 
 CLApplication::CLApplication():
 _view(nullptr),
@@ -72,9 +73,18 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
 
 /* static */void CLApplication::s_onGXEvent(void* disp , const GXEvent *evt)
 {
-    Display* display = static_cast< Display* >(disp);
-    
-    CLApplication* self = static_cast<CLApplication*>(DisplayGetUserContext( display));
+    if(evt->type == GXEventTypeMouse)
+    {
+        const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
+        const GXPoint p =GXPointMake(mouse->x, mouse->y);
+        if( _cursor->getPos() != p)
+        {
+            _cursor->setPos( p);
+            _cursor->setNeedsDisplay();
+        }
+    }
+
+    CLApplication* self = instance();
     assert(self);
     
     switch (evt->type)
@@ -101,27 +111,13 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
     
 }
 
+bool CLApplication::quit()
+{
+    return _runLoop.stop();
+}
 
 /* *** */
 
-VKCursor* _cursor;
-
-static void eventListener(void* disp , const GXEvent *evt)
-{
-    
-    if(evt->type == GXEventTypeMouse)
-    {
-        const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
-        const GXPoint p =GXPointMake(mouse->x, mouse->y);
-        if( _cursor->getPos() != p)
-        {
-            _cursor->setPos( p);
-            _cursor->setNeedsDisplay();
-        }
-    }
-    
-    CLApplication::s_onGXEvent(disp , evt);
-}
 
 int CLApplication::main(int argc , char* argv[])
 {
@@ -129,8 +125,7 @@ int CLApplication::main(int argc , char* argv[])
     
     Display disp;
     {
-        GB::RunLoop runL;
-        CLApplication::runLoop = &runL;
+        
         
         /**/
         if( DisplayInit(&disp , 1280 , 750) == 0)
@@ -169,22 +164,17 @@ int CLApplication::main(int argc , char* argv[])
         GXContext ctx;
         
         VKWindow mainWin;
-        //_mainWin = &mainWin;
         VKCursor cursor;
         _cursor = &cursor;
-        //CLApplication app;
-        //AppDelegate appDelegate;
         
-        //app.setDelegate(&appDelegate);
         
-        DisplaySetUserContext(&disp, this);
-        DisplaySetEventCallback(&disp, eventListener);
+        DisplaySetEventCallback(&disp, CLApplication::s_onGXEvent);
         
         mainWin.setWindowTitle("My APP");
         mainWin.id = 0;
-        CustomView* cView = new CustomView();
-        setView( cView );
-        setKeyboardResponder( cView );
+        
+        _delegate->applicationWillLoad(this);
+        
         
         
         
@@ -207,7 +197,6 @@ int CLApplication::main(int argc , char* argv[])
         t.setInterval(40);
         t.setCallback([&](GB::Timer &timer)
                       {
-                          //renderScreen(&render , &disp , &ctx);
                           
                           if(render.draw( &ctx ))
                           {
@@ -217,13 +206,19 @@ int CLApplication::main(int argc , char* argv[])
                           
                           if( DisplayShouldClose( &disp ))
                           {
-                              runL.stop();
+                              quit();
                           }
                       });
         
-        runL.addSource(t);
+        _runLoop.addSource(t);
         
-        runL.run();
+        
+        _runLoop.dispatchAsync([this]()
+        {
+            _delegate->applicationDidLoad( this);
+        });
+        
+        _runLoop.run();
     }
     
     DisplayRelease(&disp);

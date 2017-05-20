@@ -14,8 +14,11 @@
 class AppDelegate : public CLApplicationDelegate
 {
 public:
-    AppDelegate();
-    ~AppDelegate();
+    
+    
+protected:
+    void applicationWillLoad( CLApplication* app) override;
+    void applicationDidLoad( CLApplication* app) override;
 };
 
 #endif /* AppDelegate_hpp */

@@ -20,7 +20,16 @@ class CLApplicationDelegate;
 class CLApplication
 {
 public:
-    CLApplication();
+    
+    static CLApplication* instance()
+    {
+        if( s_instance == nullptr)
+        {
+            s_instance = new CLApplication();
+        }
+        
+        return s_instance;
+    }
     
     void setView( VKView* v) noexcept;
     VKView* getCurrentView() const noexcept
@@ -47,7 +56,12 @@ public:
     
     int main(int argc , char* argv[]);
     
-    static void s_onGXEvent(void* disp , const GXEvent *evt);
+    bool quit();
+    
+    GB::RunLoop* getRunLoop()
+    {
+        return &_runLoop;
+    }
     
 protected:
     
@@ -56,6 +70,13 @@ protected:
     
     VKKeyboardDelegate *_keyResponder;
 private:
+    CLApplication();
+    static CLApplication* s_instance;
+    
+    static void s_onGXEvent(void* disp , const GXEvent *evt);
+    
+    GB::RunLoop _runLoop;
+    
     CLApplicationDelegate *_delegate;
     VKView *_view;
 };

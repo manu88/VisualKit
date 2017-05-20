@@ -7,3 +7,14 @@
 //
 
 #include "CLApplicationDelegate.hpp"
+
+
+void CLApplicationDelegate::applicationDidLoad( CLApplication* app)
+{
+    
+}
+
+void CLApplicationDelegate::applicationWillLoad( CLApplication* app)
+{
+    
+}

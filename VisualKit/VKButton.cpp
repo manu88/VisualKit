@@ -68,7 +68,7 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
     if( _triggerAction)
     {
         _triggerAction = false;
-        CLApplication::runLoop->dispatchAsync([ this]()
+        CLApplication::instance()->getRunLoop()->dispatchAsync([ this]()
                                               {
                                                   onClic(this);
                                               });

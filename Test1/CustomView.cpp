@@ -64,7 +64,7 @@ void CustomView::buttonClicked( VKButton* button)
     }
     else if( button == &bttonCancel)
     {
-        CLApplication::runLoop->stop();
+        CLApplication::instance()->quit();
     }
 }
 
