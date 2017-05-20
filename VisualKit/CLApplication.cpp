@@ -18,7 +18,7 @@
 #include "VKCursor.hpp"
 #include "VKWindow.hpp"
 
-VKCursor* _cursor;
+
 
 /*static*/ CLApplication* CLApplication::s_instance = nullptr;
 
@@ -73,19 +73,21 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
 
 /* static */void CLApplication::s_onGXEvent(void* disp , const GXEvent *evt)
 {
+    
+
+    CLApplication* self = instance();
+    assert(self);
+    
     if(evt->type == GXEventTypeMouse)
     {
         const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
         const GXPoint p =GXPointMake(mouse->x, mouse->y);
-        if( _cursor->getPos() != p)
+        if( self->_cursor->getPos() != p)
         {
-            _cursor->setPos( p);
-            _cursor->setNeedsDisplay();
+            self->_cursor->setPos( p);
+            self->_cursor->setNeedsDisplay();
         }
     }
-
-    CLApplication* self = instance();
-    assert(self);
     
     switch (evt->type)
     {
@@ -111,9 +113,15 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
     
 }
 
-bool CLApplication::quit()
+void CLApplication::quit()
 {
-    return _runLoop.stop();
+    _runLoop.dispatchAsync([this]()
+    {
+        _delegate->applicationWillStop(this);
+        return _runLoop.stop();
+    });
+    
+    
 }
 
 /* *** */
@@ -220,6 +228,8 @@ int CLApplication::main(int argc , char* argv[])
         
         _runLoop.run();
     }
+    
+    
     
     DisplayRelease(&disp);
     

@@ -15,6 +15,7 @@
 
 #include "VKKeyboard.hpp"
 
+class VKCursor;
 class CLApplicationDelegate;
 
 class CLApplication
@@ -29,6 +30,11 @@ public:
         }
         
         return s_instance;
+    }
+    static void releaseInstance()
+    {
+        delete s_instance;
+        s_instance = nullptr;
     }
     
     void setView( VKView* v) noexcept;
@@ -56,7 +62,7 @@ public:
     
     int main(int argc , char* argv[]);
     
-    bool quit();
+    void quit();
     
     GB::RunLoop* getRunLoop()
     {
@@ -71,6 +77,7 @@ protected:
     VKKeyboardDelegate *_keyResponder;
 private:
     CLApplication();
+    
     static CLApplication* s_instance;
     
     static void s_onGXEvent(void* disp , const GXEvent *evt);
@@ -79,6 +86,7 @@ private:
     
     CLApplicationDelegate *_delegate;
     VKView *_view;
+    VKCursor* _cursor;
 };
 
 #endif /* CLApplication_hpp */

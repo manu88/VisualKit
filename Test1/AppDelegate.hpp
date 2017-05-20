@@ -10,6 +10,7 @@
 #define AppDelegate_hpp
 
 #include "CLApplicationDelegate.hpp"
+#include "CustomView.hpp"
 
 class AppDelegate : public CLApplicationDelegate
 {
@@ -19,6 +20,9 @@ public:
 protected:
     void applicationWillLoad( CLApplication* app) override;
     void applicationDidLoad( CLApplication* app) override;
+    void applicationWillStop( CLApplication* app) override;
+    
+    CustomView _view;
 };
 
 #endif /* AppDelegate_hpp */

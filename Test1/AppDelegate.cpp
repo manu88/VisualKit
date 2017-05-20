@@ -8,14 +8,13 @@
 
 #include <iostream>
 #include "AppDelegate.hpp"
-#include "CustomView.hpp"
+
 #include "CLApplication.hpp"
 
 void AppDelegate::applicationWillLoad( CLApplication* app)
-{
-    CustomView* cView = new CustomView();
-    app->setView( cView );
-    app->setKeyboardResponder( cView );
+{   
+    app->setView( &_view );
+    app->setKeyboardResponder( &_view );
 }
 
 void AppDelegate::applicationDidLoad( CLApplication* app)
@@ -23,3 +22,8 @@ void AppDelegate::applicationDidLoad( CLApplication* app)
     printf("App did load\n");
 }
 
+
+void AppDelegate::applicationWillStop( CLApplication* app)
+{
+    printf("App will stop\n");
+}

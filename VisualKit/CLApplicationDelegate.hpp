@@ -15,10 +15,13 @@ class CLApplicationDelegate
 {
     friend class CLApplication;
 public:
+    virtual ~CLApplicationDelegate();
 protected:
     
     virtual void applicationWillLoad( CLApplication* app);
     virtual void applicationDidLoad( CLApplication* app);
+    
+    virtual void applicationWillStop( CLApplication* app);
 private:
     
 };
