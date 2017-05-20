@@ -17,10 +17,6 @@ VKTextInput::VKTextInput()
     _block.background = GXColorMake(0, 1., 0.35);
     
     addChild(&_block);
-    
-    /*
-    _content = "I had a project where I needed to stuff the Linux keyboard with some keystrokes to control a web browser remotely. I couldn't believe how little information there was on the keyboard buffer and how much time it took me to figure it all out. I saw many posts with similar questions but very few with any real wo";
-     */
 }
 
 void VKTextInput::paint( GXContext* context , const GXRect& bounds)

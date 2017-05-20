@@ -10,8 +10,8 @@
 #define VKWindow_hpp
 
 #include "../../GX/include/GXLayer.hpp"
-
-class VKWindow : public GXLayer
+#include "VKView.hpp"
+class VKWindow : public VKView/* GXLayer*/
 {
 public:
     VKWindow();

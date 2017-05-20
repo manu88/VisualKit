@@ -10,7 +10,8 @@
 #include "VK.hpp"
 #include "VKButton.hpp"
 
-VKView::VKView()
+VKView::VKView():
+_hasFocus(false)
 {
 
     
@@ -21,24 +22,43 @@ VKView::~VKView()
     
 }
 
+void VKView::setFocus(bool focus) noexcept
+{
+    _hasFocus = focus;
+}
+bool VKView::hasFocus() const noexcept
+{
+    return _hasFocus;
+}
+
+bool VKView::handleFocus()
+{
+    return false;
+}
 
 bool VKView::touchBegan( const GXTouch &t)
 {
     for (GXLayer* l : getChildren())
     {
-        if( rectContainsPoint(l->getBounds(), t.center))
+        VKView* del  = dynamic_cast<VKView*>(l);
+        if( del)
         {
-            VKTouchDelegate* del  = dynamic_cast<VKTouchDelegate*>(l);
-            
-            if( del)
+            if( rectContainsPoint(l->getBounds(), t.center))
             {
+                del->setFocus(true);
+
                 if(del->touchBegan({ t.center - l->getBounds().origin ,  GXTouch::Phase::Began }))
                 {
-                    return true;
+                    //return true;
                 }
             }
-            
+            else
+            {
+                del->setFocus(false);
+            }
         }
+        
+        
     }
     
     

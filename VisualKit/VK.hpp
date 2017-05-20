@@ -13,7 +13,7 @@
 
 namespace VKDefaults
 {
-    static constexpr const char DefaultFont[] = "Roboto-Regular.ttf";
+    static constexpr const char DefaultFont[] = "SanFranciscoDisplay-Regular.ttf";
 }
 
 #endif /* VK_hpp */

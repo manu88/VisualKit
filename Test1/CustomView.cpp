@@ -101,6 +101,8 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
 
 bool CustomView::keyPressed( const GXKey &key )
 {
+    if( !textInput.hasFocus())
+        return false;
     
     std::string c = textInput.getContent();
     

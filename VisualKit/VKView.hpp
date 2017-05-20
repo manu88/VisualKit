@@ -18,13 +18,21 @@ class VKView : public GXLayer , public VKTouchDelegate
 public:
     VKView();
     virtual ~VKView();
+    
+    void setFocus(bool focus) noexcept;
+    bool hasFocus() const noexcept;
 protected:
+
+    // def false
+    virtual bool handleFocus();
+    
     
     bool touchBegan( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
     
 private:
     
+    bool _hasFocus;
     
 };
 
