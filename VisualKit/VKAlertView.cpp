@@ -15,7 +15,7 @@ VKAlertView::VKAlertView():
 onReturn(nullptr)
 {
     setOpaque(false);
-    setSize( GXSizeMake(300, 150) );
+    
     //background = GXColorMake(0.0, 0.0, 0.0 , 0.1);
     
     bttonOk.setText("Ok");
@@ -46,17 +46,25 @@ void VKAlertView::buttonClicked( VKButton* button)
 }
 void VKAlertView::paint( GXContext* context , const GXRect& bounds)
 {
+    context->addRect(bounds);
+    context->setFillColor(GXColorMake(0.2, 0.2, 0.2, 0.8));
+    context->fill();
+    context->beginPath();
+    const GXSize winSize = GXSizeMake(300, 150);
+    const GXPoint center = GXPointMake(bounds.size.width/2, bounds.size.height/2 );
     
-    bttonOk.setPos( GXPointMake(bounds.size.width/2 - 40, bounds.size.height - 40));
-    bttonCancel.setPos( GXPointMake(bounds.size.width/2 + 40, bounds.size.height - 40));
+    const GXRect winBounds = GXRectMake(center - (winSize/2), winSize );
+    
+    bttonOk.setPos( GXPointMake(center.x - 40, winBounds.origin.y + winBounds.size.height - 40));
+    bttonCancel.setPos( GXPointMake(center.x + 40,winBounds.origin.y + winBounds.size.height - 40));
     
     
     
-    context->addRoundedRect(bounds, 5);
+    context->addRoundedRect(winBounds, 5);
     context->setFillColor( GXColorMake(0.3, 0.3, 0.3 , 0.3));
     context->fill();
     
-    context->addRoundedRect(GXRectMake(bounds.origin, bounds.size - GXSizeMake(4, 4)), 5);
+    context->addRoundedRect(GXRectMake(winBounds.origin, winBounds.size - GXSizeMake(4, 4)), 5);
     context->setFillColor( GXColorMake(0.7f , 0.7f , 0.7f));
     context->setStrokeColor(GXColors::White);
     context->fill();
@@ -71,10 +79,19 @@ void VKAlertView::paint( GXContext* context , const GXRect& bounds)
     context->setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE );
 
     context->setFillColor(GXColors::White);
-    context->addTextBox(GXPointMake( 0 ,15), bounds.size.width, _title );
+    context->addTextBox(GXPointMake( winBounds.origin.x ,winBounds.origin.y + 15), winBounds.size.width, _title );
     
 }
 
+bool VKAlertView::keyPressed(  const GXKey &key )
+{
+    if( key.key == GXKey_ENTER)
+    {
+        onReturn(this , 1 );
+    }
+    return true;
+}
+/*
 bool VKAlertView::touchBegan( const GXTouch &t)
 {
     return VKView::touchBegan(t);
@@ -83,6 +100,6 @@ bool VKAlertView::touchEnded( const GXTouch &t)
 {
     return VKView::touchEnded(t);
 }
-
+*/
 
 

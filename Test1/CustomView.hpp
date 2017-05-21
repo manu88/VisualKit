@@ -24,6 +24,10 @@ public:
 
 protected:
     
+    
+    void viewWillAppear() override;
+    void viewDidDismiss() override;
+    
     void buttonClicked( VKButton* button);
     void paint( GXContext* context , const GXRect& bounds) override;
     
@@ -37,10 +41,10 @@ protected:
     
     VKButton bttonOk;
     VKButton bttonCancel;
+    VKButton bttonNav;
     
     VKAlertView *alert;
     
-    GB::FDSource input;
     
     VKTextInput textInput;
     VKTextInput textInput2;

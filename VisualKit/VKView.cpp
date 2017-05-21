@@ -43,6 +43,15 @@ void VKView::focusChanged()
     
 }
 
+void VKView::viewWillAppear()
+{
+    
+}
+void VKView::viewDidDismiss()
+{
+    
+}
+
 bool VKView::keyPressed(  const GXKey &key )
 {
     for (GXLayer* l : getChildren())

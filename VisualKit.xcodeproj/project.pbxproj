@@ -23,6 +23,7 @@
 		59E0D3981ED034A600BF10C4 /* VKKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */; };
 		59E0D3A11ED0DAC400BF10C4 /* CLApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */; };
 		59E0D3A81ED0DB0B00BF10C4 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3A61ED0DB0B00BF10C4 /* AppDelegate.cpp */; };
+		59E0D3AC1ED19D3200BF10C4 /* CustomView2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3AA1ED19D3200BF10C4 /* CustomView2.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,8 @@
 		59E0D3A01ED0DAC400BF10C4 /* CLApplicationDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLApplicationDelegate.hpp; sourceTree = "<group>"; };
 		59E0D3A61ED0DB0B00BF10C4 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		59E0D3A71ED0DB0B00BF10C4 /* AppDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hpp; sourceTree = "<group>"; };
+		59E0D3AA1ED19D3200BF10C4 /* CustomView2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomView2.cpp; sourceTree = "<group>"; };
+		59E0D3AB1ED19D3200BF10C4 /* CustomView2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CustomView2.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 		59E0D3811ECED85200BF10C4 /* Test1 */ = {
 			isa = PBXGroup;
 			children = (
+				59E0D3AA1ED19D3200BF10C4 /* CustomView2.cpp */,
+				59E0D3AB1ED19D3200BF10C4 /* CustomView2.hpp */,
 				59E0D3A61ED0DB0B00BF10C4 /* AppDelegate.cpp */,
 				59E0D3A71ED0DB0B00BF10C4 /* AppDelegate.hpp */,
 				59E0D3821ECED85200BF10C4 /* CustomView.cpp */,
@@ -264,6 +269,7 @@
 				59E0D3A81ED0DB0B00BF10C4 /* AppDelegate.cpp in Sources */,
 				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
 				59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */,
+				59E0D3AC1ED19D3200BF10C4 /* CustomView2.cpp in Sources */,
 				59E0D3951ECF641900BF10C4 /* VKTextInput.cpp in Sources */,
 				59E0D3921ECF406700BF10C4 /* VKCursor.cpp in Sources */,
 				59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */,

@@ -56,9 +56,26 @@ void CLApplication::pushView( VKView* v) noexcept
     {
         _currentView = v;
         _viewStack.push_back(v);
+        
+        _currentView->setBounds( GXRectMake(0, 20, mainWin.getSize().width, mainWin.getSize().height - 20) );
+        _currentView->viewWillAppear();
+        mainWin.addChild( _currentView );
     }
 }
 
+void CLApplication::dismissView() noexcept
+{
+    if( _viewStack.empty())
+        return;
+    
+    VKView* last = _viewStack.back();
+    _viewStack.pop_back();
+    
+    _currentView = _viewStack.back();
+    mainWin.removeChild(last);
+    _currentView->viewWillAppear();
+    last->viewDidDismiss();
+}
 
 void CLApplication::setName( const std::string &n)
 {
@@ -220,8 +237,8 @@ int CLApplication::main(int argc , char* argv[])
     
     if(_currentView)
     {
-        _currentView->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
-        mainWin.addChild( _currentView );
+        pushView(_currentView);
+        
     }
     mainWin.addChild( &_cursor);
 

@@ -46,6 +46,8 @@ public:
         return _currentView;
     }
     
+    void dismissView() noexcept;
+    
     void setDelegate( CLApplicationDelegate* delegate) noexcept
     {
         _delegate = delegate;

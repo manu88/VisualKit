@@ -12,7 +12,7 @@
 #include <GBTimer.hpp>
 #include "VKView.hpp"
 #include "VKKeyboard.hpp"
-
+#include "../../GX/include/GXTextContainer.hpp"
 
 class VKTextInput : public VKView
 {
@@ -21,12 +21,12 @@ public:
     
     const std::string &getContent() const noexcept
     {
-        return _content;
+        return _textContainer.getContent();
     }
     
     void setContent( const std::string &c) noexcept
     {
-        _content = c;
+        _textContainer.setContent(c);
     }
     
 protected:
@@ -36,11 +36,14 @@ protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     void focusChanged() override;
     
+    
+    GXTextContainer _textContainer;
+    
     GXLayer _block;
     
     GB::Timer tBlock;
     
-    std::string _content;
+    //std::string _content;
     size_t _insertPoint;
     size_t _kbPos;
     GXPoint _cursorPos;

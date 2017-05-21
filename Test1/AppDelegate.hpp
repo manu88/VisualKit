@@ -12,6 +12,7 @@
 #include "CLApplicationDelegate.hpp"
 #include "CustomView.hpp"
 
+
 class AppDelegate : public CLApplicationDelegate
 {
 public:
@@ -23,6 +24,7 @@ protected:
     void applicationWillStop( CLApplication* app) override;
     
     CustomView _view;
+
 };
 
 #endif /* AppDelegate_hpp */

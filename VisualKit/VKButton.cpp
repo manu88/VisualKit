@@ -54,6 +54,7 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
     
     if( _state == Highlighted)
     {
+
         context->addRoundedRect( _bounds , 5);
         
         GXColor c = GXColors::DarkGray;
@@ -61,7 +62,6 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
         context->setFillColor( c);
         
         context->fill();
-        
     }
     
     

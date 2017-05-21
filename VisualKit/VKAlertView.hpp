@@ -39,10 +39,12 @@ protected:
     void buttonClicked( VKButton* button);
     void paint( GXContext* context , const GXRect& bounds) override;
     
+    bool keyPressed(  const GXKey &key ) override;
     
+    /*
     bool touchBegan( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
-    
+    */
     
     
 private:

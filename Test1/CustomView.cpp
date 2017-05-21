@@ -10,8 +10,9 @@
 #include "VK.hpp"
 #include "CLApplication.hpp"
 
-CustomView::CustomView():
-input(STDIN_FILENO)
+
+#include "CustomView2.hpp"
+CustomView::CustomView()
 {
     background = GXColors::LightGray;
     
@@ -24,6 +25,14 @@ input(STDIN_FILENO)
     bttonCancel.setBounds(GXRectMake(80, 10, 60, 20));
     addChild( &bttonCancel );
     
+    bttonNav.setText("Next");
+    bttonNav.setBounds(GXRectMake(150, 10, 60, 20));
+    addChild( &bttonNav );
+    
+    bttonNav.onClic = [](VKButton* sender)
+    {
+        CLApplication::instance()->pushView(new CustomView2());
+    };
     
     bttonOk.onClic = std::bind(&CustomView::buttonClicked, this , std::placeholders::_1);
     bttonCancel.onClic = std::bind(&CustomView::buttonClicked, this , std::placeholders::_1);
@@ -41,6 +50,16 @@ input(STDIN_FILENO)
 
 }
 
+
+void CustomView::viewWillAppear()
+{
+    CLApplication::instance()->setName("View 1");
+}
+void CustomView::viewDidDismiss()
+{
+    
+}
+
 void CustomView::buttonClicked( VKButton* button)
 {
     if( button == &bttonOk)
@@ -49,17 +68,18 @@ void CustomView::buttonClicked( VKButton* button)
         {
             alert = new VKAlertView();
             alert->setTitle("Hello");
-            alert->setCenter( GXPointMake(getSize().width /2, getSize().height/2));
             
+            
+            CLApplication::instance()->pushView(alert);
             alert->onReturn = [ this ]( VKAlertView* _alert , int code)
             {
                 assert(_alert == alert);
                 printf("Alert returned with code %i\n" , code);
-                _alert->removeFromParent();
+                CLApplication::instance()->dismissView();
                 delete alert;
                 alert = nullptr;
             };
-            addChild( alert);
+            //addChild( alert);
         }
     }
     else if( button == &bttonCancel)
@@ -82,6 +102,7 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     context->addTextBox(GXPointMake(bounds.size.width /2 , 20), 100, _test);
 
 }
+
 
 
 

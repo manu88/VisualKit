@@ -32,6 +32,9 @@ protected:
     
     bool keyPressed(  const GXKey &key ) override;
     
+    
+    virtual void viewWillAppear();
+    virtual void viewDidDismiss();
 private:
     
     bool _hasFocus;

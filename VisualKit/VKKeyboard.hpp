@@ -11,6 +11,7 @@
 
 
 #include <string>
+#include "../../GX/include/GXKey.h"
 
 typedef enum
 {

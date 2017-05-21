@@ -14,6 +14,8 @@
 namespace VKDefaults
 {
     static constexpr const char DefaultFont[] = "SanFranciscoDisplay-Regular.ttf";
+    
+    static constexpr const float DefautFontSize = 20.f;
 }
 
 #endif /* VK_hpp */
