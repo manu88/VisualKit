@@ -64,7 +64,8 @@ void CLApplication::pushView( VKView* v) noexcept
         _currentView->setBounds( GXRectMake(0, 20, mainWin.getSize().width, mainWin.getSize().height - 20) );
         _currentView->viewWillAppear();
         mainWin.addChild( _currentView );
-            
+        
+        v->setNeedsDisplay();
         printf("pushView:\n");
             
         for (const GXLayer *c : mainWin.getChildren())
@@ -255,7 +256,7 @@ int CLApplication::main(int argc , char* argv[])
     
     mainWin.id = 0;
     
-    _delegate->applicationWillLoad(this);
+    
 
     DisplayGetWindowSize( _disp, &winWidth, &winHeight);
     DisplayGetFramebufferSize( _disp, &fbWidth, &fbHeight);
@@ -264,6 +265,7 @@ int CLApplication::main(int argc , char* argv[])
     mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
     render.setRoot( &mainWin );
     
+    _delegate->applicationWillLoad(this);
 
     
     _cursor.setZPos(20);
