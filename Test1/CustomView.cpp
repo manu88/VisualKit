@@ -29,12 +29,12 @@ CustomView::CustomView()
     bttonNav.setBounds(GXRectMake(150, 10, 60, 20));
     addChild( &bttonNav );
     
-    bttonNav.onClic = [](VKButton* sender)
+    bttonNav.onClic = [](VKSender* sender)
     {
         CLApplication::instance()->pushView(new CustomView2());
     };
     
-    bttonOk.onClic = std::bind(&CustomView::buttonClicked, this , std::placeholders::_1);
+    bttonOk.onClic = std::bind(&CustomView::buttonClicked,  this , std::placeholders::_1);
     bttonCancel.onClic = std::bind(&CustomView::buttonClicked, this , std::placeholders::_1);
     
     
@@ -60,7 +60,7 @@ void CustomView::viewDidDismiss()
     
 }
 
-void CustomView::buttonClicked( VKButton* button)
+void CustomView::buttonClicked( VKSender* button)
 {
     if( button == &bttonOk)
     {

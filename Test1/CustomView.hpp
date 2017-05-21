@@ -28,7 +28,7 @@ protected:
     void viewWillAppear() override;
     void viewDidDismiss() override;
     
-    void buttonClicked( VKButton* button);
+    void buttonClicked( VKSender* button);
     void paint( GXContext* context , const GXRect& bounds) override;
     
     bool touchBegan( const GXTouch &t) override;

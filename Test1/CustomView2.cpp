@@ -21,7 +21,7 @@ void CustomView2::viewWillAppear()
     _returnBton.setBounds( GXRectMake(10, 10, 60, 20));
     addChild( &_returnBton );
     
-    _returnBton.onClic = [](VKButton* bton)
+    _returnBton.onClic = [](VKSender* bton)
     {
         printf("Return \n");
         CLApplication::instance()->dismissView();
