@@ -11,7 +11,7 @@
 #include "VKButton.hpp"
 
 VKView::VKView():
-_movingV( nullptr ),
+
 _hasFocus(false)
 {
 
@@ -98,38 +98,13 @@ bool VKView::touchBegan( const GXTouch &t)
 bool VKView::touchMoved( const GXTouch &t)
 {
 
-    if( !_movingV)
-    {
-        for (GXLayer* l : getChildren())
-        {
-            VKView* view  = dynamic_cast<VKView*>(l);
-            
-            if( view)
-            {
-                if( rectContainsPoint(l->getBounds(), t.center))
-                {
-                    _movingV = view;
-                    
-                }
-            }
-        }
-    }
-    if( _movingV)
-    {
-        _movingV->setCenter(t.center);
-    }
-    
+       
     return true;
 }
 
 bool VKView::touchEnded( const GXTouch &t)
 {
-    printf("Touch ended \n");
-    if( _movingV)
-    {
-        _movingV = nullptr;
-        
-    }
+
      
     for (GXLayer* l : getChildren())
     {

@@ -10,7 +10,8 @@
 #include "BuilderToolBox.hpp"
 
 BuilderMainView::BuilderMainView():
-_selected(nullptr)
+_selected(nullptr),
+_movingV( nullptr )
 {
     background = GXColorMake( 0.96f ,0.96f ,0.96f);
     
@@ -51,6 +52,44 @@ bool BuilderMainView::touchBegan( const GXTouch &t)
         }
     }
     return VKView::touchBegan(t);
+}
+
+bool BuilderMainView::touchMoved( const GXTouch &t)
+{
+    if( !_movingV)
+    {
+        for (GXLayer* l : getChildren())
+        {
+            VKView* view  = dynamic_cast<VKView*>(l);
+            
+            if( view)
+            {
+                if( rectContainsPoint(l->getBounds(), t.center))
+                {
+                    _movingV = view;
+                    
+                }
+            }
+        }
+    }
+    if( _movingV)
+    {
+        _movingV->setCenter(t.center);
+    }
+
+    
+    return VKView::touchMoved(t);
+}
+
+bool BuilderMainView::touchEnded( const GXTouch &t)
+{
+    if( _movingV)
+    {
+        _movingV = nullptr;
+        
+    }
+    
+    return VKView::touchEnded(t);
 }
 
 void BuilderMainView::itemSelectionChanged()

@@ -26,10 +26,10 @@ public:
     void addButton(VKSender* sender);
     
     bool touchBegan( const GXTouch &t) override;
-    /*
-    bool touchEnded( const GXTouch &t) override;
     bool touchMoved( const GXTouch &t) override;
-     */
+    bool touchEnded( const GXTouch &t) override;
+    
+    
     bool keyPressed(  const GXKey &key ) override;
     
     void textContentChanged( VKSender* sender);
@@ -42,6 +42,7 @@ public:
     
     VKImage _image;
 private:
+    VKView* _movingV;
     
 };
 

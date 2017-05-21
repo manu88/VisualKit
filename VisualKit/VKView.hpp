@@ -39,7 +39,7 @@ protected:
     virtual void viewDidDismiss();
     
 private:
-    VKView* _movingV;
+    
     
     
     bool _hasFocus;
