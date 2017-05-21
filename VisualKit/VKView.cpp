@@ -11,6 +11,7 @@
 #include "VKButton.hpp"
 
 VKView::VKView():
+_movingV( nullptr ),
 _hasFocus(false)
 {
 
@@ -69,40 +70,76 @@ bool VKView::keyPressed(  const GXKey &key )
 
 bool VKView::touchBegan( const GXTouch &t)
 {
+    bool foundTouch = false;
     for (GXLayer* l : getChildren())
     {
-        VKView* del  = dynamic_cast<VKView*>(l);
-        if( del)
+        VKView* view  = dynamic_cast<VKView*>(l);
+        if( view )
         {
             if( rectContainsPoint(l->getBounds(), t.center))
             {
-                del->setFocus(true);
+                view->setFocus(true);
 
-                if(del->touchBegan({ t.center - l->getBounds().origin ,  GXTouch::Phase::Began }))
+                if(!foundTouch && view->touchBegan({ t.center - l->getBounds().origin ,  GXTouch::Phase::Began }))
                 {
+                    foundTouch = true;
                     //return true;
                 }
             }
             else
             {
-                del->setFocus(false);
+                view->setFocus(false);
             }
         }   
     }
+    return foundTouch;
+}
+
+bool VKView::touchMoved( const GXTouch &t)
+{
+
+    if( !_movingV)
+    {
+        for (GXLayer* l : getChildren())
+        {
+            VKView* view  = dynamic_cast<VKView*>(l);
+            
+            if( view)
+            {
+                if( rectContainsPoint(l->getBounds(), t.center))
+                {
+                    _movingV = view;
+                    
+                }
+            }
+        }
+    }
+    if( _movingV)
+    {
+        _movingV->setCenter(t.center);
+    }
+    
     return true;
 }
 
 bool VKView::touchEnded( const GXTouch &t)
 {
+    printf("Touch ended \n");
+    if( _movingV)
+    {
+        _movingV = nullptr;
+        
+    }
+     
     for (GXLayer* l : getChildren())
     {
-        if( rectContainsPoint(l->getBounds(), t.center))
+        VKView* view  = dynamic_cast<VKView*>(l);
+        
+        if( view)
         {
-            VKTouchDelegate* del  = dynamic_cast<VKTouchDelegate*>(l);
-            
-            if( del)
+            if( rectContainsPoint(l->getBounds(), t.center))
             {
-                del->touchEnded({ t.center - l->getBounds().origin ,  GXTouch::Phase::Ended });
+                view->touchEnded({ t.center - l->getBounds().origin ,  GXTouch::Phase::Ended });
             }
         }
     }

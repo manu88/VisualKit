@@ -11,7 +11,10 @@
 #include "CLApplication.hpp"
 
 
-VKTextInput::VKTextInput()
+VKTextInput::VKTextInput():
+textChanged(nullptr),
+editingEnded(nullptr),
+_singleLine(false)
 {
     
     setOpaque(false);
@@ -28,9 +31,9 @@ VKTextInput::VKTextInput()
         _block.setVisible( !_block.isVisible());
         _block.setNeedsDisplay();
     });
-    
+    /*
     setContent( "Les Iraniens ont voté massivement, vendredi 19 mai, pour reconduire le modéré Hassan Rohani à la présidence pendant quatre ans. Il a obtenu, dès le premier tour, la majorité absolue avec une confortable avance : 57 % des voix, selon les résultats officiels communiqués en fin de matinée par le ministère de l’intérieur.");
-    
+    */
     _kbPos = 0;
 }
 
@@ -54,7 +57,7 @@ void VKTextInput::focusChanged()
 
 bool VKTextInput::keyPressed(  const GXKey &key )
 {
-    
+    bool _textChanged = false;
     if( key.key == GXKey_RIGHT)
     {
         _kbPos++;
@@ -75,25 +78,43 @@ bool VKTextInput::keyPressed(  const GXKey &key )
     {
         if( !c.empty())
         {
+            /*
             c.erase(c.begin() + _insertPoint-1);
             _insertPoint-=1;
             printf("Instert point %zi\n" , _insertPoint);
-            //c.pop_back();
+             */
+            c.pop_back();
+            _textChanged = true;
         }
     }
     else if( key.key == GXKey_ENTER)
     {
-        c.insert(_insertPoint, "\n");
-        //_insertPoint+=1;
+        if( _singleLine)
+        {
+            if( editingEnded)
+                editingEnded(this);
+        }
+        else
+        {
+            c.insert(_insertPoint, "\n");
+            //_insertPoint+=1;
+            _textChanged = true;
+        }
     }
     else
     {
-        c.insert(_insertPoint,  key.toStr() );
+        //c.insert(_insertPoint,  key.toStr() );
+        c.append(key.toStr());
         //_insertPoint+=1;
+        _textChanged = true;
     }
     setContent(c);
     setNeedsDisplay();
     
+    if( _textChanged && textChanged)
+    {
+        textChanged(this);
+    }
     return true;
 }
 
@@ -119,7 +140,7 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
     context->setFillColor( GXColors::Black);// GXColorMake(0, 1., 0.35) );
     
     
-    const GXPoint textPos = GXPointMake(5, 10);
+    const GXPoint textPos = GXPointMake(5, 5);
 
     _textContainer.setSize(bounds.size);
     //_textContainer.setContent(_content);

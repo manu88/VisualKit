@@ -36,7 +36,7 @@ public:
     VKAlertViewDidReturn onReturn;
     
 protected:
-    void buttonClicked( VKButton* button);
+    void buttonClicked( VKSender* button);
     void paint( GXContext* context , const GXRect& bounds) override;
     
     bool keyPressed(  const GXKey &key ) override;

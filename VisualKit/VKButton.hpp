@@ -10,17 +10,17 @@
 #define VKButton_hpp
 
 
-#include <functional>
+#include "VKAction.hpp"
 #include "../../GX/include/GXLayer.hpp"
 #include "VKView.hpp"
 
 
 
-class VKButton : public VKView
+class VKButton : public VKView , public VKSender
 {
 public:
     
-    typedef std::function<void(VKButton*)> Action;
+    
     
     enum State
     {
@@ -37,7 +37,7 @@ public:
         return _text;
     }
     
-    Action onClic;
+    VKAction::Action onClic;
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     

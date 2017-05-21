@@ -36,7 +36,7 @@ onReturn(nullptr)
     bttonCancel.id = 10;
 }
 
-void VKAlertView::buttonClicked( VKButton* button)
+void VKAlertView::buttonClicked( VKSender* button)
 {
     
     if( onReturn)

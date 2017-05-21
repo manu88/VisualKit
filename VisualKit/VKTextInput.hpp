@@ -10,11 +10,12 @@
 #define VKTextInput_hpp
 
 #include <GBTimer.hpp>
+#include "VKAction.hpp"
 #include "VKView.hpp"
 #include "VKKeyboard.hpp"
 #include "../../GX/include/GXTextContainer.hpp"
-
-class VKTextInput : public VKView
+#include "VKAction.hpp"
+class VKTextInput : public VKView , public VKSender
 {
 public:
     VKTextInput();
@@ -29,6 +30,18 @@ public:
         _textContainer.setContent(c);
     }
     
+    void setSingleLine( bool single) noexcept
+    {
+        _singleLine = single;
+    }
+    
+    bool isSingleLine() const noexcept
+    {
+        return _singleLine;
+    }
+    
+    VKAction::Action textChanged;
+    VKAction::Action editingEnded;
 protected:
     bool keyPressed(  const GXKey &key ) override;
     bool touchBegan( const GXTouch &t) override;
@@ -42,7 +55,7 @@ protected:
     GXLayer _block;
     
     GB::Timer tBlock;
-    
+    bool _singleLine;
     //std::string _content;
     size_t _insertPoint;
     size_t _kbPos;

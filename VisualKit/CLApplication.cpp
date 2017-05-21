@@ -94,6 +94,9 @@ const std::string& CLApplication::getName() const noexcept
 
 void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
 {
+    static GXMouseState lastState = GXMouseStateReleased;
+    static bool isPressMoving = 0;
+    
     const GXPoint center = GXPointMake( mouse->x , mouse->y );
     
     if( rectContainsPoint( _currentView->getBounds(), center))
@@ -110,9 +113,20 @@ void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
         }
         else if( mouse->state == GXMouseStateMoving)
         {
-            _currentView->touchMoved({ realPoint , GXTouch::Phase::Moved });
+            if( isPressMoving)
+                _currentView->touchMoved({ realPoint , GXTouch::Phase::Moved });
         }
     }
+    
+    if (lastState == GXMouseStatePressed && mouse->state == GXMouseStateMoving)
+    {
+        isPressMoving = true;
+    }
+    else if( lastState == GXMouseStateMoving && mouse->state == GXMouseStateReleased )
+    {
+        isPressMoving = false;
+    }
+    lastState = mouse->state;
 
 }
 

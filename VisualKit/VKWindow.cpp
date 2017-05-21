@@ -39,5 +39,5 @@ void VKWindow::paint( GXContext* context , const GXRect& bounds)
     context->setFillColor(GXColors::White);
     
     
-    context->addTextBox(GXPointMake(bounds.size.width /2 , 10), 100, _winTitle );
+    context->addTextBox(GXPointMake(bounds.size.width /2 , 10), 200, _winTitle );
 }
