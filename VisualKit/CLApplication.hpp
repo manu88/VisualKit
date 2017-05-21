@@ -9,19 +9,22 @@
 #ifndef CLApplication_hpp
 #define CLApplication_hpp
 
+#include <vector>
 #include <GBRunLoop.hpp>
 #include "VKView.hpp"
 #include "../../GX/include/GXEvent.h"
 
+#include "VKWindow.hpp"
 #include "VKKeyboard.hpp"
+#include "VKCursor.hpp"
+#include "../../GX/include/Display.h"
 
-class VKCursor;
 class CLApplicationDelegate;
 
 class CLApplication
 {
 public:
-    
+    ~CLApplication();
     static CLApplication* instance()
     {
         if( s_instance == nullptr)
@@ -37,10 +40,10 @@ public:
         s_instance = nullptr;
     }
     
-    void setView( VKView* v) noexcept;
+    void pushView( VKView* v) noexcept;
     VKView* getCurrentView() const noexcept
     {
-        return _view;
+        return _currentView;
     }
     
     void setDelegate( CLApplicationDelegate* delegate) noexcept
@@ -69,12 +72,15 @@ public:
         return &_runLoop;
     }
     
+    void setName( const std::string &n);
+    const std::string &getName() const noexcept;
+    
 protected:
     
     void handleMouseEvent( const GXEventMouse* evt);
     void handleKeyEvent( const GXEventKey* evt);
     
-    VKKeyboardDelegate *_keyResponder;
+    
 private:
     CLApplication();
     
@@ -82,11 +88,19 @@ private:
     
     static void s_onGXEvent(void* disp , const GXEvent *evt);
     
+    
+    std::string _appName;
+    VKKeyboardDelegate *_keyResponder;
+    Display *_disp;
+    GXContext *_ctx;
     GB::RunLoop _runLoop;
     
     CLApplicationDelegate *_delegate;
-    VKView *_view;
-    VKCursor* _cursor;
+    std::vector<VKView*> _viewStack;
+    VKView* _currentView;
+    VKCursor _cursor;
+    
+    VKWindow mainWin;
 };
 
 #endif /* CLApplication_hpp */

@@ -12,8 +12,9 @@
 #include "CLApplication.hpp"
 
 void AppDelegate::applicationWillLoad( CLApplication* app)
-{   
-    app->setView( &_view );
+{
+    app->setName("MyApp");
+    app->pushView( &_view );
     app->setKeyboardResponder( &_view );
 }
 
@@ -21,7 +22,6 @@ void AppDelegate::applicationDidLoad( CLApplication* app)
 {
     printf("App did load\n");
 }
-
 
 void AppDelegate::applicationWillStop( CLApplication* app)
 {

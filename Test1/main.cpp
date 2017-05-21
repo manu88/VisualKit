@@ -12,12 +12,17 @@
 
 int main(int argc , char* argv[])
 {
-    AppDelegate appDelegate;
+    int ret;
     
-    CLApplication::instance()->setDelegate(&appDelegate);
+    {
+        AppDelegate appDelegate;
     
-    const int ret = CLApplication::instance()->main(argc, argv);
+        CLApplication::instance()->setDelegate(&appDelegate);
     
+        ret = CLApplication::instance()->main(argc, argv);
+    
+    
+    }
     CLApplication::releaseInstance();
     
     return ret;

@@ -11,12 +11,12 @@
 
 #include "CLApplication.hpp"
 #include "CLApplicationDelegate.hpp"
-#include "../../GX/include/Display.h"
+
 #include "../../GX/include/GXLayer.hpp"
 #include "../../GX/include/GXRenderer.hpp"
 
-#include "VKCursor.hpp"
-#include "VKWindow.hpp"
+
+
 
 
 
@@ -24,36 +24,76 @@
 
 
 CLApplication::CLApplication():
-_view(nullptr),
-_keyResponder(nullptr)
+_keyResponder(nullptr),
+_disp(nullptr),
+_ctx(nullptr),
+_delegate(nullptr),
+_currentView(nullptr)
 {
+    _disp = (Display*) malloc(sizeof(Display));
+    if( DisplayInit(_disp , 1280 , 750) == 0)
+    {
+        printf("Display init error \n");
+        
+    }
+
+}
+
+CLApplication::~CLApplication()
+{
+    DisplayRelease(_disp);
+    free(_disp);
+    
+    if( _ctx)
+    {
+        delete _ctx;
+    }
+}
+
+void CLApplication::pushView( VKView* v) noexcept
+{
+    if( v)
+    {
+        _currentView = v;
+        _viewStack.push_back(v);
+    }
+}
+
+
+void CLApplication::setName( const std::string &n)
+{
+    if( _appName !=n)
+    {
+        _appName = n;
+        mainWin.setWindowTitle( _appName );
+    }
     
 }
 
-void CLApplication::setView( VKView* v) noexcept
+const std::string& CLApplication::getName() const noexcept
 {
-    _view = v;
+    return _appName;
 }
 
 void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
 {
     const GXPoint center = GXPointMake( mouse->x , mouse->y );
     
-    if( rectContainsPoint( _view->getBounds(), center))
+    if( rectContainsPoint( _currentView->getBounds(), center))
     {
-        const GXPoint realPoint = center - _view->getBounds().origin;
+        const GXPoint realPoint = center - _currentView->getBounds().origin;
         
         if( mouse->state == GXMouseStatePressed)
         {
-            _view->touchBegan( { realPoint , GXTouch::Phase::Began  });
+            _currentView->touchBegan( { realPoint , GXTouch::Phase::Began  });
         }
         else if( mouse->state == GXMouseStateReleased)
         {
-            _view->touchEnded( { realPoint , GXTouch::Phase::Ended  });
+            _currentView->touchEnded( { realPoint , GXTouch::Phase::Ended  });
         }
         else if( mouse->state == GXMouseStateMoving)
         {
-            _view->touchMoved({ realPoint , GXTouch::Phase::Moved });
+            _currentView->touchMoved({ realPoint , GXTouch::Phase::Moved });
         }
     }
 
@@ -82,10 +122,10 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
     {
         const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
         const GXPoint p =GXPointMake(mouse->x, mouse->y);
-        if( self->_cursor->getPos() != p)
+        if( self->_cursor.getPos() != p)
         {
-            self->_cursor->setPos( p);
-            self->_cursor->setNeedsDisplay();
+            self->_cursor.setPos( p);
+            self->_cursor.setNeedsDisplay();
         }
     }
     
@@ -110,7 +150,6 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
             assert(false);
             break;
     }
-    
 }
 
 void CLApplication::quit()
@@ -120,118 +159,98 @@ void CLApplication::quit()
         _delegate->applicationWillStop(this);
         return _runLoop.stop();
     });
-    
-    
 }
 
-/* *** */
+/* *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** */
 
 
 int CLApplication::main(int argc , char* argv[])
 {
-    GXRenderer render;
+    assert(_delegate);
     
-    Display disp;
+    int winWidth, winHeight;
+    int fbWidth, fbHeight;
+//    float pxRatio;
+    
+    if (!_disp->_handle)
     {
-        
-        
-        /**/
-        if( DisplayInit(&disp , 1280 , 750) == 0)
-        {
-            printf("Display init error \n");
-            return -1;
-        }
-        
-        int winWidth, winHeight;
-        int fbWidth, fbHeight;
-        float pxRatio;
-        
-        if (!disp._handle)
-        {
-            return -1;
-        }
-        
-        DisplayMakeContextCurrent( &disp );
-        
-        DisplayGetWindowSize( &disp, &winWidth, &winHeight);
-        DisplayGetFramebufferSize( &disp , &fbWidth, &fbHeight);
-        
-        
-        if(DisplayGetType(&disp) == DisplayGLFW)
-        {
-            SetDefaultLayout( FrenchMac );
-        }
-        else if(DisplayGetType(&disp) == DisplayDispman)
-        {
-            SetDefaultLayout( FrenchPC );
-        }
-        
-        // Calculate pixel ration for hi-dpi devices.
-        pxRatio = (float)fbWidth / (float)winWidth;
-        
-        GXContext ctx;
-        
-        VKWindow mainWin;
-        VKCursor cursor;
-        _cursor = &cursor;
-        
-        
-        DisplaySetEventCallback(&disp, CLApplication::s_onGXEvent);
-        
-        mainWin.setWindowTitle("My APP");
-        mainWin.id = 0;
-        
-        _delegate->applicationWillLoad(this);
-        
-        
-        
-        
-        DisplayGetWindowSize( &disp, &winWidth, &winHeight);
-        DisplayGetFramebufferSize(&disp, &fbWidth, &fbHeight);
-        pxRatio = (float)fbWidth / (float)winWidth;
-        
-        
-        mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
-        render.setRoot( &mainWin );
-        
-        getCurrentView()->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
-        mainWin.addChild( getCurrentView() );
-        mainWin.addChild( &cursor);
-        
-        
-        /**/
-        
-        GB::Timer t;
-        t.setInterval(40);
-        t.setCallback([&](GB::Timer &timer)
-                      {
-                          
-                          if(render.draw( &ctx ))
-                          {
-                              DisplaySwap( &disp );
-                          }
-                          DisplayPollEvents( &disp );
-                          
-                          if( DisplayShouldClose( &disp ))
-                          {
-                              quit();
-                          }
-                      });
-        
-        _runLoop.addSource(t);
-        
-        
-        _runLoop.dispatchAsync([this]()
-        {
-            _delegate->applicationDidLoad( this);
-        });
-        
-        _runLoop.run();
+        return -1;
     }
     
+    DisplayMakeContextCurrent( _disp );
+    
+    DisplayGetWindowSize( _disp, &winWidth, &winHeight);
+    DisplayGetFramebufferSize( _disp , &fbWidth, &fbHeight);
     
     
-    DisplayRelease(&disp);
+    if(DisplayGetType( _disp) == DisplayGLFW)
+    {
+        SetDefaultLayout( FrenchMac );
+    }
+    else if(DisplayGetType( _disp) == DisplayDispman)
+    {
+        SetDefaultLayout( FrenchPC );
+    }
     
+    // Calculate pixel ration for hi-dpi devices.
+//    pxRatio = (float)fbWidth / (float)winWidth;
+    
+    _ctx = new GXContext();
+    
+    GXRenderer render;
+    
+    
+
+    DisplaySetEventCallback( _disp, CLApplication::s_onGXEvent);
+    
+    
+    mainWin.id = 0;
+    
+    _delegate->applicationWillLoad(this);
+    
+    
+    
+    
+    DisplayGetWindowSize( _disp, &winWidth, &winHeight);
+    DisplayGetFramebufferSize( _disp, &fbWidth, &fbHeight);
+//    pxRatio = (float)fbWidth / (float)winWidth;
+
+    mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
+    render.setRoot( &mainWin );
+    
+    if(_currentView)
+    {
+        _currentView->setBounds( GXRectMake(0, 20, winWidth, winHeight - 20) );
+        mainWin.addChild( _currentView );
+    }
+    mainWin.addChild( &_cursor);
+
+    GB::Timer t;
+    t.setInterval(40);
+    t.setCallback([&](GB::Timer &timer)
+                  {
+                      
+                      if(render.draw( _ctx ))
+                      {
+                          DisplaySwap( _disp );
+                      }
+                      DisplayPollEvents( _disp );
+                      
+                      if( DisplayShouldClose( _disp ))
+                      {
+                          quit();
+                      }
+                  });
+    
+    _runLoop.addSource(t);
+    
+    
+    _runLoop.dispatchAsync([this]()
+    {
+        _delegate->applicationDidLoad( this);
+    });
+    
+    _runLoop.run();
+
     return 0;
 }

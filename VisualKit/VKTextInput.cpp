@@ -10,7 +10,7 @@
 #include "VK.hpp"
 #include "CLApplication.hpp"
 #include "../../GX/src/nanovg/nanovg.h"
-
+#include "../../GX/include/GXTextContainer.hpp"
 VKTextInput::VKTextInput()
 {
     
@@ -30,6 +30,8 @@ VKTextInput::VKTextInput()
     });
     
     _content = "Les Iraniens ont voté massivement, vendredi 19 mai, pour reconduire le modéré Hassan Rohani à la présidence pendant quatre ans. Il a obtenu, dès le premier tour, la majorité absolue avec une confortable avance : 57 % des voix, selon les résultats officiels communiqués en fin de matinée par le ministère de l’intérieur.";
+    
+    _kbPos = 0;
 }
 
 void VKTextInput::focusChanged()
@@ -52,25 +54,42 @@ void VKTextInput::focusChanged()
 
 bool VKTextInput::keyPressed(  const GXKey &key )
 {
-    std::string c = getContent();
+    
+    if( key.key == GXKey_RIGHT)
+    {
+        _kbPos++;
+        
+        return true;
+    }
+    else if( key.key == GXKey_LEFT)
+    {
+        if( _kbPos > 0)
+            _kbPos--;
+
+        return true;
+    }
+
+    std::string c = _content;
     
     if( key.key == GXKey_BACKSPACE)
     {
         if( !c.empty())
         {
             c.erase(c.begin() + _insertPoint-1);
+            _insertPoint-=1;
+            printf("Instert point %zi\n" , _insertPoint);
             //c.pop_back();
         }
     }
     else if( key.key == GXKey_ENTER)
     {
         c.insert(_insertPoint, "\n");
-        _insertPoint+=1;
+        //_insertPoint+=1;
     }
     else
     {
         c.insert(_insertPoint,  key.toStr() );
-        _insertPoint+=1;
+        //_insertPoint+=1;
     }
     setContent(c);
     setNeedsDisplay();
@@ -80,6 +99,7 @@ bool VKTextInput::keyPressed(  const GXKey &key )
 
 bool VKTextInput::touchBegan( const GXTouch &t)
 {
+    _hit = true;
     _cursorPos = t.center;
     return VKView::touchBegan(t);
 }
@@ -91,18 +111,48 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
     context->setStrokeColor( GXColors::Black);
     context->fill();
     context->stroke();
+
+    /* **** **** **** **** **** **** **** **** **** **** */
+    /*
     context->setFontSize(20);
     context->setFontId( context->getFontManager().getFont( VKDefaults::DefaultFont) );
     context->setFillColor( GXColors::Black);// GXColorMake(0, 1., 0.35) );
-    context->setTextAlignement(GXTextAlign_LEFT | GXTextAlign_TOP);
+    */
     
     const GXPoint textPos = GXPointMake(5, 10);
     
-    //context->addTextBox(textPos, bounds.size.width, _content);
+
+
+    
+    
+    GXTextContainer text( context);
+    text.setSize(bounds.size);
+    text.setFontSize(20);
+    text.setFontId(context->getFontManager().getFont( VKDefaults::DefaultFont) );
+    text.setTextColor(GXColors::Black);
+    text.setContent(_content);
+    context->setTextAlignement(GXTextAlign_LEFT | GXTextAlign_TOP);
+    
+    text.addHitTest(_cursorPos);
+    text.draw( textPos);
+    //context->addText(textPos, text);
+    
+    
+    for (const GXTextContainer::HitTest &retTest : text.getHitTestResults())
+    {
+        printf("Got hit test result %i %i \n" , retTest.textPos.x , retTest.textPos.y);
+        _block.setPos(GXPointMake( retTest.textPos.x, retTest.textPos.y));
+    }
+    
+    
+    return;
+    /* **** **** **** **** **** **** **** **** **** **** */
+    /*
+    GXText::HitTest hitTest;
+    hitTest.point = _cursorPos;
     
     const char* c = _content.c_str();
-    
-    NVGtextRow rows[3];
+
     int totalRows = 0;
     int nrows =0;
     const char* start = c;
@@ -116,58 +166,59 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
     
     int lnum = 0;
     
-    float caretx;
+    //float caretx;
     float px;
     int nglyphs = 0;
-    NVGglyphPosition glyphs[100];
     
-    while((nrows = context->textBreakLines( start, end, bounds.size.width, rows, 3)))
+    
+    NVGtextRow rows[3];
+    int currentRow = 0;
+    while((nrows = context->textBreakLines( start, end, bounds.size.width , rows, 1)))
     {
+
+        currentRow++;
         for (int i = 0; i < nrows; i++)
         {
             NVGtextRow* row = &rows[i];
-            int hit = _cursorPos.x > x && _cursorPos.x < (x+bounds.size.width) && _cursorPos.y >= y && _cursorPos.y < (y+lineh);
-            
-            
-            
-            
-            
+
+            int hit = hitTest.point.x > x && hitTest.point.x < (x+bounds.size.width) && hitTest.point.y >= y && hitTest.point.y < (y+lineh);
+
             context->addText(GXPointMake(x, y), row->start, row->end);
             
-            if (hit)
+            if (hit && _hit)
             {
-                caretx = (_cursorPos.x < x+row->width/2) ? x : x+row->width;
+                _hit = false;
+                hitTest.textPos.x = (hitTest.point.x < x+row->width/2) ? x : x+row->width;
                 px = x;
+                
+                assert(row->end > row->start);
+                const size_t numG = row->end - row->start;
+                
+                
+                NVGglyphPosition glyphs[ numG];
+                
                 nglyphs = nvgTextGlyphPositions(static_cast<NVGcontext*>( context->getImpl() ),
-                                                x, y, row->start, row->end, glyphs, 100);
+                                                x, y, row->start, row->end, glyphs, (int)numG);
                 
                 for (int j = 0; j < nglyphs; j++)
                 {
                     float x0 = glyphs[j].x;
                     float x1 = (j+1 < nglyphs) ? glyphs[j+1].x : x+row->width;
                     float gx = x0 * 0.3f + x1 * 0.7f;
-                    if (_cursorPos.x >= px && _cursorPos.x < gx)
+                    if (hitTest.point.x >= px && hitTest.point.x < gx)
                     {
                         const char*p = glyphs[j].str;
-                        _insertPoint = p-c;
+                        hitTest.textOffset  = p-c;
                         
-                        printf("At pos %li \n" , p-c);
-                        caretx = glyphs[j].x;
+                        
+                        hitTest.textPos.x = glyphs[j].x;
+                        
+                        hitTest.textPos.y = y;
                     }
                     px = gx;
                 }
-                _block.setPos(GXPointMake(caretx, y));
-                /*
-                context->beginPath();
-                nvgFillColor(static_cast<NVGcontext*>( context->getImpl() ), nvgRGBA(255,192,0,255));
-                nvgRect(static_cast<NVGcontext*>( context->getImpl() ), caretx, y, 1, lineh);
-                nvgFill(static_cast<NVGcontext*>( context->getImpl() ));
-                */
-                /*
-                gutter = lnum+1;
-                gx = x - 10;
-                gy = y + lineh/2;
-                 */
+                
+                
             }
             
             lnum++;
@@ -178,6 +229,11 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
         start = rows[nrows-1].next;
     }
     
+    _insertPoint = hitTest.textOffset;
+    printf("At pos %zi \n" , _insertPoint);
+    _block.setPos(GXPointMake(hitTest.textPos.x, hitTest.textPos.y));
+    */
+    /* **** **** **** **** **** **** **** **** **** **** */
     
     
 }

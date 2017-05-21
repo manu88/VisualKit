@@ -42,7 +42,10 @@ protected:
     
     std::string _content;
     size_t _insertPoint;
+    size_t _kbPos;
     GXPoint _cursorPos;
+    
+    bool _hit;
 };
 
 #endif /* VKTextInput_hpp */
