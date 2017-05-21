@@ -55,14 +55,22 @@ void CLApplication::pushView( VKView* v) noexcept
     if( v)
     {
         if( _currentView)
+        {
             v->setZPos(_currentView->getZPos()+1);
-            
+        }
         _currentView = v;
         _viewStack.push_back(v);
         
         _currentView->setBounds( GXRectMake(0, 20, mainWin.getSize().width, mainWin.getSize().height - 20) );
         _currentView->viewWillAppear();
         mainWin.addChild( _currentView );
+            
+        printf("pushView:\n");
+            
+        for (const GXLayer *c : mainWin.getChildren())
+        {
+            printf("Layer %i \n" , c->getZPos());
+        }
     }
 }
 
@@ -78,6 +86,13 @@ void CLApplication::dismissView() noexcept
     mainWin.removeChild(last);
     _currentView->viewWillAppear();
     last->viewDidDismiss();
+    
+    printf("dismissView:\n");
+    
+    for (const GXLayer *c : mainWin.getChildren())
+    {
+        printf("Layer %i \n" , c->getZPos());
+    }
 }
 
 void CLApplication::setName( const std::string &n)
@@ -249,11 +264,7 @@ int CLApplication::main(int argc , char* argv[])
     mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
     render.setRoot( &mainWin );
     
-    if(_currentView)
-    {
-        pushView(_currentView);
-        
-    }
+
     
     _cursor.setZPos(20);
     mainWin.addChild( &_cursor);
