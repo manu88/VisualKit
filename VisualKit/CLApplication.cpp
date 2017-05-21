@@ -54,6 +54,9 @@ void CLApplication::pushView( VKView* v) noexcept
 {
     if( v)
     {
+        if( _currentView)
+            v->setZPos(_currentView->getZPos()+1);
+            
         _currentView = v;
         _viewStack.push_back(v);
         
@@ -238,10 +241,7 @@ int CLApplication::main(int argc , char* argv[])
     mainWin.id = 0;
     
     _delegate->applicationWillLoad(this);
-    
-    
-    
-    
+
     DisplayGetWindowSize( _disp, &winWidth, &winHeight);
     DisplayGetFramebufferSize( _disp, &fbWidth, &fbHeight);
 //    pxRatio = (float)fbWidth / (float)winWidth;
@@ -254,6 +254,8 @@ int CLApplication::main(int argc , char* argv[])
         pushView(_currentView);
         
     }
+    
+    _cursor.setZPos(20);
     mainWin.addChild( &_cursor);
 
     GB::Timer t;
