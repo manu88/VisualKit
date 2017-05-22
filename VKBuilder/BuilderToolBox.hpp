@@ -21,9 +21,13 @@ public:
     
 
     void paint( GXContext* context , const GXRect& bounds) override;
+    bool serialize( GB::VariantMap& obj) const override;
     
-    
+    VKButton _bttonSave;
+    VKButton _bttonLoad;
     VKButton _bttonAddButton;
+    VKButton _bttonAddLabel;
+    VKButton _bttonAddImg;
     VKTextInput _text;
     
     VKTextInput _inWidth;

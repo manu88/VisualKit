@@ -14,6 +14,8 @@ VKButton::VKButton():
 _triggerAction (false),
 _state( Inactive )
 {
+    _type = VK_Button;
+    
     background = GXColorMake(1, 0, 0 );
     id = 3;
     
@@ -98,4 +100,10 @@ bool VKButton::touchEnded( const GXTouch &t)
     
 
     return  true;
+}
+
+bool VKButton::serialize( GB::VariantMap& obj) const
+{
+    obj.insert(std::make_pair("Text", getText()));
+    return VKView::serialize(obj);
 }

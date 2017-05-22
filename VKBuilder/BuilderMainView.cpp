@@ -6,6 +6,8 @@
 //  Copyright © 2017 Unlimited Development. All rights reserved.
 //
 
+#include <iostream>
+#include <GBXMLDocument.hpp>
 #include "BuilderMainView.hpp"
 #include "BuilderToolBox.hpp"
 
@@ -19,22 +21,195 @@ _movingV( nullptr )
     _toolBox->setBounds(GXRectMake(0, 0, 300, 400));
     addChild(_toolBox);
     
+    /*
+    _label.setBounds(GXRectMake(300, 500, 200, 100));
+    _label.setContent("Hello world!");
+    addChild(&_label);
+    */
     
-    _image.setBounds(GXRectMake(300, 500, 200, 100));
-    _image.setFile("img.png");
-    addChild(&_image);
+    
+    
+}
+
+void BuilderMainView::viewWillAppear()
+{
+    //loadFile("test.xml");
+}
+
+bool BuilderMainView::loadFile( const std::string &file)
+{
+    
+    for( GXLayer* c : getChildren())
+    {
+        if( c != _toolBox)
+        {
+            removeChild(c);
+        }
+    }
+    GB::XMLDocument doc(file);
+    
+    printf("Num elements %zi \n" , doc.getSize());
+    if(doc.contains("rootView"))
+    {
+        const GB::VariantMap rootView = doc.getValueForKey("rootView").getMap();
+        
+        if( rootView.count("Children"))
+        {
+            const GB::VariantList children = rootView.at("Children").getList();
+            
+            for( const GB::Variant &c : children)
+            {
+                const GB::VariantMap cDesc = c.getMap();
+                
+                const int type = cDesc.at("Type").toInt();
+                
+                std::cout << "Got 1 child type " << type << "\n";
+                
+                VKView* ret = nullptr;
+                
+                if( type == VKView::Type::VK_Button)
+                {
+                    ret = createButton(cDesc);
+                }
+                else if( type == VKView::Type::VK_Image)
+                {
+                    ret = createImage(cDesc);
+                }
+                else if( type == VKView::Type::VK_Label)
+                {
+                    ret = createLabel(cDesc);
+                }
+                
+                if( ret)
+                {
+                    addChild(ret);
+                }
+            }
+        }
+        
+        
+    }
+    
+    return false;
+}
+
+bool BuilderMainView::createBase(VKView* v , const GB::VariantMap &desc)
+{
+    assert(!desc.empty());
+    
+    if( !v)
+        return false;
+    
+    const GB::VariantList _bounds = desc.at("Bounds").getList();
+    assert(_bounds.size() == 4);
+
+    v->setBounds(GXRectMake(_bounds.at(0).getInt(), _bounds.at(1).getInt(), _bounds.at(2).getInt(), _bounds.at(3).getInt()));
+    
+    return true;
+}
+
+VKView* BuilderMainView::createImage( const GB::VariantMap &desc)
+{
+    if( desc.empty())
+        return nullptr;
+    
+    VKImage* img = new VKImage();
+    
+    if( createBase(img, desc))
+    {
+        img->setFile( desc.at("Res").getString());
+        return img;
+    }
+    
+    return nullptr;
+}
+VKView* BuilderMainView::createLabel( const GB::VariantMap &desc)
+{
+    if( desc.empty())
+        return nullptr;
+    
+    VKLabel* lbl = new VKLabel();
+    
+    
+    if( createBase(lbl, desc))
+    {
+        lbl->setContent( desc.at("Res").getString() );
+        return lbl;
+    }
+    
+    return nullptr;
+}
+VKView* BuilderMainView::createButton( const GB::VariantMap &desc)
+{
+    if( desc.empty())
+        return nullptr;
+    
+    VKButton* bt = new VKButton();
+    
+    
+    if( createBase(bt, desc))
+    {
+        bt->setText( desc.at("Text").getString() );
+        return bt;
+    }
+
+    return nullptr;
+}
+
+void BuilderMainView::actionLoad( VKSender* sender)
+{
+    loadFile("test.xml");
+}
+
+void BuilderMainView::actionSave( VKSender* sender)
+{
+    printf("Save\n");
+    
+    GB::XMLDocument doc;
+    GB::VariantMap obj;
+    
+    if(serialize(obj))
+    {
+        doc.addValueForKey(obj, "rootView");
+        
+        if( doc.save("test.xml"))
+        {
+            printf("Serialization ok\n");
+        }
+        else
+        {
+            printf("Error saving XML\n");
+        }
+    }
 }
 
 void BuilderMainView::addButton(VKSender* sender)
 {
-    VKButton* bton = new VKButton;
+    VKButton* item = new VKButton;
     
-    bton->setSize(GXSizeMake(60, 20));
-    bton->setCenter(getCenter());
-    addChild(bton);
+    item->setSize(GXSizeMake(60, 20));
+    item->setCenter(getCenter());
+    addChild(item);
     
 }
 
+void BuilderMainView::addLabel(VKSender* sender)
+{
+    VKLabel* item = new VKLabel;
+    
+    item->setSize(GXSizeMake(90, 50));
+    item->setCenter(getCenter());
+    addChild(item);
+}
+
+void BuilderMainView::addImage(VKSender* sender)
+{
+    VKImage* item = new VKImage;
+    
+    item->setSize(GXSizeMake(90, 50));
+    item->setCenter(getCenter());
+    addChild(item);
+}
 
 bool BuilderMainView::touchBegan( const GXTouch &t)
 {
@@ -94,21 +269,23 @@ bool BuilderMainView::touchEnded( const GXTouch &t)
 
 void BuilderMainView::itemSelectionChanged()
 {
-    VKButton* bt = dynamic_cast<VKButton*>(_selected);
-    if( bt)
+    
+    if( VKButton* bt = dynamic_cast<VKButton*>(_selected))
     {
         _toolBox->_text.setContent(bt->getText());
-        _toolBox->_text.setNeedsDisplay();
         
-        return;
+        
     }
-    
-    VKImage* img = dynamic_cast<VKImage*>(_selected);
-    if( img)
+    else if( VKImage* img = dynamic_cast<VKImage*>(_selected))
     {
         _toolBox->_text.setContent( img->getFile());
-        _toolBox->_text.setNeedsDisplay();
     }
+    else if( VKLabel* lbl = dynamic_cast<VKLabel*>(_selected))
+    {
+        _toolBox->_text.setContent( lbl->getContent());
+    }
+    
+    _toolBox->_text.setNeedsDisplay();
     
     _toolBox->_inWidth.setContent( std::to_string(_selected->getSize().width));
     _toolBox->_inHeight.setContent( std::to_string(_selected->getSize().height));
@@ -147,20 +324,23 @@ void BuilderMainView::textContentChanged( VKSender* sender)
     {
         if( _selected)
         {
-            VKButton* bt = dynamic_cast<VKButton*>(_selected);
-            if( bt)
+            
+            if( VKButton* bt = dynamic_cast<VKButton*>(_selected) )
             {
                 bt->setText(_toolBox->_text.getContent());
                 bt->setNeedsDisplay();
                 
                 return;
             }
-            
-            VKImage* img = dynamic_cast<VKImage*>(_selected);
-            if( img)
+            else if( VKImage* img = dynamic_cast<VKImage*>(_selected))
             {
                 img->setFile(_toolBox->_text.getContent());
                 img->setNeedsDisplay();
+            }
+            else if( VKLabel* lbl = dynamic_cast<VKLabel*>(_selected))
+            {
+                lbl->setContent(_toolBox->_text.getContent());
+                lbl->setNeedsDisplay();
             }
         }
     }
@@ -192,7 +372,13 @@ bool BuilderMainView::keyPressed(  const GXKey &key )
         _selected->setPos( _selected->getPos() + GXPointMake(5, 0));
         _selected->setNeedsDisplay();
     }
-    
+    /*
+    else if( _selected && key.key == GXKey_BACKSPACE)
+    {
+        removeChild(_selected);
+        _selected = nullptr;
+    }
+     */
     
     return VKView::keyPressed(key);
 }

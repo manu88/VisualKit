@@ -13,6 +13,7 @@
 #include "VKView.hpp"
 #include "VKAction.hpp"
 #include "VKImage.hpp"
+#include "VKLabel.hpp"
 
 class BuilderToolBox;
 
@@ -21,9 +22,19 @@ class BuilderMainView : public VKView
 public:
     BuilderMainView();
     
+    void viewWillAppear() override;
     BuilderToolBox* _toolBox;
     
+    bool loadFile( const std::string &file);
+    
+    bool    createBase(VKView* v , const GB::VariantMap &desc);
+    VKView* createButton( const GB::VariantMap &desc);
+    VKView* createImage( const GB::VariantMap &desc);
+    VKView* createLabel( const GB::VariantMap &desc);
+    
     void addButton(VKSender* sender);
+    void addLabel(VKSender* sender);
+    void addImage(VKSender* sender);
     
     bool touchBegan( const GXTouch &t) override;
     bool touchMoved( const GXTouch &t) override;
@@ -32,6 +43,8 @@ public:
     
     bool keyPressed(  const GXKey &key ) override;
     
+    void actionSave( VKSender* sender);
+    void actionLoad( VKSender* sender);
     void textContentChanged( VKSender* sender);
     void widthContentChanged( VKSender* sender);
     void heightContentChanged( VKSender* sender);
@@ -40,7 +53,7 @@ public:
     
     VKView* _selected;
     
-    VKImage _image;
+    VKLabel _label;
 private:
     VKView* _movingV;
     

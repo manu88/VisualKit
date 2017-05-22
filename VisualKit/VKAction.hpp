@@ -17,8 +17,14 @@ class VKSender
 {
 public:
     virtual ~VKSender(){}
+    
+    
 protected:
     VKSender(){}
+    
+    
+private:
+    
 };
 
 namespace VKAction

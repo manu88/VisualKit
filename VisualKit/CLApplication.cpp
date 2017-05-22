@@ -15,11 +15,6 @@
 #include "../../GX/include/GXLayer.hpp"
 #include "../../GX/include/GXRenderer.hpp"
 
-
-
-
-
-
 /*static*/ CLApplication* CLApplication::s_instance = nullptr;
 
 

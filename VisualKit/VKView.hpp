@@ -9,6 +9,8 @@
 #ifndef VKView_hpp
 #define VKView_hpp
 
+#include <GBVariant.hpp>
+
 #include "../../GX/include/GXLayer.hpp"
 #include "VKTouch.hpp"
 #include "VKKeyboard.hpp"
@@ -17,16 +19,33 @@
 class VKView : public GXLayer , public VKTouchDelegate , public VKKeyboardDelegate
 {
     friend class CLApplication;
+    
 public:
+    typedef enum
+    {
+        VK_View   = 0,
+        VK_Button = 1,
+        VK_Image  = 2,
+        VK_Label  = 3
+    } Type;
+    
     VKView();
     virtual ~VKView();
     
     void setFocus(bool focus) noexcept;
     bool hasFocus() const noexcept;
+    
+    virtual bool serialize( GB::VariantMap& obj) const;
+
+    Type getType() const noexcept
+    {
+        return _type;
+    }
 protected:
 
-    // def false
+    // default to false
     virtual bool handleFocus();
+    
     virtual void focusChanged();
     
     bool touchBegan( const GXTouch &t) override;
@@ -38,12 +57,13 @@ protected:
     virtual void viewWillAppear();
     virtual void viewDidDismiss();
     
+    
+    Type _type;
+    
 private:
     
-    
-    
     bool _hasFocus;
-    
+
 };
 
 #endif /* VKView_hpp */

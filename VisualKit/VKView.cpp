@@ -5,13 +5,17 @@
 //  Created by Manuel Deneu on 18/05/2017.
 //  Copyright © 2017 Unlimited Development. All rights reserved.
 //
+
+#include <iostream>
+
+
 #include <assert.h>
 #include "VKView.hpp"
 #include "VK.hpp"
 #include "VKButton.hpp"
 
 VKView::VKView():
-
+_type(VK_View),
 _hasFocus(false)
 {
 
@@ -119,5 +123,36 @@ bool VKView::touchEnded( const GXTouch &t)
         }
     }
     
+    return true;
+}
+
+
+bool VKView::serialize( GB::VariantMap& obj) const
+{
+    
+    obj.insert(std::make_pair("Type", getType() ));
+    
+    obj.insert(std::make_pair("Bounds", GB::Variant
+                              ({ getBounds().origin.x ,getBounds().origin.y,getBounds().size.width , getBounds().size.height }))
+               );
+    
+    obj.insert(std::make_pair("Z", getZPos()));
+    
+    if( hasChildren())
+    {
+        GB::VariantList children;
+        for (const GXLayer* l : getChildren())
+        {
+            const VKView* v = dynamic_cast<const VKView*>(l);
+            
+            GB::VariantMap c;
+            if( v->serialize(c))
+            {
+                children.push_back(c);
+            }
+        }
+        
+        obj.insert(std::make_pair("Children", children));
+    }
     return true;
 }

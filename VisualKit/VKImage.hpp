@@ -25,7 +25,7 @@ public:
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     
-    
+    bool serialize( GB::VariantMap& obj) const override;
     
 private:
     GXImageHandle _imgHandle;

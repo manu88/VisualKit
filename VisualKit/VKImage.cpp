@@ -14,7 +14,7 @@ VKImage::VKImage():
 _imgHandle(GXImageInvalid),
 _reload(false)
 {
-    
+    _type = VK_Image;
 }
 
 VKImage::~VKImage()
@@ -62,4 +62,10 @@ void VKImage::paint( GXContext* context , const GXRect& bounds)
         
     }
     context->fill();
+}
+
+bool VKImage::serialize( GB::VariantMap& obj) const
+{
+    obj.insert(std::make_pair("Res", getFile()));
+    return VKView::serialize(obj);
 }
