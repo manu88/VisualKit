@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>VisualKit 2.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>VisualKit.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -23,6 +28,11 @@
 			<true/>
 		</dict>
 		<key>59E0D3AD1ED1AC6600BF10C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>59E0D3F11ED55EF800BF10C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

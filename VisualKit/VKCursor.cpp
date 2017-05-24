@@ -20,8 +20,10 @@ void VKCursor::paint( GXContext* context , const GXRect& bounds)
 {
     
     context->addRect( bounds);
+    /*
     context->setStrokeColor( GXColors::Green);
     context->stroke();
+     */
     context->beginPath();
     context->moveTo(bounds.origin);                                                  //top arrow
     context->lineTo(GXPointMake(bounds.origin.x, 15*bounds.size.height/20));         // bottom left

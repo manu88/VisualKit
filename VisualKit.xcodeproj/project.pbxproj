@@ -9,42 +9,47 @@
 /* Begin PBXBuildFile section */
 		59E0D35E1ECE0B3800BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
 		59E0D3641ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */; };
-		59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */; };
-		59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */; };
-		59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */; };
-		59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */; };
-		59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3781ECECD6D00BF10C4 /* VK.cpp */; };
-		59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */; };
 		59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3821ECED85200BF10C4 /* CustomView.cpp */; };
 		59E0D3861ECED85200BF10C4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3841ECED85200BF10C4 /* main.cpp */; };
-		59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */; };
-		59E0D3921ECF406700BF10C4 /* VKCursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3901ECF406700BF10C4 /* VKCursor.cpp */; };
-		59E0D3951ECF641900BF10C4 /* VKTextInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */; };
-		59E0D3981ED034A600BF10C4 /* VKKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */; };
-		59E0D3A11ED0DAC400BF10C4 /* CLApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */; };
 		59E0D3A81ED0DB0B00BF10C4 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3A61ED0DB0B00BF10C4 /* AppDelegate.cpp */; };
 		59E0D3AC1ED19D3200BF10C4 /* CustomView2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3AA1ED19D3200BF10C4 /* CustomView2.cpp */; };
-		59E0D3AF1ED1AC6600BF10C4 /* VK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3781ECECD6D00BF10C4 /* VK.cpp */; };
-		59E0D3B01ED1AC6600BF10C4 /* CLApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */; };
-		59E0D3B11ED1AC6600BF10C4 /* VKKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */; };
-		59E0D3B21ED1AC6600BF10C4 /* VKWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */; };
-		59E0D3B41ED1AC6600BF10C4 /* CLApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */; };
-		59E0D3B51ED1AC6600BF10C4 /* VKAlertView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */; };
-		59E0D3B71ED1AC6600BF10C4 /* VKTextInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */; };
-		59E0D3B81ED1AC6600BF10C4 /* VKCursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3901ECF406700BF10C4 /* VKCursor.cpp */; };
-		59E0D3B91ED1AC6600BF10C4 /* VKTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */; };
-		59E0D3BA1ED1AC6600BF10C4 /* VKButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */; };
-		59E0D3BB1ED1AC6600BF10C4 /* VKView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */; };
 		59E0D3BF1ED1AC6600BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
 		59E0D3C01ED1AC6600BF10C4 /* libGroundBase-cpp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */; };
 		59E0D3C81ED1ACB500BF10C4 /* mainVKBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3C71ED1ACB500BF10C4 /* mainVKBuilder.cpp */; };
 		59E0D3CB1ED1ACC600BF10C4 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3C91ED1ACC600BF10C4 /* AppDelegate.cpp */; };
 		59E0D3CE1ED1AD1F00BF10C4 /* BuilderMainView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3CC1ED1AD1F00BF10C4 /* BuilderMainView.cpp */; };
 		59E0D3D11ED1B06300BF10C4 /* BuilderToolBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3CF1ED1B06300BF10C4 /* BuilderToolBox.cpp */; };
-		59E0D3D51ED1BBB200BF10C4 /* VKLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */; };
-		59E0D3D61ED1BBB900BF10C4 /* VKLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */; };
-		59E0D3D91ED1BBC200BF10C4 /* VKImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */; };
-		59E0D3DA1ED1BBC200BF10C4 /* VKImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */; };
+		59E0D3DF1ED4133800BF10C4 /* ColorPickerView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3DD1ED4133800BF10C4 /* ColorPickerView.cpp */; };
+		59E0D4051ED55F3700BF10C4 /* CLApplication.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3F71ED55F3700BF10C4 /* CLApplication.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4061ED55F3700BF10C4 /* CLApplicationDelegate.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3F81ED55F3700BF10C4 /* CLApplicationDelegate.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4071ED55F3700BF10C4 /* VK.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3F91ED55F3700BF10C4 /* VK.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4081ED55F3700BF10C4 /* VKAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3FA1ED55F3700BF10C4 /* VKAction.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4091ED55F3700BF10C4 /* VKAlertView.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3FB1ED55F3700BF10C4 /* VKAlertView.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D40A1ED55F3700BF10C4 /* VKButton.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3FC1ED55F3700BF10C4 /* VKButton.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D40B1ED55F3700BF10C4 /* VKCursor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3FD1ED55F3700BF10C4 /* VKCursor.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D40C1ED55F3700BF10C4 /* VKImage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3FE1ED55F3700BF10C4 /* VKImage.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D40D1ED55F3700BF10C4 /* VKKeyboard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D3FF1ED55F3700BF10C4 /* VKKeyboard.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D40E1ED55F3700BF10C4 /* VKLabel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D4001ED55F3700BF10C4 /* VKLabel.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D40F1ED55F3700BF10C4 /* VKTextInput.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D4011ED55F3700BF10C4 /* VKTextInput.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4101ED55F3700BF10C4 /* VKTouch.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D4021ED55F3700BF10C4 /* VKTouch.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4111ED55F3700BF10C4 /* VKView.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D4031ED55F3700BF10C4 /* VKView.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
+		59E0D4121ED55F3700BF10C4 /* VKWindow.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0D4041ED55F3700BF10C4 /* VKWindow.hpp */; };
+		59E0D4131ED55F4E00BF10C4 /* VKLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */; };
+		59E0D4141ED55F4E00BF10C4 /* VKImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */; };
+		59E0D4151ED55F4E00BF10C4 /* VKTextInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */; };
+		59E0D4161ED55F4E00BF10C4 /* VKCursor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3901ECF406700BF10C4 /* VKCursor.cpp */; };
+		59E0D4171ED55F4E00BF10C4 /* VKAlertView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */; };
+		59E0D4181ED55F4E00BF10C4 /* VKTouch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */; };
+		59E0D4191ED55F4E00BF10C4 /* VKKeyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */; };
+		59E0D41A1ED55F4E00BF10C4 /* VK.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3781ECECD6D00BF10C4 /* VK.cpp */; };
+		59E0D41B1ED55F4E00BF10C4 /* VKButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */; };
+		59E0D41C1ED55F4E00BF10C4 /* VKView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */; };
+		59E0D41D1ED55F4E00BF10C4 /* VKWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */; };
+		59E0D41E1ED55F4E00BF10C4 /* CLApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */; };
+		59E0D41F1ED55F4E00BF10C4 /* CLApplicationDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */; };
+		59E0D4201ED55F9500BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
+		59E0D4211ED55FB200BF10C4 /* libGroundBase-cpp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */; };
+		59E0D4221ED55FBC00BF10C4 /* libVisualKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3F21ED55EF800BF10C4 /* libVisualKit.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,34 +91,23 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		59E0D34B1ECE0AD700BF10C4 /* VisualKit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VisualKit; sourceTree = BUILT_PRODUCTS_DIR; };
+		59E0D34B1ECE0AD700BF10C4 /* VisualKitTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VisualKitTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59E0D3551ECE0AE200BF10C4 /* GX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GX.xcodeproj; path = ../GX/GX.xcodeproj; sourceTree = "<group>"; };
 		59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libGroundBase-cpp.dylib"; path = "../../../../../../usr/local/lib/libGroundBase-cpp.dylib"; sourceTree = "<group>"; };
 		59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKWindow.cpp; sourceTree = "<group>"; };
-		59E0D3661ECE0C8A00BF10C4 /* VKWindow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKWindow.hpp; sourceTree = "<group>"; };
 		59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CLApplication.cpp; sourceTree = "<group>"; };
-		59E0D36A1ECE17C600BF10C4 /* CLApplication.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLApplication.hpp; sourceTree = "<group>"; };
 		59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKView.cpp; sourceTree = "<group>"; };
-		59E0D36F1ECE1C4E00BF10C4 /* VKView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKView.hpp; sourceTree = "<group>"; };
 		59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKButton.cpp; sourceTree = "<group>"; };
-		59E0D3741ECE2B5600BF10C4 /* VKButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKButton.hpp; sourceTree = "<group>"; };
 		59E0D3781ECECD6D00BF10C4 /* VK.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VK.cpp; sourceTree = "<group>"; };
-		59E0D3791ECECD6D00BF10C4 /* VK.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VK.hpp; sourceTree = "<group>"; };
 		59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKTouch.cpp; sourceTree = "<group>"; };
-		59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTouch.hpp; sourceTree = "<group>"; };
 		59E0D3821ECED85200BF10C4 /* CustomView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomView.cpp; sourceTree = "<group>"; };
 		59E0D3831ECED85200BF10C4 /* CustomView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CustomView.hpp; sourceTree = "<group>"; };
 		59E0D3841ECED85200BF10C4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKAlertView.cpp; sourceTree = "<group>"; };
-		59E0D38E1ECEFB7A00BF10C4 /* VKAlertView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKAlertView.hpp; sourceTree = "<group>"; };
 		59E0D3901ECF406700BF10C4 /* VKCursor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKCursor.cpp; sourceTree = "<group>"; };
-		59E0D3911ECF406700BF10C4 /* VKCursor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKCursor.hpp; sourceTree = "<group>"; };
 		59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKTextInput.cpp; sourceTree = "<group>"; };
-		59E0D3941ECF641900BF10C4 /* VKTextInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTextInput.hpp; sourceTree = "<group>"; };
 		59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKKeyboard.cpp; sourceTree = "<group>"; };
-		59E0D3971ED034A600BF10C4 /* VKKeyboard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKKeyboard.hpp; sourceTree = "<group>"; };
 		59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CLApplicationDelegate.cpp; sourceTree = "<group>"; };
-		59E0D3A01ED0DAC400BF10C4 /* CLApplicationDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLApplicationDelegate.hpp; sourceTree = "<group>"; };
 		59E0D3A61ED0DB0B00BF10C4 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
 		59E0D3A71ED0DB0B00BF10C4 /* AppDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AppDelegate.hpp; sourceTree = "<group>"; };
 		59E0D3AA1ED19D3200BF10C4 /* CustomView2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomView2.cpp; sourceTree = "<group>"; };
@@ -126,11 +120,25 @@
 		59E0D3CD1ED1AD1F00BF10C4 /* BuilderMainView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BuilderMainView.hpp; sourceTree = "<group>"; };
 		59E0D3CF1ED1B06300BF10C4 /* BuilderToolBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BuilderToolBox.cpp; sourceTree = "<group>"; };
 		59E0D3D01ED1B06300BF10C4 /* BuilderToolBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BuilderToolBox.hpp; sourceTree = "<group>"; };
-		59E0D3D21ED1B5BF00BF10C4 /* VKAction.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = VKAction.hpp; sourceTree = "<group>"; };
 		59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKLabel.cpp; sourceTree = "<group>"; };
-		59E0D3D41ED1BBB200BF10C4 /* VKLabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKLabel.hpp; sourceTree = "<group>"; };
 		59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKImage.cpp; sourceTree = "<group>"; };
-		59E0D3D81ED1BBC200BF10C4 /* VKImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKImage.hpp; sourceTree = "<group>"; };
+		59E0D3DD1ED4133800BF10C4 /* ColorPickerView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorPickerView.cpp; sourceTree = "<group>"; };
+		59E0D3DE1ED4133800BF10C4 /* ColorPickerView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ColorPickerView.hpp; sourceTree = "<group>"; };
+		59E0D3F21ED55EF800BF10C4 /* libVisualKit.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libVisualKit.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		59E0D3F71ED55F3700BF10C4 /* CLApplication.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLApplication.hpp; sourceTree = "<group>"; };
+		59E0D3F81ED55F3700BF10C4 /* CLApplicationDelegate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CLApplicationDelegate.hpp; sourceTree = "<group>"; };
+		59E0D3F91ED55F3700BF10C4 /* VK.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VK.hpp; sourceTree = "<group>"; };
+		59E0D3FA1ED55F3700BF10C4 /* VKAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKAction.hpp; sourceTree = "<group>"; };
+		59E0D3FB1ED55F3700BF10C4 /* VKAlertView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKAlertView.hpp; sourceTree = "<group>"; };
+		59E0D3FC1ED55F3700BF10C4 /* VKButton.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKButton.hpp; sourceTree = "<group>"; };
+		59E0D3FD1ED55F3700BF10C4 /* VKCursor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKCursor.hpp; sourceTree = "<group>"; };
+		59E0D3FE1ED55F3700BF10C4 /* VKImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKImage.hpp; sourceTree = "<group>"; };
+		59E0D3FF1ED55F3700BF10C4 /* VKKeyboard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKKeyboard.hpp; sourceTree = "<group>"; };
+		59E0D4001ED55F3700BF10C4 /* VKLabel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKLabel.hpp; sourceTree = "<group>"; };
+		59E0D4011ED55F3700BF10C4 /* VKTextInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTextInput.hpp; sourceTree = "<group>"; };
+		59E0D4021ED55F3700BF10C4 /* VKTouch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKTouch.hpp; sourceTree = "<group>"; };
+		59E0D4031ED55F3700BF10C4 /* VKView.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKView.hpp; sourceTree = "<group>"; };
+		59E0D4041ED55F3700BF10C4 /* VKWindow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKWindow.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +157,16 @@
 			files = (
 				59E0D3BF1ED1AC6600BF10C4 /* libGX.dylib in Frameworks */,
 				59E0D3C01ED1AC6600BF10C4 /* libGroundBase-cpp.dylib in Frameworks */,
+				59E0D4221ED55FBC00BF10C4 /* libVisualKit.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59E0D3EF1ED55EF800BF10C4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59E0D4211ED55FB200BF10C4 /* libGroundBase-cpp.dylib in Frameworks */,
+				59E0D4201ED55F9500BF10C4 /* libGX.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				59E0D3551ECE0AE200BF10C4 /* GX.xcodeproj */,
+				59E0D3F61ED55F3700BF10C4 /* include */,
 				59E0D34D1ECE0AD700BF10C4 /* VisualKit */,
 				59E0D3811ECED85200BF10C4 /* Test1 */,
 				59E0D3C61ED1ACB500BF10C4 /* VKBuilder */,
@@ -170,8 +189,9 @@
 		59E0D34C1ECE0AD700BF10C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				59E0D34B1ECE0AD700BF10C4 /* VisualKit */,
+				59E0D34B1ECE0AD700BF10C4 /* VisualKitTest */,
 				59E0D3C51ED1AC6600BF10C4 /* VKBuilder */,
+				59E0D3F21ED55EF800BF10C4 /* libVisualKit.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,33 +199,19 @@
 		59E0D34D1ECE0AD700BF10C4 /* VisualKit */ = {
 			isa = PBXGroup;
 			children = (
-				59E0D3D41ED1BBB200BF10C4 /* VKLabel.hpp */,
 				59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */,
-				59E0D3D81ED1BBC200BF10C4 /* VKImage.hpp */,
 				59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */,
-				59E0D3D21ED1B5BF00BF10C4 /* VKAction.hpp */,
 				59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */,
-				59E0D3941ECF641900BF10C4 /* VKTextInput.hpp */,
 				59E0D3901ECF406700BF10C4 /* VKCursor.cpp */,
-				59E0D3911ECF406700BF10C4 /* VKCursor.hpp */,
 				59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */,
-				59E0D38E1ECEFB7A00BF10C4 /* VKAlertView.hpp */,
 				59E0D37B1ECED39F00BF10C4 /* VKTouch.cpp */,
-				59E0D37C1ECED39F00BF10C4 /* VKTouch.hpp */,
 				59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */,
-				59E0D3971ED034A600BF10C4 /* VKKeyboard.hpp */,
 				59E0D3781ECECD6D00BF10C4 /* VK.cpp */,
-				59E0D3791ECECD6D00BF10C4 /* VK.hpp */,
 				59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */,
-				59E0D3741ECE2B5600BF10C4 /* VKButton.hpp */,
 				59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */,
-				59E0D36F1ECE1C4E00BF10C4 /* VKView.hpp */,
 				59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */,
-				59E0D3661ECE0C8A00BF10C4 /* VKWindow.hpp */,
 				59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */,
-				59E0D36A1ECE17C600BF10C4 /* CLApplication.hpp */,
 				59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */,
-				59E0D3A01ED0DAC400BF10C4 /* CLApplicationDelegate.hpp */,
 			);
 			path = VisualKit;
 			sourceTree = "<group>";
@@ -244,6 +250,8 @@
 		59E0D3C61ED1ACB500BF10C4 /* VKBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				59E0D3DD1ED4133800BF10C4 /* ColorPickerView.cpp */,
+				59E0D3DE1ED4133800BF10C4 /* ColorPickerView.hpp */,
 				59E0D3CF1ED1B06300BF10C4 /* BuilderToolBox.cpp */,
 				59E0D3D01ED1B06300BF10C4 /* BuilderToolBox.hpp */,
 				59E0D3CC1ED1AD1F00BF10C4 /* BuilderMainView.cpp */,
@@ -255,12 +263,57 @@
 			path = VKBuilder;
 			sourceTree = "<group>";
 		};
+		59E0D3F61ED55F3700BF10C4 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				59E0D3F71ED55F3700BF10C4 /* CLApplication.hpp */,
+				59E0D3F81ED55F3700BF10C4 /* CLApplicationDelegate.hpp */,
+				59E0D4021ED55F3700BF10C4 /* VKTouch.hpp */,
+				59E0D3FA1ED55F3700BF10C4 /* VKAction.hpp */,
+				59E0D3FB1ED55F3700BF10C4 /* VKAlertView.hpp */,
+				59E0D3FC1ED55F3700BF10C4 /* VKButton.hpp */,
+				59E0D3FD1ED55F3700BF10C4 /* VKCursor.hpp */,
+				59E0D3FE1ED55F3700BF10C4 /* VKImage.hpp */,
+				59E0D3F91ED55F3700BF10C4 /* VK.hpp */,
+				59E0D3FF1ED55F3700BF10C4 /* VKKeyboard.hpp */,
+				59E0D4001ED55F3700BF10C4 /* VKLabel.hpp */,
+				59E0D4011ED55F3700BF10C4 /* VKTextInput.hpp */,
+				59E0D4031ED55F3700BF10C4 /* VKView.hpp */,
+				59E0D4041ED55F3700BF10C4 /* VKWindow.hpp */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		59E0D3F01ED55EF800BF10C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59E0D4051ED55F3700BF10C4 /* CLApplication.hpp in Headers */,
+				59E0D4081ED55F3700BF10C4 /* VKAction.hpp in Headers */,
+				59E0D40D1ED55F3700BF10C4 /* VKKeyboard.hpp in Headers */,
+				59E0D4121ED55F3700BF10C4 /* VKWindow.hpp in Headers */,
+				59E0D40B1ED55F3700BF10C4 /* VKCursor.hpp in Headers */,
+				59E0D40F1ED55F3700BF10C4 /* VKTextInput.hpp in Headers */,
+				59E0D4101ED55F3700BF10C4 /* VKTouch.hpp in Headers */,
+				59E0D4111ED55F3700BF10C4 /* VKView.hpp in Headers */,
+				59E0D40E1ED55F3700BF10C4 /* VKLabel.hpp in Headers */,
+				59E0D4071ED55F3700BF10C4 /* VK.hpp in Headers */,
+				59E0D4061ED55F3700BF10C4 /* CLApplicationDelegate.hpp in Headers */,
+				59E0D40C1ED55F3700BF10C4 /* VKImage.hpp in Headers */,
+				59E0D4091ED55F3700BF10C4 /* VKAlertView.hpp in Headers */,
+				59E0D40A1ED55F3700BF10C4 /* VKButton.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		59E0D34A1ECE0AD700BF10C4 /* VisualKit */ = {
+		59E0D34A1ECE0AD700BF10C4 /* VisualKitTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 59E0D3521ECE0AD700BF10C4 /* Build configuration list for PBXNativeTarget "VisualKit" */;
+			buildConfigurationList = 59E0D3521ECE0AD700BF10C4 /* Build configuration list for PBXNativeTarget "VisualKitTest" */;
 			buildPhases = (
 				59E0D3471ECE0AD700BF10C4 /* Sources */,
 				59E0D3481ECE0AD700BF10C4 /* Frameworks */,
@@ -270,9 +323,9 @@
 			);
 			dependencies = (
 			);
-			name = VisualKit;
+			name = VisualKitTest;
 			productName = VisualKit;
-			productReference = 59E0D34B1ECE0AD700BF10C4 /* VisualKit */;
+			productReference = 59E0D34B1ECE0AD700BF10C4 /* VisualKitTest */;
 			productType = "com.apple.product-type.tool";
 		};
 		59E0D3AD1ED1AC6600BF10C4 /* VKBuilder */ = {
@@ -292,6 +345,23 @@
 			productReference = 59E0D3C51ED1AC6600BF10C4 /* VKBuilder */;
 			productType = "com.apple.product-type.tool";
 		};
+		59E0D3F11ED55EF800BF10C4 /* VisualKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 59E0D3F31ED55EF800BF10C4 /* Build configuration list for PBXNativeTarget "VisualKit" */;
+			buildPhases = (
+				59E0D3EE1ED55EF800BF10C4 /* Sources */,
+				59E0D3EF1ED55EF800BF10C4 /* Frameworks */,
+				59E0D3F01ED55EF800BF10C4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VisualKit;
+			productName = VisualKit;
+			productReference = 59E0D3F21ED55EF800BF10C4 /* libVisualKit.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -302,6 +372,10 @@
 				ORGANIZATIONNAME = "Unlimited Development";
 				TargetAttributes = {
 					59E0D34A1ECE0AD700BF10C4 = {
+						CreatedOnToolsVersion = 8.2;
+						ProvisioningStyle = Automatic;
+					};
+					59E0D3F11ED55EF800BF10C4 = {
 						CreatedOnToolsVersion = 8.2;
 						ProvisioningStyle = Automatic;
 					};
@@ -325,7 +399,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				59E0D34A1ECE0AD700BF10C4 /* VisualKit */,
+				59E0D3F11ED55EF800BF10C4 /* VisualKit */,
+				59E0D34A1ECE0AD700BF10C4 /* VisualKitTest */,
 				59E0D3AD1ED1AC6600BF10C4 /* VKBuilder */,
 			);
 		};
@@ -353,22 +428,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59E0D37A1ECECD6D00BF10C4 /* VK.cpp in Sources */,
-				59E0D3A11ED0DAC400BF10C4 /* CLApplicationDelegate.cpp in Sources */,
-				59E0D3981ED034A600BF10C4 /* VKKeyboard.cpp in Sources */,
-				59E0D3671ECE0C8A00BF10C4 /* VKWindow.cpp in Sources */,
 				59E0D3A81ED0DB0B00BF10C4 /* AppDelegate.cpp in Sources */,
-				59E0D36B1ECE17C600BF10C4 /* CLApplication.cpp in Sources */,
-				59E0D38F1ECEFB7A00BF10C4 /* VKAlertView.cpp in Sources */,
 				59E0D3AC1ED19D3200BF10C4 /* CustomView2.cpp in Sources */,
-				59E0D3951ECF641900BF10C4 /* VKTextInput.cpp in Sources */,
-				59E0D3921ECF406700BF10C4 /* VKCursor.cpp in Sources */,
-				59E0D37D1ECED39F00BF10C4 /* VKTouch.cpp in Sources */,
-				59E0D3751ECE2B5600BF10C4 /* VKButton.cpp in Sources */,
-				59E0D3701ECE1C4E00BF10C4 /* VKView.cpp in Sources */,
-				59E0D3D51ED1BBB200BF10C4 /* VKLabel.cpp in Sources */,
 				59E0D3861ECED85200BF10C4 /* main.cpp in Sources */,
-				59E0D3D91ED1BBC200BF10C4 /* VKImage.cpp in Sources */,
 				59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,23 +439,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59E0D3AF1ED1AC6600BF10C4 /* VK.cpp in Sources */,
-				59E0D3B01ED1AC6600BF10C4 /* CLApplicationDelegate.cpp in Sources */,
-				59E0D3B11ED1AC6600BF10C4 /* VKKeyboard.cpp in Sources */,
-				59E0D3B21ED1AC6600BF10C4 /* VKWindow.cpp in Sources */,
-				59E0D3B41ED1AC6600BF10C4 /* CLApplication.cpp in Sources */,
-				59E0D3B51ED1AC6600BF10C4 /* VKAlertView.cpp in Sources */,
+				59E0D3DF1ED4133800BF10C4 /* ColorPickerView.cpp in Sources */,
 				59E0D3CE1ED1AD1F00BF10C4 /* BuilderMainView.cpp in Sources */,
-				59E0D3B71ED1AC6600BF10C4 /* VKTextInput.cpp in Sources */,
 				59E0D3D11ED1B06300BF10C4 /* BuilderToolBox.cpp in Sources */,
-				59E0D3B81ED1AC6600BF10C4 /* VKCursor.cpp in Sources */,
-				59E0D3B91ED1AC6600BF10C4 /* VKTouch.cpp in Sources */,
-				59E0D3BA1ED1AC6600BF10C4 /* VKButton.cpp in Sources */,
-				59E0D3BB1ED1AC6600BF10C4 /* VKView.cpp in Sources */,
-				59E0D3D61ED1BBB900BF10C4 /* VKLabel.cpp in Sources */,
 				59E0D3C81ED1ACB500BF10C4 /* mainVKBuilder.cpp in Sources */,
-				59E0D3DA1ED1BBC200BF10C4 /* VKImage.cpp in Sources */,
 				59E0D3CB1ED1ACC600BF10C4 /* AppDelegate.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		59E0D3EE1ED55EF800BF10C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59E0D41A1ED55F4E00BF10C4 /* VK.cpp in Sources */,
+				59E0D41F1ED55F4E00BF10C4 /* CLApplicationDelegate.cpp in Sources */,
+				59E0D4161ED55F4E00BF10C4 /* VKCursor.cpp in Sources */,
+				59E0D4141ED55F4E00BF10C4 /* VKImage.cpp in Sources */,
+				59E0D41D1ED55F4E00BF10C4 /* VKWindow.cpp in Sources */,
+				59E0D41C1ED55F4E00BF10C4 /* VKView.cpp in Sources */,
+				59E0D41E1ED55F4E00BF10C4 /* CLApplication.cpp in Sources */,
+				59E0D4181ED55F4E00BF10C4 /* VKTouch.cpp in Sources */,
+				59E0D41B1ED55F4E00BF10C4 /* VKButton.cpp in Sources */,
+				59E0D4151ED55F4E00BF10C4 /* VKTextInput.cpp in Sources */,
+				59E0D4191ED55F4E00BF10C4 /* VKKeyboard.cpp in Sources */,
+				59E0D4131ED55F4E00BF10C4 /* VKLabel.cpp in Sources */,
+				59E0D4171ED55F4E00BF10C4 /* VKAlertView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +589,26 @@
 			};
 			name = Release;
 		};
+		59E0D3F41ED55EF800BF10C4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		59E0D3F51ED55EF800BF10C4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -531,7 +621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		59E0D3521ECE0AD700BF10C4 /* Build configuration list for PBXNativeTarget "VisualKit" */ = {
+		59E0D3521ECE0AD700BF10C4 /* Build configuration list for PBXNativeTarget "VisualKitTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				59E0D3531ECE0AD700BF10C4 /* Debug */,
@@ -548,6 +638,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		59E0D3F31ED55EF800BF10C4 /* Build configuration list for PBXNativeTarget "VisualKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59E0D3F41ED55EF800BF10C4 /* Debug */,
+				59E0D3F51ED55EF800BF10C4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

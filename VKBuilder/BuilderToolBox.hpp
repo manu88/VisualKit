@@ -12,6 +12,7 @@
 #include "VKButton.hpp"
 #include "VKTextInput.hpp"
 #include "VKView.hpp"
+#include "ColorPickerView.hpp"
 
 class BuilderMainView;
 class BuilderToolBox : public VKView

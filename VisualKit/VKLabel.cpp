@@ -9,7 +9,10 @@
 #include "VKLabel.hpp"
 #include "VK.hpp"
 
-VKLabel::VKLabel()
+VKLabel::VKLabel():
+_fontSize(20.f),
+_font( GXFontInvalid),
+_textColor(GXColors::Black)
 {
     _type = VK_Label;
     //setOpaque(false);
@@ -18,9 +21,9 @@ VKLabel::VKLabel()
 
 void VKLabel::paint( GXContext* context , const GXRect& bounds)
 {
-    context->setFontSize(20);
-    context->setFontId( context->getFontManager().getFont( VKDefaults::DefaultFont) );
-    context->setFillColor( GXColors::Black);// GXColorMake(0, 1., 0.35) );
+    context->setFontSize( _fontSize );
+    context->setFontId( _font == GXFontInvalid? context->getFontManager().getFont( VKDefaults::DefaultFont) : _font );
+    context->setFillColor( _textColor );
     
     const GXPoint textPos = GXPointMake(5, 5);
     

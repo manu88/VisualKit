@@ -14,7 +14,7 @@
 #include "VKAction.hpp"
 #include "VKImage.hpp"
 #include "VKLabel.hpp"
-
+#include "ColorPickerView.hpp"
 class BuilderToolBox;
 
 class BuilderMainView : public VKView
@@ -24,6 +24,7 @@ public:
     
     void viewWillAppear() override;
     BuilderToolBox* _toolBox;
+    ColorPickerView* _colorView;
     
     bool loadFile( const std::string &file);
     
@@ -52,6 +53,7 @@ public:
     void itemSelectionChanged();
     
     VKView* _selected;
+    
     
     VKLabel _label;
 private:

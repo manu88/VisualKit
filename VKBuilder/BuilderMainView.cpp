@@ -34,6 +34,12 @@ _movingV( nullptr )
 void BuilderMainView::viewWillAppear()
 {
     //loadFile("test.xml");
+    
+    _colorView = new ColorPickerView();
+    
+    _colorView->setBounds(GXRectMake(200, 300, 200, 400));
+    _colorView->setZPos(50);
+    addChild( _colorView );
 }
 
 bool BuilderMainView::loadFile( const std::string &file)
@@ -41,7 +47,7 @@ bool BuilderMainView::loadFile( const std::string &file)
     
     for( GXLayer* c : getChildren())
     {
-        if( c != _toolBox)
+        if( c != _toolBox && c != _colorView)
         {
             removeChild(c);
         }
@@ -212,13 +218,13 @@ void BuilderMainView::addImage(VKSender* sender)
 }
 
 bool BuilderMainView::touchBegan( const GXTouch &t)
-{
-    
+{   
     for( GXLayer *c : getChildren())
     {
         VKView* subV = dynamic_cast<VKView*>(c);
-        if( subV == _toolBox)
+        if( subV == _toolBox || subV == _colorView)
             continue;
+        
         if( subV && rectContainsPoint(subV->getBounds(), t.center))
         {
             _selected = subV;
