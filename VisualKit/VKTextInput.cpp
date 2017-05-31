@@ -14,13 +14,18 @@
 VKTextInput::VKTextInput():
 textChanged(nullptr),
 editingEnded(nullptr),
+
+_textColor( GXColors::Black),
+_textAlign( GXTextAlign_Default ),
+
 _singleLine(false)
 {
     
     setOpaque(false);
     
-    _block.setBounds(GXRectMake(10, 10, 7, 15));
-    _block.background = GXColorMake(0, 1., 0.35);
+    _block.setBounds(GXRectMake(10, 10, 1, 15));
+    _block.background = _textColor;
+    _block.setPos(GXPointMake(20, 20));
     
     
     
@@ -144,7 +149,8 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 
     _textContainer.setSize(bounds.size);
     //_textContainer.setContent(_content);
-    context->setTextAlignement(GXTextAlign_LEFT | GXTextAlign_TOP);
+    context->setTextAlignement(  _textAlign );
+    
     
     _textContainer.clearHitTests();
     _textContainer.addHitTest(_cursorPos);
@@ -152,7 +158,7 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 
     for (const GXTextContainer::HitTest &retTest : _textContainer.getHitTestResults())
     {
-        //printf("Got hit test result %i %i \n" , retTest.textPos.x , retTest.textPos.y);
-        _block.setPos(GXPointMake( retTest.textPos.x, retTest.textPos.y));
+//        printf("Got hit test result %i %i \n" , retTest.textPos.x , retTest.textPos.y);
+//        _block.setPos(GXPointMake( retTest.textPos.x, retTest.textPos.y));
     }    
 }

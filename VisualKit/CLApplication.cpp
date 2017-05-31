@@ -108,6 +108,8 @@ const std::string& CLApplication::getName() const noexcept
 
 void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
 {
+    if( !_currentView)
+        return ;
     static GXMouseState lastState = GXMouseStateReleased;
     static bool isPressMoving = 0;
     

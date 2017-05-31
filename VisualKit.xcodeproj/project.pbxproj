@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		591884501ED805D500DF180F /* libVisualKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3F21ED55EF800BF10C4 /* libVisualKit.dylib */; };
+		59E016881EDD561B00E8986D /* VKLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E016861EDD561B00E8986D /* VKLayout.cpp */; };
+		59E0168D1EDD563A00E8986D /* VKLayout.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0168C1EDD563A00E8986D /* VKLayout.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		59E0D35E1ECE0B3800BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
 		59E0D3641ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */; };
 		59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E0D3821ECED85200BF10C4 /* CustomView.cpp */; };
@@ -91,6 +94,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		59E016861EDD561B00E8986D /* VKLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKLayout.cpp; sourceTree = "<group>"; };
+		59E0168C1EDD563A00E8986D /* VKLayout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKLayout.hpp; sourceTree = "<group>"; };
 		59E0D34B1ECE0AD700BF10C4 /* VisualKitTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VisualKitTest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59E0D3551ECE0AE200BF10C4 /* GX.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GX.xcodeproj; path = ../GX/GX.xcodeproj; sourceTree = "<group>"; };
 		59E0D3631ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libGroundBase-cpp.dylib"; path = "../../../../../../usr/local/lib/libGroundBase-cpp.dylib"; sourceTree = "<group>"; };
@@ -148,6 +153,7 @@
 			files = (
 				59E0D35E1ECE0B3800BF10C4 /* libGX.dylib in Frameworks */,
 				59E0D3641ECE0C5F00BF10C4 /* libGroundBase-cpp.dylib in Frameworks */,
+				591884501ED805D500DF180F /* libVisualKit.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,8 +205,10 @@
 		59E0D34D1ECE0AD700BF10C4 /* VisualKit */ = {
 			isa = PBXGroup;
 			children = (
+				59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */,
 				59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */,
 				59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */,
+				59E016861EDD561B00E8986D /* VKLayout.cpp */,
 				59E0D3931ECF641900BF10C4 /* VKTextInput.cpp */,
 				59E0D3901ECF406700BF10C4 /* VKCursor.cpp */,
 				59E0D38D1ECEFB7A00BF10C4 /* VKAlertView.cpp */,
@@ -208,7 +216,6 @@
 				59E0D3961ED034A600BF10C4 /* VKKeyboard.cpp */,
 				59E0D3781ECECD6D00BF10C4 /* VK.cpp */,
 				59E0D3731ECE2B5600BF10C4 /* VKButton.cpp */,
-				59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */,
 				59E0D3651ECE0C8A00BF10C4 /* VKWindow.cpp */,
 				59E0D3691ECE17C600BF10C4 /* CLApplication.cpp */,
 				59E0D39F1ED0DAC400BF10C4 /* CLApplicationDelegate.cpp */,
@@ -268,6 +275,7 @@
 			children = (
 				59E0D3F71ED55F3700BF10C4 /* CLApplication.hpp */,
 				59E0D3F81ED55F3700BF10C4 /* CLApplicationDelegate.hpp */,
+				59E0168C1EDD563A00E8986D /* VKLayout.hpp */,
 				59E0D4021ED55F3700BF10C4 /* VKTouch.hpp */,
 				59E0D3FA1ED55F3700BF10C4 /* VKAction.hpp */,
 				59E0D3FB1ED55F3700BF10C4 /* VKAlertView.hpp */,
@@ -297,6 +305,7 @@
 				59E0D4121ED55F3700BF10C4 /* VKWindow.hpp in Headers */,
 				59E0D40B1ED55F3700BF10C4 /* VKCursor.hpp in Headers */,
 				59E0D40F1ED55F3700BF10C4 /* VKTextInput.hpp in Headers */,
+				59E0168D1EDD563A00E8986D /* VKLayout.hpp in Headers */,
 				59E0D4101ED55F3700BF10C4 /* VKTouch.hpp in Headers */,
 				59E0D4111ED55F3700BF10C4 /* VKView.hpp in Headers */,
 				59E0D40E1ED55F3700BF10C4 /* VKLabel.hpp in Headers */,
@@ -453,6 +462,7 @@
 			files = (
 				59E0D41A1ED55F4E00BF10C4 /* VK.cpp in Sources */,
 				59E0D41F1ED55F4E00BF10C4 /* CLApplicationDelegate.cpp in Sources */,
+				59E016881EDD561B00E8986D /* VKLayout.cpp in Sources */,
 				59E0D4161ED55F4E00BF10C4 /* VKCursor.cpp in Sources */,
 				59E0D4141ED55F4E00BF10C4 /* VKImage.cpp in Sources */,
 				59E0D41D1ED55F4E00BF10C4 /* VKWindow.cpp in Sources */,
@@ -646,6 +656,7 @@
 				59E0D3F51ED55EF800BF10C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

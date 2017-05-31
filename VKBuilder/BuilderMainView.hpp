@@ -44,6 +44,8 @@ public:
     
     bool keyPressed(  const GXKey &key ) override;
     
+    
+    void colorEditEnded( const GXColor& col);
     void actionSave( VKSender* sender);
     void actionLoad( VKSender* sender);
     void textContentChanged( VKSender* sender);

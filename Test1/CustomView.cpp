@@ -12,22 +12,24 @@
 
 
 #include "CustomView2.hpp"
-CustomView::CustomView()
+CustomView::CustomView():
+buttonLayout(VKLayout::Horizontal),
+textLayout(VKLayout::Vertical)
 {
     background = GXColors::LightGray;
     
     
     bttonOk.setText("Show");
-    bttonOk.setBounds( GXRectMake(10, 10, 60, 20));
-    addChild( &bttonOk );
+    bttonOk.setSize( GXSizeMake( 60, 20));
+    
 
     bttonCancel.setText("Close");
-    bttonCancel.setBounds(GXRectMake(80, 10, 60, 20));
-    addChild( &bttonCancel );
+    bttonCancel.setSize( GXSizeMake( 60, 20));
+    
     
     bttonNav.setText("Next");
-    bttonNav.setBounds(GXRectMake(150, 10, 60, 20));
-    addChild( &bttonNav );
+    bttonNav.setSize( GXSizeMake( 60, 20));
+    
     
     bttonNav.onClic = [](VKSender* sender)
     {
@@ -40,14 +42,25 @@ CustomView::CustomView()
     
     alert = nullptr;
     
-    textInput.setBounds(GXRectMake(20, 80, 400, 200));
-    addChild( &textInput);
-    
-    textInput2.setBounds(GXRectMake(600, 80, 400, 200));
-    addChild( &textInput2);
-
+    textInput.setSize(GXSizeMake(400, 200));
+    textInput2.setSize(GXSizeMake(400, 200));
     
 
+    buttonLayout.setPos(GXPointMake(10, 10));
+
+    addChild( &buttonLayout);
+    buttonLayout.addChild( &bttonNav );
+    buttonLayout.addChild( &bttonOk );
+    buttonLayout.addChild( &bttonCancel );
+    
+    
+    textLayout.setPos(GXPointMake(20, 80));
+    
+    addChild( &textLayout);
+    textLayout.addChild( &textInput);
+    textLayout.addChild( &textInput2);
+    
+    
 }
 
 
@@ -103,6 +116,25 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
 
 }
 
+void CustomView::focusChanged()
+{
+    printf("Focus changed to %i \n" , hasFocus());
+}
+
+bool CustomView::keyPressed(  const GXKey &key )
+{
+    if( hasFocus())
+    {
+        if(key.key == GXKey_UP)
+        {
+            printf("Key UP \n");
+        }
+        
+        return true;
+    }
+    
+    return VKView::keyPressed(key);
+}
 
 
 

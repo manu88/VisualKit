@@ -11,6 +11,24 @@
 
 #include <string>
 
+#include "VKView.hpp"
+#include "VKWindow.hpp"
+
+#include "VKAction.hpp"
+#include "VKTouch.hpp"
+#include "VKKeyboard.hpp"
+
+#include "VKButton.hpp"
+#include "VKCursor.hpp"
+#include "VKImage.hpp"
+
+#include "VKLabel.hpp"
+#include "VKTextInput.hpp"
+
+#include "VKLayout.hpp"
+
+#include "VKAlertView.hpp"
+
 namespace VKDefaults
 {
     static constexpr const char DefaultFont[] = "SanFranciscoDisplay-Regular.ttf";

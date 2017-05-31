@@ -16,7 +16,9 @@
 
 VKView::VKView():
 _type(VK_View),
-_hasFocus(false)
+_hasFocus(false),
+_minSize( GXSizeInvalid),
+_maxSize( GXSizeInvalid)
 {
 
     
@@ -27,11 +29,14 @@ VKView::~VKView()
     
 }
 
+
 void VKView::setFocus(bool focus) noexcept
 {
-    _hasFocus = focus;
-    
-    focusChanged();
+    if( _hasFocus != focus)
+    {
+        _hasFocus = focus;
+        focusChanged();
+    }
 }
 bool VKView::hasFocus() const noexcept
 {
@@ -44,8 +49,33 @@ bool VKView::handleFocus()
 }
 
 void VKView::focusChanged()
+{}
+
+void VKView::setBounds( const GXRect& b) noexcept
 {
+    if(   ( _minSize != GXSizeInvalid && b.size < _minSize)
+       || ( _maxSize != GXSizeInvalid && b.size > _maxSize))
+    {
+        return ;
+    }
     
+    GXLayer::setBounds( b );
+}
+
+void VKView::setMinSize( const GXSize &s) noexcept
+{
+    if( _minSize != s)
+    {
+        _minSize = s;
+    }
+}
+
+void VKView::setMaxSize( const GXSize &s) noexcept
+{
+    if( _maxSize != s)
+    {
+        _maxSize = s;
+    }
 }
 
 void VKView::viewWillAppear()

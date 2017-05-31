@@ -35,9 +35,9 @@ void BuilderMainView::viewWillAppear()
 {
     //loadFile("test.xml");
     
-    _colorView = new ColorPickerView();
+    _colorView = new ColorPickerView(this);
     
-    _colorView->setBounds(GXRectMake(200, 300, 200, 400));
+    _colorView->setBounds(GXRectMake(220, 220, 250, 200));
     _colorView->setZPos(50);
     addChild( _colorView );
 }
@@ -299,6 +299,8 @@ void BuilderMainView::itemSelectionChanged()
     _toolBox->_inHeight.setNeedsDisplay();
     _toolBox->_inWidth.setNeedsDisplay();
     
+    _colorView->setColor(_selected->background);
+    
 }
 
 void BuilderMainView::widthContentChanged( VKSender* sender)
@@ -350,6 +352,12 @@ void BuilderMainView::textContentChanged( VKSender* sender)
             }
         }
     }
+}
+
+void BuilderMainView::colorEditEnded( const GXColor& col)
+{
+    _selected->background = col;
+    _selected->setNeedsDisplay();
 }
 
 bool BuilderMainView::keyPressed(  const GXKey &key )

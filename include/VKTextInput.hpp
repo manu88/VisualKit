@@ -42,6 +42,12 @@ public:
     
     VKAction::Action textChanged;
     VKAction::Action editingEnded;
+    
+    
+    void setTextAlignement( GXTextAlign align) noexcept
+    {
+        _textAlign = align;
+    }
 protected:
     bool keyPressed(  const GXKey &key ) override;
     bool touchBegan( const GXTouch &t) override;
@@ -51,6 +57,12 @@ protected:
     
     
     GXTextContainer _textContainer;
+    
+    /**/
+    // props
+    GXColor _textColor;
+    GXTextAlign _textAlign;
+    /**/
     
     GXLayer _block;
     

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "C86CE5A3A948B938363015BC0FA2BD8706C6DF25",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "C86CE5A3A948B938363015BC0FA2BD8706C6DF25" : 9223372036854775807,
+    "105BEF7F20BC14DD62953610DCBF86A5E0EDDFB5" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EB2B0851-58FF-4114-842A-6964256D2C3F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "C86CE5A3A948B938363015BC0FA2BD8706C6DF25" : "VisualKit\/",
+    "105BEF7F20BC14DD62953610DCBF86A5E0EDDFB5" : "GX\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "VisualKit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "VisualKit.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/manu88\/GX.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "105BEF7F20BC14DD62953610DCBF86A5E0EDDFB5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/manu88\/VisualKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C86CE5A3A948B938363015BC0FA2BD8706C6DF25"
+    }
+  ]
+}

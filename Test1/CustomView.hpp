@@ -10,12 +10,8 @@
 #define CustomView_hpp
 
 #include <GBRunLoopSource.hpp>
-#include "VKView.hpp"
-#include "VKButton.hpp"
-#include "VKAlertView.hpp"
-#include "VKTextInput.hpp"
+#include "VK.hpp"
 
-#include "VKKeyboard.hpp"
 
 class CustomView : public VKView
 {
@@ -24,6 +20,12 @@ public:
 
 protected:
     
+    bool handleFocus() override
+    {
+        return true;
+    }
+    
+    void focusChanged() override;
     
     void viewWillAppear() override;
     void viewDidDismiss() override;
@@ -35,17 +37,18 @@ protected:
     bool touchMoved( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
     
-    
+    bool keyPressed(  const GXKey &key ) override;
     
     std::string _test;
     
+    VKLayout buttonLayout;
     VKButton bttonOk;
     VKButton bttonCancel;
     VKButton bttonNav;
     
     VKAlertView *alert;
     
-    
+    VKLayout textLayout;
     VKTextInput textInput;
     VKTextInput textInput2;
     

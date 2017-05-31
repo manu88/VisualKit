@@ -41,8 +41,27 @@ public:
     {
         return _type;
     }
+    
+    void setMinSize( const GXSize &) noexcept;
+    const GXSize& getMinSize() const noexcept
+    {
+        return _minSize;
+    }
+    
+    void setMaxSize( const GXSize &) noexcept;
+    const GXSize& getMaxSize() const noexcept
+    {
+        return _maxSize;
+    }
+    
+    void setBounds( const GXRect& b) noexcept override;
+    
 protected:
 
+    virtual void paint( GXContext* context , const GXRect& bounds) override
+    {} // Default GXLayer method does nothing
+    
+    
     // default to false
     virtual bool handleFocus();
     
@@ -51,6 +70,7 @@ protected:
     bool touchBegan( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
     bool touchMoved( const GXTouch &t) override;
+    
     bool keyPressed(  const GXKey &key ) override;
     
     
@@ -63,6 +83,10 @@ protected:
 private:
     
     bool _hasFocus;
+    
+    GXSize _minSize;
+    GXSize _maxSize;
+    
 
 };
 
