@@ -48,14 +48,14 @@ textLayout(VKLayout::Vertical)
 
     buttonLayout.setPos(GXPointMake(10, 10));
 
-    addChild( &buttonLayout);
+    
     buttonLayout.addChild( &bttonNav );
     buttonLayout.addChild( &bttonOk );
     buttonLayout.addChild( &bttonCancel );
     
     
     textLayout.setPos(GXPointMake(20, 80));
-    
+    textLayout.addChild( &buttonLayout);
     addChild( &textLayout);
     textLayout.addChild( &textInput);
     textLayout.addChild( &textInput2);
@@ -114,6 +114,11 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     
     context->addTextBox(GXPointMake(bounds.size.width /2 , 20), 100, _test);
 
+}
+
+bool CustomView::handleFocus() 
+{
+    return true;
 }
 
 void CustomView::focusChanged()

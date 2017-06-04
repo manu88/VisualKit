@@ -20,10 +20,7 @@ public:
 
 protected:
     
-    bool handleFocus() override
-    {
-        return true;
-    }
+    bool handleFocus() override;
     
     void focusChanged() override;
     

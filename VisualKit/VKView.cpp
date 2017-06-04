@@ -131,15 +131,11 @@ bool VKView::touchBegan( const GXTouch &t)
 
 bool VKView::touchMoved( const GXTouch &t)
 {
-
-       
     return true;
 }
 
 bool VKView::touchEnded( const GXTouch &t)
 {
-
-     
     for (GXLayer* l : getChildren())
     {
         VKView* view  = dynamic_cast<VKView*>(l);
@@ -176,6 +172,7 @@ bool VKView::serialize( GB::VariantMap& obj) const
             const VKView* v = dynamic_cast<const VKView*>(l);
             
             GB::VariantMap c;
+            
             if( v->serialize(c))
             {
                 children.push_back(c);

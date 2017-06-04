@@ -148,7 +148,6 @@ void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
 
 void CLApplication::handleKeyEvent( const GXEventKey* key)
 {
-    //printf("Got key %i \n" , key->code);
     if( _keyResponder)
     {
         if(key->action == GXKeyAction_Press)
