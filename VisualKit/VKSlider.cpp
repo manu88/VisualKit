@@ -20,6 +20,8 @@ _pos(0.f)
 void VKSlider::setPosition( float p) noexcept
 {
     _pos = p;
+    if( valueDidChange)
+        valueDidChange(this);
 }
 
 void VKSlider::paint( GXContext* context , const GXRect& bounds)
@@ -38,14 +40,9 @@ void VKSlider::paint( GXContext* context , const GXRect& bounds)
 }
 
 bool VKSlider::touchMoved( const GXTouch &t)
-{   
-    _pos =  (float)t.center.x  / (float)getSize().width;
-    setNeedsDisplay();
+{
+    setPosition( (float)t.center.x  / (float)getSize().width );
     
-    if( valueDidChange)
-    {
-        valueDidChange(this);
-    }
     return true;
 }
 

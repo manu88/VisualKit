@@ -82,6 +82,21 @@ textLayout(VKLayout::Vertical)
         slider1.setNeedsDisplay();
     };
     
+    
+    GB::Timer *t = new GB::Timer;
+    t->setInterval(40);
+    t->setCallback([this](const GB::Timer& t)
+    {
+        float p = slider2.getPosition() + 0.01;
+        if( p> 1.)
+            p = 0;
+        slider2.setPosition(p);
+        slider2.setNeedsDisplay();
+        
+    });
+    
+    CLApplication::instance()->getRunLoop()->addSource(*t);
+    
 }
 
 
