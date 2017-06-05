@@ -157,7 +157,7 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
     }
 }
 
-/* static */void CLApplication::s_onGXEvent(void* disp , const GXEvent *evt)
+/* static */void CLApplication::s_onGXEvent( const void* disp , const GXEvent *evt)
 {
     
 

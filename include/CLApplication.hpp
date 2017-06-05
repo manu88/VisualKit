@@ -88,7 +88,7 @@ private:
     
     static CLApplication* s_instance;
     
-    static void s_onGXEvent(void* disp , const GXEvent *evt);
+    static void s_onGXEvent( const void* disp , const GXEvent *evt);
     
     
     std::string _appName;

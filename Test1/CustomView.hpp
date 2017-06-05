@@ -27,7 +27,8 @@ protected:
     void viewWillAppear() override;
     void viewDidDismiss() override;
     
-    void buttonClicked( VKSender* button);
+    void dropDownDidChange( VKSender* );
+    void buttonClicked( VKSender* );
     void paint( GXContext* context , const GXRect& bounds) override;
     
     bool touchBegan( const GXTouch &t) override;
@@ -38,6 +39,8 @@ protected:
     
     std::string _test;
     
+    
+    VKDropDown _dropDown;
     VKLayout buttonLayout;
     VKButton bttonOk;
     VKButton bttonCancel;
@@ -48,6 +51,9 @@ protected:
     VKLayout textLayout;
     VKTextInput textInput;
     VKTextInput textInput2;
+    
+    VKSlider slider1;
+    VKSlider slider2;
     
 };
 

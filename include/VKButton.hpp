@@ -11,10 +11,7 @@
 
 
 #include "VKAction.hpp"
-#include "../../GX/include/GXLayer.hpp"
 #include "VKView.hpp"
-
-
 
 class VKButton : public VKView , public VKSender
 {

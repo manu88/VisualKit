@@ -20,7 +20,9 @@
 
 #include "VKButton.hpp"
 #include "VKCursor.hpp"
+#include "VKDropDown.hpp"
 #include "VKImage.hpp"
+#include "VKSlider.hpp"
 
 #include "VKLabel.hpp"
 #include "VKTextInput.hpp"

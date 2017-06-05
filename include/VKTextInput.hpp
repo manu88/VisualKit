@@ -48,6 +48,13 @@ public:
     {
         _textAlign = align;
     }
+    
+    void setTextColor( const GXColor&) noexcept;
+    
+    const GXColor& getTextColor() const noexcept
+    {
+        return _textColor;
+    }
 protected:
     bool keyPressed(  const GXKey &key ) override;
     bool touchBegan( const GXTouch &t) override;

@@ -101,7 +101,8 @@ bool VKTextInput::keyPressed(  const GXKey &key )
         }
         else
         {
-            c.insert(_insertPoint, "\n");
+            //c.insert(_insertPoint, "\n");
+            c.push_back('\n');
             //_insertPoint+=1;
             _textChanged = true;
         }
@@ -142,7 +143,7 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
     
     context->setFontSize(20);
     context->setFontId( context->getFontManager().getFont( VKDefaults::DefaultFont) );
-    context->setFillColor( GXColors::Black);// GXColorMake(0, 1., 0.35) );
+    context->setFillColor( _textColor);// GXColorMake(0, 1., 0.35) );
     
     
     const GXPoint textPos = GXPointMake(5, 5);
@@ -161,4 +162,10 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 //        printf("Got hit test result %i %i \n" , retTest.textPos.x , retTest.textPos.y);
 //        _block.setPos(GXPointMake( retTest.textPos.x, retTest.textPos.y));
     }    
+}
+
+
+void VKTextInput::setTextColor( const GXColor& col) noexcept
+{
+    _textColor = col;
 }

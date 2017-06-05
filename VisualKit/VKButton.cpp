@@ -65,8 +65,7 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
         
         context->fill();
     }
-    
-    
+
     if( _triggerAction)
     {
         _triggerAction = false;
