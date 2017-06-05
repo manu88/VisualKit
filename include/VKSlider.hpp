@@ -16,7 +16,7 @@ class VKSlider : public VKView , public VKSender
 {
 public:
     VKSlider();
-    
+    VKAction::Action valueDidChange;
     
     void setPosition( float p) noexcept;
     float getPosition() const noexcept
@@ -25,6 +25,8 @@ public:
     }
 private:
     void paint( GXContext* context , const GXRect& bounds) override;
+    
+    bool touchMoved( const GXTouch &t) override;
     
     float _pos;
 };

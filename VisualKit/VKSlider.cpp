@@ -10,6 +10,7 @@
 #include "VK.hpp"
 
 VKSlider::VKSlider():
+valueDidChange(nullptr),
 _pos(0.f)
 {
     //setOpaque(false);
@@ -32,6 +33,19 @@ void VKSlider::paint( GXContext* context , const GXRect& bounds)
     context->stroke();
     context->beginPath();
     context->addCircle( GXPointMake( getSize().width*_pos, (getSize().height /2) ), 10);
-    context->setFillColor(GXColors::Blue);
+    context->setFillColor(GXColors::DarkGray);
     context->fill();
 }
+
+bool VKSlider::touchMoved( const GXTouch &t)
+{   
+    _pos =  (float)t.center.x  / (float)getSize().width;
+    setNeedsDisplay();
+    
+    if( valueDidChange)
+    {
+        valueDidChange(this);
+    }
+    return true;
+}
+

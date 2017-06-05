@@ -131,6 +131,19 @@ bool VKView::touchBegan( const GXTouch &t)
 
 bool VKView::touchMoved( const GXTouch &t)
 {
+    for (GXLayer* l : getChildren())
+    {
+        VKView* view  = dynamic_cast<VKView*>(l);
+        
+        if( view)
+        {
+            if( rectContainsPoint(l->getBounds(), t.center))
+            {
+                view->touchMoved({ t.center - l->getBounds().origin ,  GXTouch::Phase::Ended });
+            }
+        }
+    }
+    
     return true;
 }
 

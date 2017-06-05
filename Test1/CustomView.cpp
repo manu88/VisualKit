@@ -74,21 +74,13 @@ textLayout(VKLayout::Vertical)
     
     addChild( &textLayout);
     
-    
-    GB::Timer* timer = new GB::Timer();
-    timer->setInterval( 10);
-    timer->setCallback([this] (GB::Timer &timer)
+    slider2.valueDidChange = [this](VKSender* slider)
     {
-        float p = slider1.getPosition() + 0.01;
-        if( p > 1.)
-            p = 0;
+        assert(slider == &slider2);
         
-        slider1.setPosition(p);
-        slider2.setPosition(1.f - p);
+        slider1.setPosition(slider2.getPosition());
         slider1.setNeedsDisplay();
-        slider2.setNeedsDisplay();
-    });
-    CLApplication::instance()->getRunLoop()->addSource( *timer);
+    };
     
 }
 

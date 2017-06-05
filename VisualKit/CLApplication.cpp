@@ -7,6 +7,8 @@
 //
 
 #include <assert.h>
+#include <chrono>
+#include <iostream> // temp debug
 #include <GroundBase.hpp>
 
 #include "CLApplication.hpp"
@@ -130,7 +132,9 @@ void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
         else if( mouse->state == GXMouseStateMoving)
         {
             if( isPressMoving)
+            {
                 _currentView->touchMoved({ realPoint , GXTouch::Phase::Moved });
+            }
         }
     }
     
@@ -271,17 +275,24 @@ int CLApplication::main(int argc , char* argv[])
     t.setInterval(40);
     t.setCallback([&](GB::Timer &timer)
                   {
+                      auto start = std::chrono::steady_clock::now();
                       
                       if(render.draw( _ctx ))
                       {
                           DisplaySwap( _disp );
                       }
+                      auto end = std::chrono::steady_clock::now();
+                      
                       DisplayPollEvents( _disp );
                       
                       if( DisplayShouldClose( _disp ))
                       {
                           quit();
                       }
+                      
+                      auto diff = end - start;
+                      
+                      std::cout << std::chrono::duration <double,std::milli> (diff).count() << " ms" << std::endl;
                   });
     
     _runLoop.addSource(t);
