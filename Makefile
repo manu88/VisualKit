@@ -6,7 +6,7 @@ CFLAGS= $(BUILD_CONFIG)  -c -Wall -Wextra
 CFLAGS+= -std=c++11 -pedantic 
 
 
-CFLAGS+= -I/usr/local/include/GroundBase -I../GX/include/ -IVisualKit/
+CFLAGS+= -I/usr/local/include/GroundBase -I../GX/include/ -IVisualKit/ -Iinclude/
 
 LDFLAGS= -L/usr/local/lib/ -L../GX/ -lGX -lGroundBase-cpp
 
