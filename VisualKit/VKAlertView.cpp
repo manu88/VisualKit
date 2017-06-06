@@ -31,9 +31,7 @@ onReturn(nullptr)
     addChild( &bttonOk );
     bttonOk.onClic = std::bind(&VKAlertView::buttonClicked, this , std::placeholders::_1);
     bttonCancel.onClic = std::bind(&VKAlertView::buttonClicked, this , std::placeholders::_1);
-    
-    bttonOk.id = 9;
-    bttonCancel.id = 10;
+
 }
 
 void VKAlertView::buttonClicked( VKSender* button)

@@ -17,7 +17,7 @@ _state( Inactive )
     _type = VK_Button;
     
     background = GXColorMake(1, 0, 0 );
-    id = 3;
+    identifier = "VKButton";
     
     setOpaque(false);
     
@@ -81,7 +81,7 @@ bool VKButton::touchBegan( const GXTouch &t)
 {
     
     _state = Highlighted;
-    setNeedsDisplay();
+    setNeedsRedraw();
     return true;
 }
 bool VKButton::touchEnded( const GXTouch &t)
@@ -90,7 +90,7 @@ bool VKButton::touchEnded( const GXTouch &t)
     _state = Inactive;
     
     
-    setNeedsDisplay();
+    setNeedsRedraw();
     
     if( onClic)
     {

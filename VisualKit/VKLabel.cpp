@@ -8,12 +8,14 @@
 
 #include "VKLabel.hpp"
 #include "VK.hpp"
-
+#include "VK.hpp"
 VKLabel::VKLabel():
-_fontSize(20.f),
+_fontSize(VKDefaults::DefautFontSize),
 _font( GXFontInvalid),
 _textColor(GXColors::Black)
 {
+    identifier = "VKLabel";
+    
     _type = VK_Label;
     //setOpaque(false);
     background = GXColors::White;

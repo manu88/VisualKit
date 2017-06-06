@@ -42,7 +42,7 @@ void VKSlider::paint( GXContext* context , const GXRect& bounds)
 bool VKSlider::touchMoved( const GXTouch &t)
 {
     setPosition( (float)t.center.x  / (float)getSize().width );
-    
+    setNeedsRedraw();
     return true;
 }
 

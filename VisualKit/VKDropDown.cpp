@@ -15,6 +15,8 @@ _selIndex(-1),
 _isExtended(false),
 _defaultSize( GXSizeMakeNull())
 {
+    
+    identifier = "VKDropDown";
     background = GXColors::Blue;
     
     /*
@@ -56,7 +58,7 @@ bool VKDropDown::touchEnded( const GXTouch &t)
     _isExtended = !_isExtended;
     
     update();
-    setNeedsDisplay();
+    setNeedsRedraw();
     
     return true;
 }

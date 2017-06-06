@@ -55,6 +55,16 @@ public:
     {
         return _textColor;
     }
+    
+    void setTextSize( float size) noexcept
+    {
+        _fontSize = size;
+    }
+    float getTextSize() const noexcept
+    {
+        return _fontSize;
+    }
+    
 protected:
     bool keyPressed(  const GXKey &key ) override;
     bool touchBegan( const GXTouch &t) override;
@@ -67,6 +77,7 @@ protected:
     
     /**/
     // props
+    float _fontSize;
     GXColor _textColor;
     GXTextAlign _textAlign;
     /**/

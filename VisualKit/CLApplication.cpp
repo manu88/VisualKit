@@ -62,7 +62,7 @@ void CLApplication::pushView( VKView* v) noexcept
         _currentView->viewWillAppear();
         mainWin.addChild( _currentView );
         
-        v->setNeedsDisplay();
+        v->setNeedsRedraw();
         printf("pushView:\n");
             
         for (const GXLayer *c : mainWin.getChildren())
@@ -175,7 +175,7 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
         if( self->_cursor.getPos() != p)
         {
             self->_cursor.setPos( p);
-            self->_cursor.setNeedsDisplay();
+            self->_cursor.setNeedsRedraw();
         }
     }
     
@@ -254,7 +254,7 @@ int CLApplication::main(int argc , char* argv[])
     DisplaySetEventCallback( _disp, CLApplication::s_onGXEvent);
     
     
-    mainWin.id = 0;
+    mainWin.identifier = "MainWin";
     
     
 
@@ -262,8 +262,13 @@ int CLApplication::main(int argc , char* argv[])
     DisplayGetFramebufferSize( _disp, &fbWidth, &fbHeight);
 //    pxRatio = (float)fbWidth / (float)winWidth;
 
+    
+    
+    
     mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
     render.setRoot( &mainWin );
+    
+    render.initView(_ctx);
     
     _delegate->applicationWillLoad(this);
 
@@ -275,13 +280,6 @@ int CLApplication::main(int argc , char* argv[])
     t.setInterval(40);
     t.setCallback([&](GB::Timer &timer)
                   {
-                      auto start = std::chrono::steady_clock::now();
-                      
-                      if(render.draw( _ctx ))
-                      {
-                          DisplaySwap( _disp );
-                      }
-                      auto end = std::chrono::steady_clock::now();
                       
                       DisplayPollEvents( _disp );
                       
@@ -290,9 +288,24 @@ int CLApplication::main(int argc , char* argv[])
                           quit();
                       }
                       
-                      auto diff = end - start;
+                      auto start = std::chrono::steady_clock::now();
                       
-                      std::cout << std::chrono::duration <double,std::milli> (diff).count() << " ms" << std::endl;
+                      //DisplayClear(_disp);
+                      const bool ret = render.draw( _ctx );
+                      if(ret)
+                      {
+                          DisplaySwap( _disp );
+                          auto end = std::chrono::steady_clock::now();
+                          auto diff = end - start;
+                          
+                          //std::cout << std::chrono::duration <double,std::milli> (diff).count() << " ms" << std::endl;
+                      }
+                      
+                      
+                      
+                      
+                      
+                      
                   });
     
     _runLoop.addSource(t);

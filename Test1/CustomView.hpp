@@ -41,6 +41,8 @@ protected:
     
     
     VKDropDown _dropDown;
+    VKDropDown _alignDropDown;
+    VKLayout optionsLayout;
     VKLayout buttonLayout;
     VKButton bttonOk;
     VKButton bttonCancel;

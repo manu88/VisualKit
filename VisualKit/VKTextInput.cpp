@@ -15,12 +15,14 @@ VKTextInput::VKTextInput():
 textChanged(nullptr),
 editingEnded(nullptr),
 
+_fontSize(VKDefaults::DefautFontSize),
 _textColor( GXColors::Black),
 _textAlign( GXTextAlign_Default ),
 
 _singleLine(false)
 {
     
+    identifier = "VKTextInput";
     setOpaque(false);
     
     _block.setBounds(GXRectMake(10, 10, 1, 15));
@@ -34,7 +36,7 @@ _singleLine(false)
     {
         
         _block.setVisible( !_block.isVisible());
-        _block.setNeedsDisplay();
+        _block.setNeedsRedraw();
     });
     /*
     setContent( "Les Iraniens ont voté massivement, vendredi 19 mai, pour reconduire le modéré Hassan Rohani à la présidence pendant quatre ans. Il a obtenu, dès le premier tour, la majorité absolue avec une confortable avance : 57 % des voix, selon les résultats officiels communiqués en fin de matinée par le ministère de l’intérieur.");
@@ -49,14 +51,14 @@ void VKTextInput::focusChanged()
         addChild(&_block);
         
         _block.setVisible(true);
-        CLApplication::instance()->getRunLoop()->addSource(tBlock);
-        setNeedsDisplay();
+        //CLApplication::instance()->getRunLoop()->addSource(tBlock);
+        setNeedsRedraw();
     }
     else
     {
         removeChild(&_block);
-        CLApplication::instance()->getRunLoop()->removeSource(tBlock);
-        setNeedsDisplay();
+        //CLApplication::instance()->getRunLoop()->removeSource(tBlock);
+        setNeedsRedraw();
     }
 }
 
@@ -115,7 +117,7 @@ bool VKTextInput::keyPressed(  const GXKey &key )
         _textChanged = true;
     }
     setContent(c);
-    setNeedsDisplay();
+    setNeedsRedraw();
     
     if( _textChanged && textChanged)
     {
@@ -141,7 +143,7 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 
     /* **** **** **** **** **** **** **** **** **** **** */
     
-    context->setFontSize(20);
+    context->setFontSize(_fontSize);
     context->setFontId( context->getFontManager().getFont( VKDefaults::DefaultFont) );
     context->setFillColor( _textColor);// GXColorMake(0, 1., 0.35) );
     

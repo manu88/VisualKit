@@ -16,6 +16,7 @@ CustomView::CustomView():
 buttonLayout(VKLayout::Horizontal),
 textLayout(VKLayout::Vertical)
 {
+    identifier = "CustomView";
     background = GXColors::LightGray;
     
     
@@ -56,16 +57,23 @@ textLayout(VKLayout::Vertical)
     
     textLayout.setPos(GXPointMake(20, 80));
     textLayout.addChild( &buttonLayout);
-    textLayout.addChild( &_dropDown);
-    textLayout.addChild( &textInput);
-    textLayout.addChild( &textInput2);
+    
     
     _dropDown.setItems({ "red" , "green" , "blue"});
     _dropDown.selectionDidChange = std::bind(&CustomView::dropDownDidChange, this , std::placeholders::_1);
     
     _dropDown.setSize(GXSizeMake(100, 20));
     
+    _alignDropDown.setSize(GXSizeMake(100, 20));
+    _alignDropDown.setItems({ "Left" , "Center" , "Right"});
     
+    optionsLayout.addChild(&_dropDown);
+    optionsLayout.addChild(&_alignDropDown);
+    textLayout.addChild( &optionsLayout);
+    
+    textLayout.addChild( &textInput);
+    textLayout.addChild( &textInput2);
+
     slider1.setSize(GXSizeMake(200, 30));
     textLayout.addChild(&slider1);
     
@@ -79,10 +87,13 @@ textLayout(VKLayout::Vertical)
         assert(slider == &slider2);
         
         slider1.setPosition(slider2.getPosition());
-        slider1.setNeedsDisplay();
+        slider1.setNeedsRedraw();
+        
+        textInput.setTextSize(VKDefaults::DefautFontSize*slider2.getPosition()*5);
+        textInput.setNeedsRedraw();
     };
     
-    
+    /*
     GB::Timer *t = new GB::Timer;
     t->setInterval(40);
     t->setCallback([this](const GB::Timer& t)
@@ -96,7 +107,7 @@ textLayout(VKLayout::Vertical)
     });
     
     CLApplication::instance()->getRunLoop()->addSource(*t);
-    
+    */
 }
 
 
@@ -127,7 +138,7 @@ void CustomView::dropDownDidChange( VKSender* sender)
         textInput.setTextColor(GXColors::Blue);
     }
     
-    textInput.setNeedsDisplay();
+    textInput.setNeedsRedraw();
 }
 
 void CustomView::buttonClicked( VKSender* button)

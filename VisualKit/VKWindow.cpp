@@ -12,6 +12,7 @@
 VKWindow::VKWindow()
 {
     background = GXColors::DarkGray;
+    //setOpaque(false);
 }
 
 VKWindow::~VKWindow()

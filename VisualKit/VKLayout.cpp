@@ -14,6 +14,8 @@ VKLayout::VKLayout( VKLayout::Direction direction ):
 _dir( direction ),
 _spacing(DefaultSpacing)
 {
+    identifier = "VKLayout";
+    
     setOpaque(false);
 }
 

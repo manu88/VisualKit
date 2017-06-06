@@ -13,6 +13,8 @@
 
 void CustomView2::viewWillAppear()
 {
+    identifier = "CustomView2";
+    
     CLApplication::instance()->setName("View 2");
     
     background = GXColors::White;
