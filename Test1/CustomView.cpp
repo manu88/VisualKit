@@ -91,7 +91,7 @@ textLayout(VKLayout::Vertical)
         slider1.setNeedsRedraw();
         
         textInput.setTextSize(VKDefaults::DefautFontSize*slider2.getPosition()*5);
-        textInput.setNeedsRedraw();
+        //textInput.setNeedsRedraw();
     };
     
     slider1.identifier = "slider1";
