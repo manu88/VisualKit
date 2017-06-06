@@ -72,14 +72,16 @@ textLayout(VKLayout::Vertical)
     textLayout.addChild( &optionsLayout);
     
     textInput.setContent("Hello");
+    textLayout.addChild(&slider2);
+    textLayout.addChild(&slider1);
+    
     textLayout.addChild( &textInput);
     textLayout.addChild( &textInput2);
 
     slider1.setSize(GXSizeMake(200, 30));
-    textLayout.addChild(&slider1);
+    
     
     slider2.setSize(GXSizeMake(200, 30));
-    textLayout.addChild(&slider2);
     
     addChild( &textLayout);
     
@@ -97,7 +99,7 @@ textLayout(VKLayout::Vertical)
     slider1.identifier = "slider1";
     slider2.identifier = "slider2";
     GB::Timer *t = new GB::Timer;
-    t->setInterval(40);
+    t->setInterval(20);
     t->setCallback([this](const GB::Timer& )
     {
         float p = slider2.getPosition() + 0.01;
