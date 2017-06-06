@@ -175,7 +175,7 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
         if( self->_cursor.getPos() != p)
         {
             self->_cursor.setPos( p);
-            self->_cursor.setNeedsRedraw();
+            self->_cursor.setNeedsDisplay();
         }
     }
     

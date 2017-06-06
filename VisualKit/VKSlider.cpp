@@ -13,6 +13,7 @@ VKSlider::VKSlider():
 valueDidChange(nullptr),
 _pos(0.f)
 {
+    identifier = "VKSlider";
     //setOpaque(false);
     background = GXColors::LightGray;
 }
@@ -26,6 +27,7 @@ void VKSlider::setPosition( float p) noexcept
 
 void VKSlider::paint( GXContext* context , const GXRect& bounds)
 {
+    return;
     context->moveTo(GXPointMake(0, getSize().height/2));
     
     context->lineTo(GXPointMake(getSize().width, getSize().height/2));

@@ -71,6 +71,7 @@ textLayout(VKLayout::Vertical)
     optionsLayout.addChild(&_alignDropDown);
     textLayout.addChild( &optionsLayout);
     
+    textInput.setContent("Hello");
     textLayout.addChild( &textInput);
     textLayout.addChild( &textInput2);
 
@@ -93,7 +94,8 @@ textLayout(VKLayout::Vertical)
         textInput.setNeedsRedraw();
     };
     
-    /*
+    slider1.identifier = "slider1";
+    slider2.identifier = "slider2";
     GB::Timer *t = new GB::Timer;
     t->setInterval(40);
     t->setCallback([this](const GB::Timer& t)
@@ -102,12 +104,12 @@ textLayout(VKLayout::Vertical)
         if( p> 1.)
             p = 0;
         slider2.setPosition(p);
-        slider2.setNeedsDisplay();
+        slider2.setNeedsRedraw();
         
     });
     
     CLApplication::instance()->getRunLoop()->addSource(*t);
-    */
+    
 }
 
 
@@ -124,7 +126,7 @@ void CustomView::dropDownDidChange( VKSender* sender)
 {
     assert(sender == &_dropDown);
     
-    printf("Selected : %zi \n" , _dropDown.getSelectedIndex() );
+//    printf("Selected : %zi \n" , _dropDown.getSelectedIndex() );
     if( _dropDown.getSelectedIndex() == 0)
     {
         textInput.setTextColor(GXColors::Red);
