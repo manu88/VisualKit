@@ -48,7 +48,7 @@ void VKTextInput::focusChanged()
 {
     if( hasFocus())
     {
-        addChild(&_block);
+        //addChild(&_block);
         
         _block.setVisible(true);
         //CLApplication::instance()->getRunLoop()->addSource(tBlock);

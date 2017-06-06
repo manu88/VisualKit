@@ -91,14 +91,14 @@ textLayout(VKLayout::Vertical)
         slider1.setNeedsRedraw();
         
         textInput.setTextSize(VKDefaults::DefautFontSize*slider2.getPosition()*5);
-        //textInput.setNeedsRedraw();
+        textInput.setNeedsRedraw();
     };
     
     slider1.identifier = "slider1";
     slider2.identifier = "slider2";
     GB::Timer *t = new GB::Timer;
     t->setInterval(40);
-    t->setCallback([this](const GB::Timer& t)
+    t->setCallback([this](const GB::Timer& )
     {
         float p = slider2.getPosition() + 0.01;
         if( p> 1.)
