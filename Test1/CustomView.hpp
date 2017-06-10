@@ -55,6 +55,8 @@ protected:
     VKSlider slider1;
     VKSlider slider2;
     
+    VKImage img1;
+    
     CustomView2* _view2;
     
 };

@@ -23,7 +23,7 @@ _state( Inactive )
     
     onClic = nullptr;
     
-    setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE);
+    setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE);
 }
 
 VKButton::~VKButton()

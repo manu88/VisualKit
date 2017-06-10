@@ -9,7 +9,7 @@
 #include "CustomView.hpp"
 #include "VK.hpp"
 #include "CLApplication.hpp"
-
+#include <GBURL.hpp>
 
 #include "CustomView2.hpp"
 CustomView::CustomView():
@@ -59,7 +59,7 @@ textLayout(VKLayout::Vertical)
     buttonLayout.addChild( &bttonCancel );
     
     
-    textLayout.setPos(GXPointMake(20, 80));
+    textLayout.setPos(GXPointMake(20, 20));
     textLayout.addChild( &buttonLayout);
     
     
@@ -81,6 +81,26 @@ textLayout(VKLayout::Vertical)
     
     textLayout.addChild( &textInput);
     textLayout.addChild( &textInput2);
+    
+    img1.setSize(GXSizeMake(200, 100));
+    
+    GB::URL* imgFetch = new GB::URL("https://www.google.fr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");
+    
+    imgFetch->onData = [imgFetch , this](const char* data , GBSize size)
+    {
+        printf("Did fetch image \n");
+        img1.setBuffer(data, size);
+        img1.setNeedsRedraw();
+        
+    };
+    
+    imgFetch->startOn(*CLApplication::instance()->getRunLoop());
+    
+    
+    
+    
+    textLayout.addChild(&img1);
+    //https://www.google.fr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png
 
     slider1.setSize(GXSizeMake(200, 30));
     

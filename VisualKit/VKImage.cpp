@@ -12,6 +12,8 @@
 
 VKImage::VKImage():
 _imgHandle(GXImageInvalid),
+_datas(nullptr),
+_dataSize(0),
 _reload(false)
 {
     _type = VK_Image;
@@ -28,6 +30,27 @@ void VKImage::setFile( const std::string &imgFile)
     _reload = true;
 }
 
+void VKImage::setBuffer( const char* buffer , size_t size)
+{
+    if( buffer && size)
+    {
+        if( _datas )
+        {
+            free(_datas);
+            _dataSize = 0;
+            _datas = nullptr;
+        }
+        _dataSize = size;
+        
+        _datas = (char*) malloc( size);
+        if( _datas)
+        {
+            memcpy(_datas, buffer, size);
+            _reload = true;
+        }
+    }
+}
+
 void VKImage::paint( GXContext* context , const GXRect& bounds)
 {
     if( _reload )
@@ -38,7 +61,15 @@ void VKImage::paint( GXContext* context , const GXRect& bounds)
             _imgHandle = GXImageInvalid;
         }
         assert( _imgHandle == GXImageInvalid);
-        _imgHandle = context->createImage(_filePath, 0);
+        
+        if( _datas && _dataSize)
+        {
+            _imgHandle = context->createImage(_datas, _dataSize, 0);
+        }
+        else
+        {
+            _imgHandle = context->createImage(_filePath, 0);
+        }
         
         _reload = false;
     }

@@ -18,6 +18,7 @@ public:
     ~VKImage();
     
     void setFile( const std::string &imgFile);
+    void setBuffer( const char* buffer , size_t size);
     const std::string &getFile() const noexcept
     {
         return _filePath;
@@ -29,7 +30,11 @@ protected:
     
 private:
     GXImageHandle _imgHandle;
+    
     std::string _filePath;
+    char* _datas;
+    size_t _dataSize;
+    
     bool _reload;
 
 };
