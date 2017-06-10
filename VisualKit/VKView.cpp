@@ -102,6 +102,32 @@ bool VKView::keyPressed(  const GXKey &key )
     return true;
 }
 
+
+bool VKView::onScroll( const GXScroll &scr)
+{
+    
+    
+    for (GXLayer* l : getChildren())
+    {
+        VKView* view  = dynamic_cast<VKView*>(l);
+        if( view )
+        {
+            if( rectContainsPoint(l->getBounds(), scr.center))
+            {
+                GXScroll newScroll = scr;
+                newScroll.center = scr.center - l->getPos();
+                if(view->onScroll(newScroll))
+                {
+                    return  true;
+                }
+                //printf("On scroll at %i %i mov %i %i \n" ,scr.center.x , scr.center.y , scr.movement.width  , scr.movement.height );
+            }
+        }
+    }
+    
+    return false;
+}
+
 bool VKView::touchBegan( const GXTouch &t)
 {
     bool foundTouch = false;
@@ -163,6 +189,25 @@ bool VKView::touchEnded( const GXTouch &t)
     }
     
     return true;
+}
+
+VKWindow* VKView::getWindow() const noexcept
+{
+    GXLayer* parent = const_cast< GXLayer*  >( getParent() );
+    
+    while( parent)
+    {
+        
+        VKWindow* win = dynamic_cast< VKWindow*>(parent);
+        
+        if( win)
+        {
+            return win;
+        }
+        parent = const_cast< GXLayer*  >( parent->getParent() );
+    }
+    
+    return nullptr;
 }
 
 

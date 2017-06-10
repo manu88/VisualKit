@@ -12,22 +12,12 @@
 #include "VKView.hpp"
 #include "../../GX/include/GXTextContainer.hpp"
 
-class VKLabel : public VKView
+class VKSimpleTextTrait
 {
 public:
-    VKLabel();
+    virtual ~VKSimpleTextTrait()
+    {}
     
-    void setContent(const std::string &text) noexcept
-    {
-        _text.setContent( text);
-    }
-    
-    const std::string &getContent() const noexcept
-    {
-        return _text.getContent();
-    }
-    
-    /**/
     
     void setTextSize( float size) noexcept
     {
@@ -58,8 +48,52 @@ public:
         return _font;
     }
     
-    /**/
+    void setTextAlignement( GXTextAlign align) noexcept
+    {
+        _textAlign = align;
+    }
     
+    GXTextAlign getTextAlignement() const noexcept
+    {
+        return _textAlign;
+    }
+    
+    void setFontHandle( GXFontHandle font ) noexcept
+    {
+        _font = font;
+    }
+    
+    GXFontHandle getFontHandle() const noexcept
+    {
+        return _font;
+    }
+    
+protected:
+    VKSimpleTextTrait();
+    
+    
+private:
+    float        _fontSize;
+    GXFontHandle _font;
+    GXColor      _textColor;
+    GXTextAlign  _textAlign;
+};
+
+class VKLabel : public VKView, public VKSimpleTextTrait
+{
+public:
+    VKLabel();
+    
+    void setContent(const std::string &text) noexcept
+    {
+        _text.setContent( text);
+    }
+    
+    const std::string &getContent() const noexcept
+    {
+        return _text.getContent();
+    }
+
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     
@@ -67,9 +101,7 @@ protected:
 private:
     GXTextContainer _text;
     
-    float _fontSize;
-    GXFontHandle _font;
-    GXColor _textColor;
+    
     
 };
 

@@ -22,6 +22,8 @@ _state( Inactive )
     setOpaque(false);
     
     onClic = nullptr;
+    
+    setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE);
 }
 
 VKButton::~VKButton()
@@ -43,14 +45,14 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
     context->fill();
     context->stroke();
     
-    const GXFontHandle font =  context->getFontManager().getFont(VKDefaults::DefaultFont);// context->createFont( VKDefaults::DefaultFont );
+    const GXFontHandle font =  getFontHandle();// context->getFontManager().getFont(VKDefaults::DefaultFont);// context->createFont( VKDefaults::DefaultFont );
     
     context->setFontId( font );
-    context->setTextSize( 20 );
-    context->setTextAlignement( GXTextAlign_CENTER | GXTextAlign_MIDDLE );
+    context->setTextSize( getTextSize() );
+    context->setTextAlignement( getTextAlignement() );
     
     
-    context->setFillColor(GXColors::Black);
+    context->setFillColor( getTextColor() );
     
     context->addTextBox(GXPointMake( 0 ,10), _bounds.size.width, _text );
     
@@ -65,16 +67,6 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
         
         context->fill();
     }
-
-    if( _triggerAction)
-    {
-        _triggerAction = false;
-        CLApplication::instance()->getRunLoop()->dispatchAsync([ this]()
-                                              {
-                                                  onClic(this);
-                                              });
-        
-    }
 }
 
 bool VKButton::touchBegan( const GXTouch &t)
@@ -84,11 +76,10 @@ bool VKButton::touchBegan( const GXTouch &t)
     setNeedsRedraw();
     return true;
 }
+
 bool VKButton::touchEnded( const GXTouch &t)
 {
-    
     _state = Inactive;
-    
     
     setNeedsRedraw();
     
@@ -97,7 +88,6 @@ bool VKButton::touchEnded( const GXTouch &t)
         onClic(this);
     }
     
-
     return  true;
 }
 

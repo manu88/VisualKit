@@ -77,10 +77,16 @@ public:
     void setName( const std::string &n);
     const std::string &getName() const noexcept;
     
+    float getFPS() const noexcept
+    {
+        return _fps;
+    }
+    
 protected:
     
     void handleMouseEvent( const GXEventMouse* evt);
     void handleKeyEvent( const GXEventKey* evt);
+    void handleScrollEvent( const GXEventScroll* evt);
     
     
 private:
@@ -103,6 +109,7 @@ private:
     VKCursor _cursor;
     
     VKWindow mainWin;
+    float _fps;
 };
 
 #endif /* CLApplication_hpp */

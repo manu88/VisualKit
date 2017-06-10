@@ -15,9 +15,8 @@ VKTextInput::VKTextInput():
 textChanged(nullptr),
 editingEnded(nullptr),
 
-_fontSize(VKDefaults::DefautFontSize),
-_textColor( GXColors::Black),
-_textAlign( GXTextAlign_Default ),
+_offset(GXPointMakeNull()),
+
 
 _singleLine(false)
 {
@@ -26,7 +25,7 @@ _singleLine(false)
     setOpaque(false);
     
     _block.setBounds(GXRectMake(10, 10, 1, 15));
-    _block.background = _textColor;
+    _block.background = getTextColor();
     _block.setPos(GXPointMake(20, 20));
     
     
@@ -133,6 +132,15 @@ bool VKTextInput::touchBegan( const GXTouch &t)
     return VKView::touchBegan(t);
 }
 
+bool VKTextInput::onScroll( const GXScroll &scr)
+{
+    //printf("%s : On scroll at %i %i mov %i %i \n" , identifier.c_str() ,scr.center.x , scr.center.y , scr.movement.width  , scr.movement.height );
+    
+    _offset.y += scr.movement.height*2;
+    setNeedsRedraw();
+    return true;
+}
+
 void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 {
     context->addRoundedRect(bounds, 5);
@@ -143,16 +151,15 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 
     /* **** **** **** **** **** **** **** **** **** **** */
     
-    context->setFontSize(_fontSize);
+    context->setFontSize(getTextSize() );
     context->setFontId( context->getFontManager().getFont( VKDefaults::DefaultFont) );
-    context->setFillColor( _textColor);// GXColorMake(0, 1., 0.35) );
-    
-    
-    const GXPoint textPos = GXPointMake(5, 5);
+    context->setFillColor( getTextColor() );
+
+    const GXPoint textPos = GXPointMake(5, 5) + _offset;
 
     _textContainer.setSize(bounds.size);
-    //_textContainer.setContent(_content);
-    context->setTextAlignement(  _textAlign );
+
+    context->setTextAlignement(  getTextAlignement() );
     
     
     _textContainer.clearHitTests();
@@ -166,8 +173,3 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
     }    
 }
 
-
-void VKTextInput::setTextColor( const GXColor& col) noexcept
-{
-    _textColor = col;
-}

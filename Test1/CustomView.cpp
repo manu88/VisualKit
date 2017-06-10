@@ -16,6 +16,7 @@ CustomView::CustomView():
 buttonLayout(VKLayout::Horizontal),
 textLayout(VKLayout::Vertical)
 {
+    _view2 = nullptr;
     identifier = "CustomView";
     background = GXColors::LightGray;
     
@@ -32,9 +33,12 @@ textLayout(VKLayout::Vertical)
     bttonNav.setSize( GXSizeMake( 60, 20));
     
     
-    bttonNav.onClic = [](VKSender* sender)
+    bttonNav.onClic = [this](VKSender* )
     {
-        CLApplication::instance()->pushView(new CustomView2());
+        if (!_view2)
+            _view2 = new CustomView2();
+        
+        CLApplication::instance()->pushView( _view2);
     };
     
     bttonOk.onClic = std::bind(&CustomView::buttonClicked,  this , std::placeholders::_1);
@@ -71,7 +75,7 @@ textLayout(VKLayout::Vertical)
     optionsLayout.addChild(&_alignDropDown);
     textLayout.addChild( &optionsLayout);
     
-    textInput.setContent("Hello");
+    
     textLayout.addChild(&slider2);
     textLayout.addChild(&slider1);
     
@@ -98,6 +102,15 @@ textLayout(VKLayout::Vertical)
     
     slider1.identifier = "slider1";
     slider2.identifier = "slider2";
+    
+    textInput.identifier = "text1";
+    textInput2.identifier = "text2";
+    
+    textInput.setContent("During the last decade, Unmanned Air Vehicles (UAVs) have replaced piloted aircraft in a broad band of missions, showing a high potential for further growing, especially due to the avoidance of human risk in dangerous environments. Typical present and future roles include weather reconnaissance, offshore and border patrol, search and rescue assisting operations in sea and mountains, aerial photographing and mapping, fire detection and coordination of fire fighting, traffic control etc. Advances in telecommunications, control and Artificial Intelligence along with UAV low risk, low cost and long endurance, tailor such missions to the UAV's profile.\n\tAutonomous operation of UAVs requires the development of control systems that operate isolated from human support for extended time periods. The development of such systems has been traditionally focused on ground vehicles. Additionally, the high cost and risk of testing air vehicles necessitates the use of sophisticated analysis and simulation tools.\n\tThe desired autonomous operations of UAVs leads to the development of pathline planners, for generating collision free paths in environments with obstacles. Such planners should work either on-board, for local real-time optimization of the flight path, or out-board, for global optimization of the mission, prior to the flight. The optimization of the flight path is, in general, a constrained multi-objective optimization problem. Additionally, a trajectory tracker is needed, in order to schedule the movement of the UAV along the optimized planned path.");
+    
+    textInput2.setContent(textInput.getContent());
+    
+    /*
     GB::Timer *t = new GB::Timer;
     t->setInterval(20);
     t->setCallback([this](const GB::Timer& )
@@ -111,9 +124,8 @@ textLayout(VKLayout::Vertical)
     });
     
     CLApplication::instance()->getRunLoop()->addSource(*t);
-    
+    */
 }
-
 
 void CustomView::viewWillAppear()
 {
@@ -172,7 +184,7 @@ void CustomView::buttonClicked( VKSender* button)
         CLApplication::instance()->quit();
     }
 }
-
+/*
 void CustomView::paint( GXContext* context , const GXRect& bounds)
 {
 
@@ -187,7 +199,7 @@ void CustomView::paint( GXContext* context , const GXRect& bounds)
     context->addTextBox(GXPointMake(bounds.size.width /2 , 20), 100, _test);
 
 }
-
+*/
 bool CustomView::handleFocus() 
 {
     return true;

@@ -12,13 +12,12 @@
 
 #include "VKAction.hpp"
 #include "VKView.hpp"
+#include "VKLabel.hpp" // for VKSimpleTextTrait
 
-class VKButton : public VKView , public VKSender
+class VKButton : public VKView , public VKSimpleTextTrait, public VKSender
 {
 public:
-    
-    
-    
+
     enum State
     {
         Inactive = 0,

@@ -12,11 +12,13 @@
 #include <GBRunLoopSource.hpp>
 #include "VK.hpp"
 
+class CustomView2;
 
 class CustomView : public VKView
 {
 public:
     CustomView();
+    
 
 protected:
     
@@ -29,17 +31,13 @@ protected:
     
     void dropDownDidChange( VKSender* );
     void buttonClicked( VKSender* );
-    void paint( GXContext* context , const GXRect& bounds) override;
     
     bool touchBegan( const GXTouch &t) override;
     bool touchMoved( const GXTouch &t) override;
     bool touchEnded( const GXTouch &t) override;
     
     bool keyPressed(  const GXKey &key ) override;
-    
-    std::string _test;
-    
-    
+
     VKDropDown _dropDown;
     VKDropDown _alignDropDown;
     VKLayout optionsLayout;
@@ -56,6 +54,8 @@ protected:
     
     VKSlider slider1;
     VKSlider slider2;
+    
+    CustomView2* _view2;
     
 };
 

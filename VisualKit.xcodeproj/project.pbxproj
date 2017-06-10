@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		591884501ED805D500DF180F /* libVisualKit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D3F21ED55EF800BF10C4 /* libVisualKit.dylib */; };
+		59363F3E1EE9E05B00A96EC8 /* CustomView3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59363F3C1EE9E05B00A96EC8 /* CustomView3.cpp */; };
+		59363F431EEA86A600A96EC8 /* VKContextMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59363F411EEA86A600A96EC8 /* VKContextMenu.cpp */; };
+		59363F461EEA86BA00A96EC8 /* VKContextMenu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59363F451EEA86BA00A96EC8 /* VKContextMenu.hpp */; };
 		59E016881EDD561B00E8986D /* VKLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E016861EDD561B00E8986D /* VKLayout.cpp */; };
 		59E0168D1EDD563A00E8986D /* VKLayout.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0168C1EDD563A00E8986D /* VKLayout.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		59E0D35E1ECE0B3800BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
@@ -98,6 +101,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		59363F3C1EE9E05B00A96EC8 /* CustomView3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CustomView3.cpp; sourceTree = "<group>"; };
+		59363F3D1EE9E05B00A96EC8 /* CustomView3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CustomView3.hpp; sourceTree = "<group>"; };
+		59363F411EEA86A600A96EC8 /* VKContextMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKContextMenu.cpp; sourceTree = "<group>"; };
+		59363F451EEA86BA00A96EC8 /* VKContextMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKContextMenu.hpp; sourceTree = "<group>"; };
 		59E016861EDD561B00E8986D /* VKLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKLayout.cpp; sourceTree = "<group>"; };
 		59E0168C1EDD563A00E8986D /* VKLayout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKLayout.hpp; sourceTree = "<group>"; };
 		59E0D34B1ECE0AD700BF10C4 /* VisualKitTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VisualKitTest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,6 +222,7 @@
 			children = (
 				59F0D6C61EE4A303006461F2 /* VKSlider.cpp */,
 				59F0D6BE1EE46BC9006461F2 /* VKDropDown.cpp */,
+				59363F411EEA86A600A96EC8 /* VKContextMenu.cpp */,
 				59E0D36E1ECE1C4E00BF10C4 /* VKView.cpp */,
 				59E0D3D31ED1BBB200BF10C4 /* VKLabel.cpp */,
 				59E0D3D71ED1BBC200BF10C4 /* VKImage.cpp */,
@@ -253,6 +261,8 @@
 		59E0D3811ECED85200BF10C4 /* Test1 */ = {
 			isa = PBXGroup;
 			children = (
+				59363F3C1EE9E05B00A96EC8 /* CustomView3.cpp */,
+				59363F3D1EE9E05B00A96EC8 /* CustomView3.hpp */,
 				59E0D3AA1ED19D3200BF10C4 /* CustomView2.cpp */,
 				59E0D3AB1ED19D3200BF10C4 /* CustomView2.hpp */,
 				59E0D3A61ED0DB0B00BF10C4 /* AppDelegate.cpp */,
@@ -290,6 +300,7 @@
 				59E0D4021ED55F3700BF10C4 /* VKTouch.hpp */,
 				59E0D3FA1ED55F3700BF10C4 /* VKAction.hpp */,
 				59E0D3FB1ED55F3700BF10C4 /* VKAlertView.hpp */,
+				59363F451EEA86BA00A96EC8 /* VKContextMenu.hpp */,
 				59F0D6C41EE46C2C006461F2 /* VKDropDown.hpp */,
 				59E0D3FC1ED55F3700BF10C4 /* VKButton.hpp */,
 				59E0D3FD1ED55F3700BF10C4 /* VKCursor.hpp */,
@@ -325,6 +336,7 @@
 				59E0D40E1ED55F3700BF10C4 /* VKLabel.hpp in Headers */,
 				59E0D4071ED55F3700BF10C4 /* VK.hpp in Headers */,
 				59E0D4061ED55F3700BF10C4 /* CLApplicationDelegate.hpp in Headers */,
+				59363F461EEA86BA00A96EC8 /* VKContextMenu.hpp in Headers */,
 				59E0D40C1ED55F3700BF10C4 /* VKImage.hpp in Headers */,
 				59E0D4091ED55F3700BF10C4 /* VKAlertView.hpp in Headers */,
 				59E0D40A1ED55F3700BF10C4 /* VKButton.hpp in Headers */,
@@ -452,6 +464,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59E0D3A81ED0DB0B00BF10C4 /* AppDelegate.cpp in Sources */,
+				59363F3E1EE9E05B00A96EC8 /* CustomView3.cpp in Sources */,
 				59E0D3AC1ED19D3200BF10C4 /* CustomView2.cpp in Sources */,
 				59E0D3861ECED85200BF10C4 /* main.cpp in Sources */,
 				59E0D3851ECED85200BF10C4 /* CustomView.cpp in Sources */,
@@ -489,6 +502,7 @@
 				59E0D4151ED55F4E00BF10C4 /* VKTextInput.cpp in Sources */,
 				59E0D4191ED55F4E00BF10C4 /* VKKeyboard.cpp in Sources */,
 				59E0D4131ED55F4E00BF10C4 /* VKLabel.cpp in Sources */,
+				59363F431EEA86A600A96EC8 /* VKContextMenu.cpp in Sources */,
 				59E0D4171ED55F4E00BF10C4 /* VKAlertView.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

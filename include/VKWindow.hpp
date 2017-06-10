@@ -11,9 +11,14 @@
 
 #include "../../GX/include/GXLayer.hpp"
 #include "VKView.hpp"
+
+class VKContextMenu;
+
 class VKWindow : public VKView/* GXLayer*/
 {
 public:
+    
+    friend class CLApplication;
     VKWindow();
     virtual ~VKWindow();
     
@@ -23,11 +28,20 @@ public:
         return _winTitle;
     }
     
+    bool dismissCurrentContextMenu();
+    bool pushContextMenu( VKContextMenu* v);
+    
 protected:
     void paint( GXContext* context , const GXRect& bounds) override;
+    
+    bool touchBegan( const GXTouch &t) override;
+    bool touchEnded( const GXTouch &t) override;
+    bool touchMoved( const GXTouch &t) override;
 private:
     
     std::string _winTitle;
+    
+    VKContextMenu* _currentContextMenu;
 };
 
 #endif /* VKWindow_hpp */

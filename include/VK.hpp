@@ -30,7 +30,7 @@
 #include "VKLayout.hpp"
 
 #include "VKAlertView.hpp"
-
+#include "VKContextMenu.hpp"
 namespace VKDefaults
 {
     static constexpr const char DefaultFont[] = "SanFranciscoDisplay-Regular.ttf";

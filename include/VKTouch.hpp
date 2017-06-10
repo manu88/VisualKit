@@ -24,7 +24,13 @@ struct GXTouch
     
     GXPoint center;
     Phase phase;
-    
+};
+
+
+struct GXScroll
+{
+    GXPoint center;
+    GXSize  movement;
 };
 
 class VKTouchDelegate
@@ -38,9 +44,11 @@ protected:
     VKTouchDelegate()
     {}
     
-    virtual bool touchBegan( const GXTouch &t);
-    virtual bool touchMoved( const GXTouch &t);
-    virtual bool touchEnded( const GXTouch &t);
+    virtual bool touchBegan( const GXTouch &);
+    virtual bool touchMoved( const GXTouch &);
+    virtual bool touchEnded( const GXTouch &);
+    
+    virtual bool onScroll( const GXScroll &);
     
 };
 

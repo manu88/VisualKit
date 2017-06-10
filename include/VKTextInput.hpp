@@ -15,7 +15,11 @@
 #include "VKKeyboard.hpp"
 #include "../../GX/include/GXTextContainer.hpp"
 #include "VKAction.hpp"
-class VKTextInput : public VKView , public VKSender
+#include "VKLabel.hpp" // for VKSimpleTextTrait
+
+
+
+class VKTextInput : public VKView , public VKSimpleTextTrait , public VKSender
 {
 public:
     VKTextInput();
@@ -44,42 +48,21 @@ public:
     VKAction::Action editingEnded;
     
     
-    void setTextAlignement( GXTextAlign align) noexcept
-    {
-        _textAlign = align;
-    }
     
-    void setTextColor( const GXColor&) noexcept;
     
-    const GXColor& getTextColor() const noexcept
-    {
-        return _textColor;
-    }
-    
-    void setTextSize( float size) noexcept
-    {
-        _fontSize = size;
-    }
-    float getTextSize() const noexcept
-    {
-        return _fontSize;
-    }
-    
+
 protected:
     bool keyPressed(  const GXKey &key ) override;
     bool touchBegan( const GXTouch &t) override;
     
+    
+    bool onScroll( const GXScroll &scr) override;
     void paint( GXContext* context , const GXRect& bounds) override;
     void focusChanged() override;
     
-    
+    GXPoint _offset;
     GXTextContainer _textContainer;
-    
-    /**/
-    // props
-    float _fontSize;
-    GXColor _textColor;
-    GXTextAlign _textAlign;
+
     /**/
     
     GXLayer _block;

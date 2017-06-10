@@ -15,12 +15,15 @@
 #include "VKTouch.hpp"
 #include "VKKeyboard.hpp"
 
+class VKWindow;
 
 class VKView : public GXLayer , public VKTouchDelegate , public VKKeyboardDelegate
 {
     friend class CLApplication;
+    friend class VKWindow;
     
 public:
+    
     typedef enum
     {
         VK_View   = 0,
@@ -56,9 +59,17 @@ public:
     
     void setBounds( const GXRect& b) noexcept override;
     
+    /*
+     This method will walk the views tree, so it can be time consumming...
+     TODO : add hierarchy callback for parents changes so this pointer can be cached.
+     */
+    VKWindow* getWindow() const noexcept;
+    
+    
+    
 protected:
 
-    virtual void paint( GXContext* context , const GXRect& bounds) override
+    virtual void paint( GXContext*  , const GXRect& ) override
     {} // Default GXLayer method does nothing
     
     
@@ -67,9 +78,10 @@ protected:
     
     virtual void focusChanged();
     
-    bool touchBegan( const GXTouch &t) override;
-    bool touchEnded( const GXTouch &t) override;
-    bool touchMoved( const GXTouch &t) override;
+    virtual bool touchBegan( const GXTouch &t) override;
+    virtual bool touchEnded( const GXTouch &t) override;
+    virtual bool touchMoved( const GXTouch &t) override;
+    virtual bool onScroll( const GXScroll &) override;
     
     bool keyPressed(  const GXKey &key ) override;
     

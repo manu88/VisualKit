@@ -11,15 +11,22 @@
 
 #include "VKView.hpp"
 #include "VKButton.hpp"
+
+
+class CustomView3;
+
 class CustomView2 : public VKView
 {
 public:
-    
+    CustomView2();
 
 protected:
     void viewWillAppear() override;
     void viewDidDismiss() override;
+    
     VKButton _returnBton;
+    VKButton _nextBton;
+    CustomView3 *_view3;
 };
 
 #endif /* CustomView2_hpp */

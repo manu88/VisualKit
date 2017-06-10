@@ -51,7 +51,7 @@ void ColorPickerView::setColor( const GXColor &c)
 
 }
 
-void ColorPickerView::colorEditEnded(VKSender* sender)
+void ColorPickerView::colorEditEnded(VKSender* )
 {
     _mainView->colorEditEnded( GXColorMake( std::stof( _red.getContent() ),
                                             std::stof( _green.getContent() ),

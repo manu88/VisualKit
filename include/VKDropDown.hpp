@@ -14,13 +14,13 @@
 #include <vector>
 #include "VKAction.hpp"
 #include "VKView.hpp"
+#include "VKContextMenu.hpp"
 
-
-class VKDropDown:  public VKView , public VKSender
+class VKDropDown:  public VKView , public VKSender , public VKContextMenuController
 {
 public:
     
-    typedef std::vector<std::string> Items;
+    
     VKDropDown();
 
     ssize_t getSelectedIndex() const noexcept
@@ -28,15 +28,17 @@ public:
         return _selIndex;
     }
     
-    const Items& getItems() const noexcept
+    const VKContextMenu::Items& getItems() const noexcept
     {
         return _items;
     }
     
-    void setItems( const Items &) noexcept;
+    void setItems( const VKContextMenu::Items &) noexcept;
     
     VKAction::Action selectionDidChange;
     
+    
+    void contextMenuDidDismiss( VKContextMenu* menu) override;
 private:
     void paint( GXContext* context , const GXRect& _bounds) override;
     bool touchBegan( const GXTouch &t) override;
@@ -44,10 +46,10 @@ private:
     
     void update();
     
-    Items _items;
+    VKContextMenu::Items _items;
     ssize_t _selIndex;
     bool _isExtended;
-    GXSize _defaultSize;
+
     
 };
 

@@ -17,6 +17,9 @@
 #include "../../GX/include/GXLayer.hpp"
 #include "../../GX/include/GXRenderer.hpp"
 
+static constexpr int CursorZPos = 200;
+
+
 /*static*/ CLApplication* CLApplication::s_instance = nullptr;
 
 
@@ -25,7 +28,8 @@ _keyResponder(nullptr),
 _disp(nullptr),
 _ctx(nullptr),
 _delegate(nullptr),
-_currentView(nullptr)
+_currentView(nullptr),
+_fps(0.f)
 {
     _disp = (Display*) malloc(sizeof(Display));
     if( DisplayInit(_disp , 1280 , 750) == 0)
@@ -49,48 +53,56 @@ CLApplication::~CLApplication()
 
 void CLApplication::pushView( VKView* v) noexcept
 {
-    if( v)
+    if( !v)
+        return;
+    
+
+    
+    if( _currentView)
     {
-        if( _currentView)
-        {
-            v->setZPos(_currentView->getZPos()+1);
-        }
-        _currentView = v;
-        _viewStack.push_back(v);
-        
-        _currentView->setBounds( GXRectMake(0, 20, mainWin.getSize().width, mainWin.getSize().height - 20) );
-        _currentView->viewWillAppear();
-        mainWin.addChild( _currentView );
-        
-        v->setNeedsRedraw();
-        printf("pushView:\n");
-            
-        for (const GXLayer *c : mainWin.getChildren())
-        {
-            printf("Layer %i \n" , c->getZPos());
-        }
+        v->setZPos(_currentView->getZPos()+1);
     }
+    
+    mainWin.dismissCurrentContextMenu();
+    
+    _currentView = v;
+    _viewStack.push_back(v);
+    
+    _currentView->setBounds( GXRectMake(0, 20, mainWin.getSize().width, mainWin.getSize().height - 20) );
+    _currentView->viewWillAppear();
+    mainWin.addChild( _currentView );
+    
+    printf("pushView: %zi \n" , _viewStack.size());
+    v->setNeedsRedraw();
+    
+    assert(v->getZPos() < _cursor.getZPos());
+    
+
 }
 
 void CLApplication::dismissView() noexcept
 {
+    
     if( _viewStack.empty())
         return;
     
     VKView* last = _viewStack.back();
     _viewStack.pop_back();
     
+    
+    assert(!_viewStack.empty());
+    
+    mainWin.dismissCurrentContextMenu();
+    
     _currentView = _viewStack.back();
     mainWin.removeChild(last);
     _currentView->viewWillAppear();
     last->viewDidDismiss();
     
-    printf("dismissView:\n");
+    printf("dismissView: %zi \n", _viewStack.size());
     
-    for (const GXLayer *c : mainWin.getChildren())
-    {
-        printf("Layer %i \n" , c->getZPos());
-    }
+    
+    _currentView->setNeedsRedraw();
 }
 
 void CLApplication::setName( const std::string &n)
@@ -99,6 +111,7 @@ void CLApplication::setName( const std::string &n)
     {
         _appName = n;
         mainWin.setWindowTitle( _appName );
+        mainWin.setNeedsRedraw();
     }
     
 }
@@ -106,6 +119,21 @@ void CLApplication::setName( const std::string &n)
 const std::string& CLApplication::getName() const noexcept
 {
     return _appName;
+}
+
+void CLApplication::handleScrollEvent( const GXEventScroll* evt)
+{
+
+    GXScroll scroll;
+    scroll.movement = GXSizeMake( evt->x , evt->y);
+    
+    double x = -1;
+    double y = -1;
+    DisplayGetCursorPos(_disp, &x, &y);
+    
+    scroll.center = GXPointMake( x , y ) - _currentView->getPos();
+    _currentView->onScroll( scroll);
+    
 }
 
 void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
@@ -117,23 +145,24 @@ void CLApplication::handleMouseEvent( const GXEventMouse* mouse)
     
     const GXPoint center = GXPointMake( mouse->x , mouse->y );
     
-    if( rectContainsPoint( _currentView->getBounds(), center))
+
+    if( rectContainsPoint( mainWin.getBounds(), center))
     {
-        const GXPoint realPoint = center - _currentView->getBounds().origin;
+        const GXPoint realPoint = center - mainWin.getBounds().origin;
         
         if( mouse->state == GXMouseStatePressed)
         {
-            _currentView->touchBegan( { realPoint , GXTouch::Phase::Began  });
+            mainWin.touchBegan( { realPoint , GXTouch::Phase::Began  });
         }
         else if( mouse->state == GXMouseStateReleased)
         {
-            _currentView->touchEnded( { realPoint , GXTouch::Phase::Ended  });
+            mainWin.touchEnded( { realPoint , GXTouch::Phase::Ended  });
         }
         else if( mouse->state == GXMouseStateMoving)
         {
             if( isPressMoving)
             {
-                _currentView->touchMoved({ realPoint , GXTouch::Phase::Moved });
+                mainWin.touchMoved({ realPoint , GXTouch::Phase::Moved });
             }
         }
     }
@@ -168,6 +197,9 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
     CLApplication* self = instance();
     assert(self);
     
+    const Display* display = reinterpret_cast<const Display*>(disp);
+    assert(display);
+    
     if(evt->type == GXEventTypeMouse)
     {
         const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
@@ -181,6 +213,14 @@ void CLApplication::handleKeyEvent( const GXEventKey* key)
     
     switch (evt->type)
     {
+        case GXEventTypeScroll:
+        {
+            const GXEventScroll* ev = reinterpret_cast<const GXEventScroll*>(evt);
+            
+            self->handleScrollEvent(ev);
+            
+        }
+            break;
         case GXEventTypeMouse:
         {
             const GXEventMouse* mouse = reinterpret_cast<const GXEventMouse*>(evt);
@@ -242,28 +282,19 @@ int CLApplication::main(int argc , char* argv[])
         SetDefaultLayout( FrenchPC );
     }
     
-    // Calculate pixel ration for hi-dpi devices.
-//    pxRatio = (float)fbWidth / (float)winWidth;
-    
     _ctx = new GXContext();
     
     GXRenderer render;
     
-    
-
     DisplaySetEventCallback( _disp, CLApplication::s_onGXEvent);
-    
-    
+
     mainWin.identifier = "MainWin";
-    
-    
 
     DisplayGetWindowSize( _disp, &winWidth, &winHeight);
     DisplayGetFramebufferSize( _disp, &fbWidth, &fbHeight);
-//    pxRatio = (float)fbWidth / (float)winWidth;
 
-    
-    
+    _cursor.setZPos( CursorZPos );
+    mainWin.addChild( &_cursor);
     
     mainWin.setBounds( GXRectMake(0, 0, winWidth, winHeight) );
     render.setRoot( &mainWin );
@@ -271,10 +302,6 @@ int CLApplication::main(int argc , char* argv[])
     render.initView(_ctx);
     
     _delegate->applicationWillLoad(this);
-
-    
-    _cursor.setZPos(20);
-    mainWin.addChild( &_cursor);
 
     GB::Timer t;
     t.setInterval(40);
@@ -298,6 +325,10 @@ int CLApplication::main(int argc , char* argv[])
                           auto end = std::chrono::steady_clock::now();
                           auto diff = end - start;
                           
+                          if ( diff.count() != 0)
+                          {
+                              _fps = 1000.f / std::chrono::duration <double,std::milli> (diff).count();
+                          }
                           //std::cout << std::chrono::duration <double,std::milli> (diff).count() << " ms" << std::endl;
                       }
                       

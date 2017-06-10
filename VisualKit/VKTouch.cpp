@@ -23,3 +23,8 @@ bool VKTouchDelegate::touchMoved( const GXTouch &t)
 {
     return false;
 }
+
+bool VKTouchDelegate::onScroll( const GXScroll &)
+{
+    return false;
+}
