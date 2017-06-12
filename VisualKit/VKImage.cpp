@@ -64,11 +64,11 @@ void VKImage::paint( GXContext* context , const GXRect& bounds)
         
         if( _datas && _dataSize)
         {
-            _imgHandle = context->createImage(_datas, _dataSize, 0);
+            _imgHandle = context->createImage(_datas, _dataSize, GXimageFlags_None);
         }
         else
         {
-            _imgHandle = context->createImage(_filePath, 0);
+            _imgHandle = context->createImage(_filePath, GXimageFlags_PREMULTIPLIED);
         }
         
         _reload = false;

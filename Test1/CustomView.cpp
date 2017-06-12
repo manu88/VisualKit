@@ -82,6 +82,8 @@ textLayout(VKLayout::Vertical)
     textLayout.addChild( &textInput);
     textLayout.addChild( &textInput2);
     
+    img1.setOpaque(false);
+    img1.background = GXColors::Blue;
     img1.setSize(GXSizeMake(200, 100));
     
     GB::URL* imgFetch = new GB::URL("https://www.google.fr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");

@@ -18,14 +18,14 @@ _spacing(DefaultSpacing)
     
     setOpaque(false);
 }
-
+/*
 void VKLayout::paint( GXContext* context , const GXRect& bounds)
 {
     context->addRect(bounds);
     context->setStrokeColor(GXColors::Red);
     context->stroke();
 }
-
+*/
 bool VKLayout::addChild( GXLayer* component)
 {
     assert( component );

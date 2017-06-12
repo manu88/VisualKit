@@ -42,7 +42,7 @@ public:
     
 protected:
     // temp debug
-    void paint( GXContext* context , const GXRect& bounds) override;
+    //void paint( GXContext* context , const GXRect& bounds) override;
     
 private:
     
