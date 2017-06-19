@@ -14,18 +14,13 @@
 VKDropDown::VKDropDown():
 selectionDidChange(nullptr),
 _selIndex(-1),
-_isExtended(false)
+_menu(nullptr)
 {
     
     identifier = "VKDropDown";
     background = GXColors::Gray;
     setOpaque(false);
-    
-    /*
-    _items.push_back("1st Item");
-    _items.push_back("2nd Item");
-    _items.push_back("3d Item");
-     */
+
 }
 
 void VKDropDown::setItems( const VKContextMenu::Items &items) noexcept
@@ -35,9 +30,9 @@ void VKDropDown::setItems( const VKContextMenu::Items &items) noexcept
 
 void VKDropDown::contextMenuDidDismiss( VKContextMenu* menu)
 {
-    //printf("Context returned index %zi\n" , menu->getSelectedIndex());
-    _isExtended = false;
-    _selIndex = menu->getSelectedIndex();
+    assert( _menu && _menu == menu);
+
+    _selIndex = _menu->getSelectedIndex();
     setNeedsRedraw();
     
     if( selectionDidChange)
@@ -45,66 +40,28 @@ void VKDropDown::contextMenuDidDismiss( VKContextMenu* menu)
         selectionDidChange(this);
     }
     
-    delete menu;
+    delete _menu;
+    _menu = nullptr;
 }
 
-bool VKDropDown::touchBegan( const GXTouch &t)
-{
-    
-
-    return true;
-}
 
 bool VKDropDown::touchEnded( const GXTouch &t)
 {
-    /*
-    if( _isExtended)
-    {
-        const ssize_t index = floorf( _items.size() *   (float)t.center.y / (float)getSize().height );
-        
-        _selIndex = index;
-        
-        if( selectionDidChange)
-        {
-            selectionDidChange(this);
-        }
-    }
-    */
-    _isExtended = !_isExtended;
-    
-    if( _isExtended)
+    if( !_menu)
     {
         VKWindow* win = getWindow();
-        assert( win );
+        //assert( win );
         
-        VKContextMenu* menu = new VKContextMenu();
-        menu->setController( this );
+        _menu = new VKContextMenu();
+        _menu->setController( this );
         
-        GXLayer* parent = const_cast< GXLayer*  >( getParent() );
         
-        GXPoint c = getPos();
-        while( parent)
-        {
-            
-            VKWindow* win = dynamic_cast< VKWindow*>(parent);
-            
-            if( win)
-            {
-                break;
-            }
-            else
-            {
-                c+= parent->getPos();
-            }
-            parent = const_cast< GXLayer*  >( parent->getParent() );
-        }
-
-        menu->setSize(GXSizeMake(getSize().width, 200));
+        const GXPoint c = getCoordsInParent(win);
         
-        menu->setItems( _items );
-        menu->setPos( c  );
-        
-        win->pushContextMenu(menu);
+        _menu->setSize(GXSizeMake(getSize().width, 200));
+        _menu->setPos( c  );
+        _menu->setItems( _items );
+        win->pushContextMenu(_menu);
     }
     else
     {
@@ -116,10 +73,6 @@ bool VKDropDown::touchEnded( const GXTouch &t)
     
     return true;
 }
-
-
-
-
 
 void VKDropDown::paint( GXContext* context , const GXRect& _bounds)
 {

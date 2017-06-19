@@ -41,14 +41,15 @@ public:
     void contextMenuDidDismiss( VKContextMenu* menu) override;
 private:
     void paint( GXContext* context , const GXRect& _bounds) override;
-    bool touchBegan( const GXTouch &t) override;
+
     bool touchEnded( const GXTouch &t) override;
     
     void update();
     
     VKContextMenu::Items _items;
     ssize_t _selIndex;
-    bool _isExtended;
+
+    VKContextMenu* _menu;
 
     
 };
