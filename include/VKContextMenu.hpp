@@ -45,6 +45,11 @@ public:
         return _selIndex;
     }
     
+    const std::string &getSelectedItem() const
+    {
+        return _items.at(_selIndex);
+    }
+    
     const Items& getItems() const noexcept
     {
         return _items;

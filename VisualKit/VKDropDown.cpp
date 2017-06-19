@@ -50,7 +50,7 @@ bool VKDropDown::touchEnded( const GXTouch &t)
     if( !_menu)
     {
         VKWindow* win = getWindow();
-        //assert( win );
+        assert( win );
         
         _menu = new VKContextMenu();
         _menu->setController( this );
