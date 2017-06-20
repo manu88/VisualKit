@@ -11,6 +11,7 @@
 #include "BuilderMainView.hpp"
 #include "BuilderToolBox.hpp"
 
+
 BuilderMainView::BuilderMainView():
 _selected(nullptr),
 _movingV( nullptr )
@@ -88,6 +89,10 @@ bool BuilderMainView::loadFile( const std::string &file)
                 else if( type == "VKTextInput")
                 {
                     ret = createTextInput(cDesc);
+                }
+                else if( type == "VKSlider")
+                {
+                    ret = createSlider(cDesc);
                 }
                 
                 if( ret)
@@ -180,6 +185,20 @@ VKView* BuilderMainView::createTextInput( const GB::VariantMap &desc)
     return nullptr;
 }
 
+VKView* BuilderMainView::createSlider( const GB::VariantMap &desc)
+{
+    if( desc.empty())
+        return nullptr;
+    
+    VKSlider* item = new VKSlider();
+    
+    if( createBase(item, desc))
+    {
+        return item;
+    }
+    return nullptr;
+}
+
 void BuilderMainView::actionLoad( VKSender* )
 {
     loadFile("test.xml");
@@ -235,6 +254,11 @@ void BuilderMainView::addTextInput()
     
     addItem(item);
     
+}
+
+void BuilderMainView::addSlider()
+{
+    addItem( new VKSlider());
 }
 
 bool BuilderMainView::addItem(VKView* item)

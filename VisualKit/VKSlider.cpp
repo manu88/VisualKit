@@ -46,4 +46,9 @@ bool VKSlider::touchMoved( const GXTouch &t)
     setNeedsRedraw();
     return true;
 }
-
+/*
+bool VKSlider::serialize( GB::VariantMap& obj) const
+{
+    return VKView::serialize(obj);
+}
+ */

@@ -24,6 +24,7 @@ public:
         return _pos;
     }
 private:
+    //bool serialize( GB::VariantMap& obj) const override;
     void paint( GXContext* context , const GXRect& bounds) override;
     
     bool touchMoved( const GXTouch &t) override;

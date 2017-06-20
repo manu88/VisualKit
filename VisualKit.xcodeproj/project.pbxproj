@@ -11,6 +11,8 @@
 		59363F3E1EE9E05B00A96EC8 /* CustomView3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59363F3C1EE9E05B00A96EC8 /* CustomView3.cpp */; };
 		59363F431EEA86A600A96EC8 /* VKContextMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59363F411EEA86A600A96EC8 /* VKContextMenu.cpp */; };
 		59363F461EEA86BA00A96EC8 /* VKContextMenu.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59363F451EEA86BA00A96EC8 /* VKContextMenu.hpp */; };
+		594285111EF907EF0080DEAA /* VKStoryboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5942850F1EF907EF0080DEAA /* VKStoryboard.cpp */; };
+		594285161EF9080A0080DEAA /* VKStoryboard.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 594285151EF9080A0080DEAA /* VKStoryboard.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		59E016881EDD561B00E8986D /* VKLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E016861EDD561B00E8986D /* VKLayout.cpp */; };
 		59E0168D1EDD563A00E8986D /* VKLayout.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 59E0168C1EDD563A00E8986D /* VKLayout.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 		59E0D35E1ECE0B3800BF10C4 /* libGX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E0D35D1ECE0AE200BF10C4 /* libGX.dylib */; };
@@ -105,6 +107,8 @@
 		59363F3D1EE9E05B00A96EC8 /* CustomView3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CustomView3.hpp; sourceTree = "<group>"; };
 		59363F411EEA86A600A96EC8 /* VKContextMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKContextMenu.cpp; sourceTree = "<group>"; };
 		59363F451EEA86BA00A96EC8 /* VKContextMenu.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKContextMenu.hpp; sourceTree = "<group>"; };
+		5942850F1EF907EF0080DEAA /* VKStoryboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKStoryboard.cpp; sourceTree = "<group>"; };
+		594285151EF9080A0080DEAA /* VKStoryboard.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKStoryboard.hpp; sourceTree = "<group>"; };
 		59E016861EDD561B00E8986D /* VKLayout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VKLayout.cpp; sourceTree = "<group>"; };
 		59E0168C1EDD563A00E8986D /* VKLayout.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = VKLayout.hpp; sourceTree = "<group>"; };
 		59E0D34B1ECE0AD700BF10C4 /* VisualKitTest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VisualKitTest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +224,7 @@
 		59E0D34D1ECE0AD700BF10C4 /* VisualKit */ = {
 			isa = PBXGroup;
 			children = (
+				5942850F1EF907EF0080DEAA /* VKStoryboard.cpp */,
 				59F0D6C61EE4A303006461F2 /* VKSlider.cpp */,
 				59F0D6BE1EE46BC9006461F2 /* VKDropDown.cpp */,
 				59363F411EEA86A600A96EC8 /* VKContextMenu.cpp */,
@@ -311,6 +316,7 @@
 				59F0D6CA1EE4A31B006461F2 /* VKSlider.hpp */,
 				59E0D4031ED55F3700BF10C4 /* VKView.hpp */,
 				59E0D4041ED55F3700BF10C4 /* VKWindow.hpp */,
+				594285151EF9080A0080DEAA /* VKStoryboard.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -323,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59E0D4051ED55F3700BF10C4 /* CLApplication.hpp in Headers */,
+				594285161EF9080A0080DEAA /* VKStoryboard.hpp in Headers */,
 				59E0D4081ED55F3700BF10C4 /* VKAction.hpp in Headers */,
 				59F0D6CB1EE4A31B006461F2 /* VKSlider.hpp in Headers */,
 				59F0D6C51EE46C2C006461F2 /* VKDropDown.hpp in Headers */,
@@ -490,6 +497,7 @@
 				59E0D41A1ED55F4E00BF10C4 /* VK.cpp in Sources */,
 				59F0D6C81EE4A303006461F2 /* VKSlider.cpp in Sources */,
 				59F0D6C01EE46BC9006461F2 /* VKDropDown.cpp in Sources */,
+				594285111EF907EF0080DEAA /* VKStoryboard.cpp in Sources */,
 				59E0D41F1ED55F4E00BF10C4 /* CLApplicationDelegate.cpp in Sources */,
 				59E016881EDD561B00E8986D /* VKLayout.cpp in Sources */,
 				59E0D4161ED55F4E00BF10C4 /* VKCursor.cpp in Sources */,

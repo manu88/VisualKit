@@ -9,6 +9,12 @@
 #ifndef VKStoryboard_hpp
 #define VKStoryboard_hpp
 
-#include <stdio.h>
+#include <string>
+class VKView;
+
+class VKStoryboard
+{
+    static VKView* createFromFile(const std::string &file);
+};
 
 #endif /* VKStoryboard_hpp */

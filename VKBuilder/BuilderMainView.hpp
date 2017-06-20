@@ -15,7 +15,7 @@
 #include "VKImage.hpp"
 #include "VKLabel.hpp"
 #include "VKDropDown.hpp"
-
+#include "VKSlider.hpp"
 #include "ColorPickerView.hpp"
 class BuilderToolBox;
 
@@ -35,11 +35,13 @@ public:
     VKView* createImage( const GB::VariantMap &desc);
     VKView* createLabel( const GB::VariantMap &desc);
     VKView* createTextInput( const GB::VariantMap &desc);
+    VKView* createSlider( const GB::VariantMap &desc);
     
     void addButton();
     void addLabel();
     void addImage();
     void addTextInput();
+    void addSlider();
     bool addItem(VKView* v);
     
     bool touchBegan( const GXTouch &t) override;

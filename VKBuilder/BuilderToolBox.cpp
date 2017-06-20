@@ -28,7 +28,7 @@ _mainView(mainView)
     
     
     _itemsDropBown.setBounds(GXRectMake(10, 40, 60, 20));
-    _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput"});
+    _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput" , "slider"});
     _itemsDropBown.selectionDidChange = [this](VKSender* obj)
     {
         const VKDropDown* dp = dynamic_cast<const VKDropDown*>(obj);
@@ -48,6 +48,10 @@ _mainView(mainView)
                 break;
             case 3:
                 _mainView->addTextInput();
+                break;
+                
+            case 4:
+                _mainView->addSlider();
                 break;
                 
             default:

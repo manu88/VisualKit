@@ -7,3 +7,9 @@
 //
 
 #include "VKStoryboard.hpp"
+
+
+/*static*/ VKView* VKStoryboard::createFromFile(const std::string &file)
+{
+    return nullptr;
+}
