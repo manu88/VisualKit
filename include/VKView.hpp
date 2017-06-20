@@ -24,16 +24,6 @@ class VKView : public GXLayer , public VKTouchDelegate , public VKKeyboardDelega
     
 public:
     
-    typedef enum
-    {
-        VK_View      = 0,
-        VK_Button    = 1,
-        VK_Image     = 2,
-        VK_Label     = 3,
-        VK_DropDown  = 4,
-        VK_TextInput = 5,
-    } Type;
-    
     VKView();
     virtual ~VKView();
     
@@ -41,11 +31,6 @@ public:
     bool hasFocus() const noexcept;
     
     virtual bool serialize( GB::VariantMap& obj) const;
-
-    Type getType() const noexcept
-    {
-        return _type;
-    }
     
     void setMinSize( const GXSize &) noexcept;
     const GXSize& getMinSize() const noexcept
@@ -67,7 +52,7 @@ public:
      */
     VKWindow* getWindow() const noexcept;
     
-    
+    std::string identifier;
     
 protected:
 
@@ -92,12 +77,12 @@ protected:
     virtual void viewDidDismiss();
     
     
-    Type _type;
+    //Type _type;
     
 private:
     
     bool _hasFocus;
-    
+
     GXSize _minSize;
     GXSize _maxSize;
     

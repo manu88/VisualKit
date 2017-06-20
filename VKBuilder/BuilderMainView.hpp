@@ -17,6 +17,7 @@
 #include "VKDropDown.hpp"
 #include "VKSlider.hpp"
 #include "ColorPickerView.hpp"
+#include "VK.hpp"
 class BuilderToolBox;
 
 class BuilderMainView : public VKView 
@@ -30,18 +31,16 @@ public:
     
     bool loadFile( const std::string &file);
     
-    bool    createBase(VKView* v , const GB::VariantMap &desc);
-    VKView* createButton( const GB::VariantMap &desc);
-    VKView* createImage( const GB::VariantMap &desc);
-    VKView* createLabel( const GB::VariantMap &desc);
-    VKView* createTextInput( const GB::VariantMap &desc);
-    VKView* createSlider( const GB::VariantMap &desc);
+
+
     
     void addButton();
     void addLabel();
     void addImage();
     void addTextInput();
     void addSlider();
+    void addDropDown();
+    void addCheckBox();
     bool addItem(VKView* v);
     
     bool touchBegan( const GXTouch &t) override;
@@ -58,6 +57,8 @@ public:
     void textContentChanged( VKSender* sender);
     void widthContentChanged( VKSender* sender);
     void heightContentChanged( VKSender* sender);
+    
+    void setIdentifier( const std::string &id);
     
     void itemSelectionChanged();
     

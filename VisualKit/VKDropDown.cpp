@@ -16,9 +16,8 @@ selectionDidChange(nullptr),
 _selIndex(-1),
 _menu(nullptr)
 {
-    _type = VK_DropDown;
     
-    identifier = "VKDropDown";
+    setClassName( "VKDropDown");
     background = GXColors::Gray;
     setOpaque(false);
 

@@ -14,9 +14,10 @@
 #include "VKView.hpp"
 #include "VKDropDown.hpp"
 #include "ColorPickerView.hpp"
+#include "VKStoryboard.hpp"
 
 class BuilderMainView;
-class BuilderToolBox : public VKView 
+class BuilderToolBox : public VKView , public VKStoryboardController
 {
 public:
     BuilderToolBox(BuilderMainView* mainView);
@@ -24,6 +25,8 @@ public:
 
     void paint( GXContext* context , const GXRect& bounds) override;
     bool serialize( GB::VariantMap& obj) const override;
+    
+    void onStoryboardAction(VKSender* sender) override;
     
     VKDropDown _itemsDropBown;
     
@@ -34,7 +37,10 @@ public:
     
     VKTextInput _inWidth;
     VKTextInput _inHeight;
+    
+    VKView _inView;
     BuilderMainView* _mainView;
+    
 };
 
 #endif /* BuilderToolBox_hpp */

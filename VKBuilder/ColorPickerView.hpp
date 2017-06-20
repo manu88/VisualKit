@@ -11,9 +11,10 @@
 
 #include "VKView.hpp"
 #include "VKTextInput.hpp"
+#include "VKStoryboard.hpp"
 
 class BuilderMainView;
-class ColorPickerView : public VKView
+class ColorPickerView : public VKView , public VKStoryboardController
 {
 public:
     ColorPickerView(BuilderMainView* mainView);
@@ -22,18 +23,16 @@ public:
     
     
 
+    void onStoryboardAction(VKSender*) override;
     
     BuilderMainView* _mainView;
     
 protected:
     void colorEditEnded(VKSender*);
     
-    void paint( GXContext* context , const GXRect& bounds) override;
+
     
-    VKTextInput _red;
-    VKTextInput _green;
-    VKTextInput _blue;
-    VKTextInput _alpha;
+
 };
 
 #endif /* ColorPickerView_hpp */

@@ -13,7 +13,7 @@ VKSlider::VKSlider():
 valueDidChange(nullptr),
 _pos(0.f)
 {
-    identifier = "VKSlider";
+    setClassName( "VKSlider");
     //setOpaque(false);
     background = GXColors::LightGray;
 }

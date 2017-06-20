@@ -288,8 +288,6 @@ int CLApplication::main(int argc , char* argv[])
     
     DisplaySetEventCallback( _disp, CLApplication::s_onGXEvent);
 
-    mainWin.identifier = "MainWin";
-
     DisplayGetWindowSize( _disp, &winWidth, &winHeight);
     DisplayGetFramebufferSize( _disp, &fbWidth, &fbHeight);
 

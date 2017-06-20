@@ -20,10 +20,7 @@ _offset(GXPointMakeNull()),
 
 _singleLine(false)
 {
-    
-    _type = VK_TextInput;
-    
-    identifier = "VKTextInput";
+    setClassName( "VKTextInput");
     setOpaque(false);
     
     _block.setBounds(GXRectMake(10, 10, 1, 15));

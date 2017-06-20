@@ -22,9 +22,7 @@ _textAlign( GXTextAlign_Default )
 
 VKLabel::VKLabel()
 {
-    identifier = "VKLabel";
-    
-    _type = VK_Label;
+    setClassName( "VKLabel");
     //setOpaque(false);
     background = GXColors::White;
 }

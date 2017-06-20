@@ -23,7 +23,7 @@
 #include "VKDropDown.hpp"
 #include "VKImage.hpp"
 #include "VKSlider.hpp"
-
+#include "VKCheckBox.hpp"
 #include "VKLabel.hpp"
 #include "VKTextInput.hpp"
 

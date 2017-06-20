@@ -15,7 +15,6 @@
 #include "VKButton.hpp"
 
 VKView::VKView():
-_type(VK_View),
 _hasFocus(false),
 _minSize( GXSizeInvalid),
 _maxSize( GXSizeInvalid)
@@ -165,12 +164,15 @@ bool VKView::touchMoved( const GXTouch &t)
         {
             if( rectContainsPoint(l->getBounds(), t.center))
             {
-                view->touchMoved({ t.center - l->getBounds().origin ,  GXTouch::Phase::Ended });
+                if(view->touchMoved({ t.center - l->getBounds().origin ,  GXTouch::Phase::Ended }))
+                {
+                    return true;
+                }
             }
         }
     }
     
-    return true;
+    return false;
 }
 
 bool VKView::touchEnded( const GXTouch &t)
@@ -214,14 +216,19 @@ VKWindow* VKView::getWindow() const noexcept
 bool VKView::serialize( GB::VariantMap& obj) const
 {
     
-    obj.insert(std::make_pair("Type", identifier ));
+    obj.insert(std::make_pair("Class", getClassName() ));
     
     obj.insert(std::make_pair("Bounds", GB::Variant
                               ({ getBounds().origin.x ,getBounds().origin.y,getBounds().size.width , getBounds().size.height }))
                );
     
     obj.insert(std::make_pair("Z", getZPos()));
+    obj.insert(std::make_pair("Opaque", isOpaque() ));
     
+    if( !identifier.empty())
+    {
+        obj.insert(std::make_pair("Identifier", identifier));
+    }
     if( hasChildren())
     {
         GB::VariantList children;

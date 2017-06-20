@@ -13,11 +13,9 @@
 VKButton::VKButton():
 _triggerAction (false),
 _state( Inactive )
-{
-    _type = VK_Button;
-    
+{    
     background = GXColorMake(1, 0, 0 );
-    identifier = "VKButton";
+    setClassName( "VKButton" );
     
     setOpaque(false);
     

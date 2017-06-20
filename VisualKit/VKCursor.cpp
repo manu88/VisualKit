@@ -15,7 +15,7 @@ VKCursor::VKCursor()
     setOpaque( false);
     setSize( GXSizeMake(10, 20)); // 10 20
     
-    identifier = "VKCursor";
+    setClassName( "VKCursor");
 }
 void VKCursor::paint( GXContext* context , const GXRect& bounds)
 {

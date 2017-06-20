@@ -11,10 +11,23 @@
 
 #include <string>
 class VKView;
+class VKSender;
+
+class VKStoryboardController
+{
+public:
+    virtual ~VKStoryboardController(){}
+    
+    virtual void onStoryboardAction(VKSender*) = 0;
+    
+protected:
+    VKStoryboardController(){}
+};
 
 class VKStoryboard
 {
-    static VKView* createFromFile(const std::string &file);
+public:
+    static bool createFromFile(VKView* view , const std::string &file , VKStoryboardController* controller);
 };
 
 #endif /* VKStoryboard_hpp */

@@ -17,7 +17,7 @@ class VKContextMenu;
 class VKWindow : public VKView/* GXLayer*/
 {
 public:
-    
+    static constexpr const char* ClassName = "VKWindow";
     friend class CLApplication;
     VKWindow();
     virtual ~VKWindow();

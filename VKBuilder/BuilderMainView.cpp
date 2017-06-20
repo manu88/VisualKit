@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <GBXMLDocument.hpp>
+#include "VKStoryboard.hpp"
 #include "BuilderMainView.hpp"
 #include "BuilderToolBox.hpp"
 
@@ -53,155 +54,15 @@ bool BuilderMainView::loadFile( const std::string &file)
             removeChild(c);
         }
     }
-    GB::XMLDocument doc(file);
-    
-    printf("Num elements %zi \n" , doc.getSize());
-    if(doc.contains("rootView"))
-    {
-        const GB::VariantMap rootView = doc.getValueForKey("rootView").getMap();
-        
-        if( rootView.count("Children"))
-        {
-            const GB::VariantList children = rootView.at("Children").getList();
-            
-            for( const GB::Variant &c : children)
-            {
-                const GB::VariantMap cDesc = c.getMap();
-                
-                const std::string type = cDesc.at("Type").toString();
-                
-                std::cout << "Got 1 child type " << type << "\n";
-                
-                VKView* ret = nullptr;
-                
-                if( type == "VKButton")
-                {
-                    ret = createButton(cDesc);
-                }
-                else if( type == "VKImage")
-                {
-                    ret = createImage(cDesc);
-                }
-                else if( type == "VKLabel")
-                {
-                    ret = createLabel(cDesc);
-                }
-                else if( type == "VKTextInput")
-                {
-                    ret = createTextInput(cDesc);
-                }
-                else if( type == "VKSlider")
-                {
-                    ret = createSlider(cDesc);
-                }
-                
-                if( ret)
-                {
-                    addChild(ret);
-                }
-            }
-        }
-        
-        
-    }
-    
-    return false;
+
+    return VKStoryboard::createFromFile(this, file , nullptr /* no controller*/);
 }
 
-bool BuilderMainView::createBase(VKView* v , const GB::VariantMap &desc)
-{
-    assert(!desc.empty());
-    
-    if( !v)
-        return false;
-    
-    const GB::VariantList _bounds = desc.at("Bounds").getList();
-    assert(_bounds.size() == 4);
 
-    v->setBounds(GXRectMake(_bounds.at(0).getInt(), _bounds.at(1).getInt(), _bounds.at(2).getInt(), _bounds.at(3).getInt()));
-    
-    return true;
-}
-
-VKView* BuilderMainView::createImage( const GB::VariantMap &desc)
-{
-    if( desc.empty())
-        return nullptr;
-    
-    VKImage* img = new VKImage();
-    
-    if( createBase(img, desc))
-    {
-        img->setFile( desc.at("Res").getString());
-        return img;
-    }
-    
-    return nullptr;
-}
-VKView* BuilderMainView::createLabel( const GB::VariantMap &desc)
-{
-    if( desc.empty())
-        return nullptr;
-    
-    VKLabel* lbl = new VKLabel();
-    
-    
-    if( createBase(lbl, desc))
-    {
-        lbl->setContent( desc.at("Res").getString() );
-        return lbl;
-    }
-    
-    return nullptr;
-}
-VKView* BuilderMainView::createButton( const GB::VariantMap &desc)
-{
-    if( desc.empty())
-        return nullptr;
-    
-    VKButton* bt = new VKButton();
-    
-    
-    if( createBase(bt, desc))
-    {
-        bt->setText( desc.at("Text").getString() );
-        return bt;
-    }
-
-    return nullptr;
-}
-
-VKView* BuilderMainView::createTextInput( const GB::VariantMap &desc)
-{
-    if( desc.empty())
-        return nullptr;
-    
-    VKTextInput* item = new VKTextInput();
-    
-    if( createBase(item, desc))
-    {
-        return item;
-    }
-    return nullptr;
-}
-
-VKView* BuilderMainView::createSlider( const GB::VariantMap &desc)
-{
-    if( desc.empty())
-        return nullptr;
-    
-    VKSlider* item = new VKSlider();
-    
-    if( createBase(item, desc))
-    {
-        return item;
-    }
-    return nullptr;
-}
 
 void BuilderMainView::actionLoad( VKSender* )
 {
-    loadFile("test.xml");
+    loadFile("InspectorView.xml");
 }
 
 void BuilderMainView::actionSave( VKSender* )
@@ -253,12 +114,21 @@ void BuilderMainView::addTextInput()
     VKTextInput* item = new VKTextInput;
     
     addItem(item);
-    
 }
 
 void BuilderMainView::addSlider()
 {
     addItem( new VKSlider());
+}
+
+void BuilderMainView::addDropDown()
+{
+    addItem(new VKDropDown() );
+}
+
+void BuilderMainView::addCheckBox()
+{
+    addItem( new VKCheckBox() );
 }
 
 bool BuilderMainView::addItem(VKView* item)
@@ -291,29 +161,37 @@ bool BuilderMainView::touchBegan( const GXTouch &t)
 
 bool BuilderMainView::touchMoved( const GXTouch &t)
 {
-    if( !_movingV)
+    if( _movingV || !VKView::touchMoved(t) )
     {
-        for (GXLayer* l : getChildren())
+        if( !_movingV)
         {
-            VKView* view  = dynamic_cast<VKView*>(l);
-            
-            if( view)
+            for (GXLayer* l : getChildren())
             {
-                if( rectContainsPoint(l->getBounds(), t.center))
+                VKView* view  = dynamic_cast<VKView*>(l);
+                
+                if( view)
                 {
-                    _movingV = view;
-                    
+                    if( rectContainsPoint(l->getBounds(), t.center))
+                    {
+                        _movingV = view;
+                        
+                    }
                 }
             }
         }
-    }
-    if( _movingV)
-    {
-        _movingV->setCenter(t.center);
-    }
+        if( _movingV)
+        {
+            /*
+            const GXPoint dif = t.center - _movingV->getPos();
+            printf("Diff mouse %i %i\n" , dif.x , dif.y);
+            _movingV->setPos(_movingV->getPos() - dif);
+            */
+            _movingV->setCenter(t.center);
+        }
 
+    }
     
-    return VKView::touchMoved(t);
+    return _movingV;
 }
 
 bool BuilderMainView::touchEnded( const GXTouch &t)
@@ -414,6 +292,14 @@ void BuilderMainView::colorEditEnded( const GXColor& col)
     _selected->setNeedsDisplay();
 }
 
+void BuilderMainView::setIdentifier( const std::string &id)
+{
+    if( _selected)
+    {
+        _selected->identifier = id;
+    }
+}
+
 bool BuilderMainView::keyPressed(  const GXKey &key )
 {
     if( _selected && key.key == GXKey_UP)
@@ -440,13 +326,18 @@ bool BuilderMainView::keyPressed(  const GXKey &key )
         _selected->setPos( _selected->getPos() + GXPointMake(5, 0));
         _selected->setNeedsDisplay();
     }
+    else if( _selected && key.key == GXKey_D)
+    {
+
+        
+    }
     /*
     else if( _selected && key.key == GXKey_BACKSPACE)
     {
         removeChild(_selected);
         _selected = nullptr;
     }
-     */
+    */
     
     return VKView::keyPressed(key);
 }

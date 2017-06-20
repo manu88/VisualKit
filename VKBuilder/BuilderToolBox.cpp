@@ -6,6 +6,7 @@
 //  Copyright © 2017 Unlimited Development. All rights reserved.
 //
 
+#include "VKStoryboard.hpp"
 #include "BuilderToolBox.hpp"
 #include "BuilderMainView.hpp"
 
@@ -28,7 +29,7 @@ _mainView(mainView)
     
     
     _itemsDropBown.setBounds(GXRectMake(10, 40, 60, 20));
-    _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput" , "slider"});
+    _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput" , "slider" , "dropDown" , "checkBox"});
     _itemsDropBown.selectionDidChange = [this](VKSender* obj)
     {
         const VKDropDown* dp = dynamic_cast<const VKDropDown*>(obj);
@@ -52,6 +53,13 @@ _mainView(mainView)
                 
             case 4:
                 _mainView->addSlider();
+                break;
+                
+            case 5:
+                _mainView->addDropDown();
+                break;
+            case 6:
+                _mainView->addCheckBox();
                 break;
                 
             default:
@@ -80,6 +88,10 @@ _mainView(mainView)
     _inHeight.setBounds(GXRectMake(100, 80, 80, 30));
     _inHeight.editingEnded = std::bind(&BuilderMainView::heightContentChanged , _mainView , std::placeholders::_1);
     addChild(&_inHeight);
+    
+    _inView.setBounds(GXRectMake(5, 140, 250, 200));
+    VKStoryboard::createFromFile(&_inView, "InspectorView.xml" , this);
+    addChild(&_inView);
 }
 
 void BuilderToolBox::paint( GXContext* context , const GXRect& bounds)
@@ -91,7 +103,28 @@ void BuilderToolBox::paint( GXContext* context , const GXRect& bounds)
     context->stroke();
 }
 
-bool BuilderToolBox::serialize( GB::VariantMap& obj) const
+bool BuilderToolBox::serialize( GB::VariantMap& ) const
 {
     return false;
+}
+
+
+void BuilderToolBox::onStoryboardAction(VKSender* sender)
+{
+    assert(sender);
+    
+    
+    if( VKTextInput* view = dynamic_cast<VKTextInput* >(sender))
+    {
+        printf("Action from '%s' \n" , view->identifier.c_str());
+        //_mainView->setIdentifier(view->getContent());
+    }
+    else
+    {
+        const VKView* v = dynamic_cast< const VKView* >(sender);
+        assert(v);
+        
+        printf("Action from '%s' \n" , v->identifier.c_str());
+        //singleLineCheck
+    }
 }

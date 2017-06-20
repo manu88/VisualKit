@@ -15,9 +15,7 @@ _imgHandle(GXImageInvalid),
 _datas(nullptr),
 _dataSize(0),
 _reload(false)
-{
-    _type = VK_Image;
-}
+{}
 
 VKImage::~VKImage()
 {

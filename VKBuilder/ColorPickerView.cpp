@@ -9,9 +9,14 @@
 #include "ColorPickerView.hpp"
 #include "BuilderMainView.hpp"
 
+
 ColorPickerView::ColorPickerView(BuilderMainView* mainView):
 _mainView(mainView)
 {
+    VKStoryboard::createFromFile(this, "ColorView.xml" , this);
+    
+    
+    /*
     _red.setSingleLine(true);
     _green.setSingleLine(true);
     _blue.setSingleLine(true);
@@ -33,12 +38,14 @@ _mainView(mainView)
     _green.editingEnded = std::bind(&ColorPickerView::colorEditEnded, this , std::placeholders::_1);
     _blue.editingEnded = std::bind(&ColorPickerView::colorEditEnded, this , std::placeholders::_1);
     _alpha.editingEnded = std::bind(&ColorPickerView::colorEditEnded, this , std::placeholders::_1);
+     */
     
     
 }
 
 void ColorPickerView::setColor( const GXColor &c)
 {
+    /*
     _red.setContent(std::to_string(c.r));
     _green.setContent(std::to_string(c.g));
     _blue.setContent(std::to_string(c.b));
@@ -48,15 +55,23 @@ void ColorPickerView::setColor( const GXColor &c)
     _green.setNeedsRedraw();
     _blue.setNeedsRedraw();
     _alpha.setNeedsRedraw();
+     */
 
 }
 
 void ColorPickerView::colorEditEnded(VKSender* )
 {
+    /*
     _mainView->colorEditEnded( GXColorMake( std::stof( _red.getContent() ),
                                             std::stof( _green.getContent() ),
                                             std::stof( _blue.getContent() ),
                                             std::stof( _alpha.getContent() )));
+     */
+}
+
+void ColorPickerView::onStoryboardAction(VKSender*)
+{
+    
 }
 
 bool ColorPickerView::serialize( GB::VariantMap& obj) const
@@ -64,8 +79,3 @@ bool ColorPickerView::serialize( GB::VariantMap& obj) const
     return false;
 }
 
-void ColorPickerView::paint( GXContext* context , const GXRect& bounds)
-{
-
-
-}
