@@ -212,6 +212,25 @@ VKWindow* VKView::getWindow() const noexcept
     return nullptr;
 }
 
+VKView* VKView::getChildByIdentifier( const std::string &id ) const
+{
+    if (getChildren().empty())
+        return nullptr;
+    
+    VKView*v = nullptr;
+    for (GXLayer* c : getChildren())
+    {
+        if( ( v = dynamic_cast<VKView*>(c) ) && v->identifier == id)
+        {
+            return v;
+        }
+        
+        
+    }
+    
+    return nullptr;
+}
+
 
 bool VKView::serialize( GB::VariantMap& obj) const
 {

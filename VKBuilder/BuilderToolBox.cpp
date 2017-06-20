@@ -81,12 +81,12 @@ _mainView(mainView)
     
     _inWidth.setSingleLine(true);
     _inWidth.setBounds(GXRectMake(10, 110, 80, 30));
-    _inWidth.editingEnded = std::bind(&BuilderMainView::widthContentChanged , _mainView , std::placeholders::_1);
+    //_inWidth.editingEnded = std::bind(&BuilderMainView::widthContentChanged , _mainView , std::placeholders::_1);
     addChild(&_inWidth);
     
     _inHeight.setSingleLine(true);
     _inHeight.setBounds(GXRectMake(100, 80, 80, 30));
-    _inHeight.editingEnded = std::bind(&BuilderMainView::heightContentChanged , _mainView , std::placeholders::_1);
+    //_inHeight.editingEnded = std::bind(&BuilderMainView::heightContentChanged , _mainView , std::placeholders::_1);
     addChild(&_inHeight);
     
     _inView.setBounds(GXRectMake(5, 140, 250, 200));
@@ -113,18 +113,35 @@ void BuilderToolBox::onStoryboardAction(VKSender* sender)
 {
     assert(sender);
     
+    VKView* baseView = dynamic_cast< VKView* >(sender);
     
-    if( VKTextInput* view = dynamic_cast<VKTextInput* >(sender))
+    if( baseView->identifier == "idText" )
     {
-        printf("Action from '%s' \n" , view->identifier.c_str());
-        //_mainView->setIdentifier(view->getContent());
+        VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
+        
+        //printf("Action from '%s' \n" , view->identifier.c_str());
+        _mainView->setIdentifier(view->getContent());
+        
+    }
+    else if( baseView->identifier == "widthText" )
+    {
+        VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
+        _mainView->widthContentChanged( std::stoi(view->getContent()));
+
+        
+    }
+    else if( baseView->identifier == "heightText" )
+    {
+        VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
+        _mainView->heightContentChanged( std::stoi(view->getContent()));
+
     }
     else
     {
-        const VKView* v = dynamic_cast< const VKView* >(sender);
-        assert(v);
         
-        printf("Action from '%s' \n" , v->identifier.c_str());
+        assert(baseView);
+        
+        printf("Unkown Action from '%s' \n" , baseView->identifier.c_str());
         //singleLineCheck
     }
 }

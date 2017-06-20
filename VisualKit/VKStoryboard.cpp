@@ -20,7 +20,7 @@ static VKView* createButton( const GB::VariantMap &desc);
 
 static VKView* createTextInput( const GB::VariantMap &desc , VKStoryboardController* controller);
 static VKView* createCheckBox( const GB::VariantMap &desc , VKStoryboardController* controller);
-static VKView* createSlider( const GB::VariantMap &desc);
+static VKView* createSlider( const GB::VariantMap &desc , VKStoryboardController* controller);
 
 static bool createBase(VKView* v , const GB::VariantMap &desc)
 {
@@ -140,7 +140,7 @@ static VKView* createTextInput( const GB::VariantMap &desc , VKStoryboardControl
     return nullptr;
 }
 
-static VKView* createSlider( const GB::VariantMap &desc)
+static VKView* createSlider( const GB::VariantMap &desc , VKStoryboardController* controller)
 {
     if( desc.empty())
         return nullptr;
@@ -149,6 +149,10 @@ static VKView* createSlider( const GB::VariantMap &desc)
     
     if( createBase(item, desc))
     {
+        if(controller)
+        {
+            item->valueDidChange = std::bind(&VKStoryboardController::onStoryboardAction, controller , std::placeholders::_1);
+        }
         return item;
     }
     return nullptr;
@@ -176,8 +180,6 @@ static VKView* createSlider( const GB::VariantMap &desc)
                 
                 const std::string type = cDesc.at("Class").toString();
                 
-                std::cout << "Got 1 child type " << type << "\n";
-                
                 VKView* ret = nullptr;
                 
                 if( type == "VKButton")
@@ -198,7 +200,7 @@ static VKView* createSlider( const GB::VariantMap &desc)
                 }
                 else if( type == "VKSlider")
                 {
-                    ret = createSlider(cDesc);
+                    ret = createSlider(cDesc , controller);
                 }
                 else if( type == "VKCheckBox")
                 {

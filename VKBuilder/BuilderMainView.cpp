@@ -62,7 +62,7 @@ bool BuilderMainView::loadFile( const std::string &file)
 
 void BuilderMainView::actionLoad( VKSender* )
 {
-    loadFile("InspectorView.xml");
+    loadFile("test.xml");
 }
 
 void BuilderMainView::actionSave( VKSender* )
@@ -233,27 +233,44 @@ void BuilderMainView::itemSelectionChanged()
 
     _colorView->setColor(_selected->background);
     
+    /* */
+    
+    VKTextInput* textW = dynamic_cast<VKTextInput*>( _toolBox->_inView.getChildByIdentifier("widthText") );
+    assert(textW);
+    textW->setContent( std::to_string(_selected->getSize().width));
+    
+    
+    //heightText
+    VKTextInput* textH = dynamic_cast<VKTextInput*>( _toolBox->_inView.getChildByIdentifier("heightText") );
+    assert(textH);
+    textH->setContent( std::to_string(_selected->getSize().height));
+    
+    VKTextInput* textID = dynamic_cast<VKTextInput*>( _toolBox->_inView.getChildByIdentifier("idText") );
+    assert(textID);
+    textID->setContent( _selected->identifier);
+    
+    
+    textW->setNeedsRedraw();
+    textH->setNeedsRedraw();
+    textID->setNeedsRedraw();
 }
 
-void BuilderMainView::widthContentChanged( VKSender* sender)
+void BuilderMainView::widthContentChanged( int val)
 {
     if( _selected)
     {
-        const int newW = std::stoi( _toolBox->_inWidth.getContent());
-        printf("new width %i\n" , newW);
-        _selected->setSize(GXSizeMake( newW, _selected->getSize().height) );
+        
+        _selected->setSize(GXSizeMake( val, _selected->getSize().height) );
         
         _selected->setNeedsDisplay();
     }
 }
 
-void BuilderMainView::heightContentChanged( VKSender* sender)
+void BuilderMainView::heightContentChanged( int val)
 {
     if( _selected)
     {
-        const int newH = std::stoi( _toolBox->_inHeight.getContent());
-        printf("new height %i\n" , newH);
-        _selected->setSize(GXSizeMake( _selected->getSize().width,newH ));
+        _selected->setSize(GXSizeMake( _selected->getSize().width, val ));
         _selected->setNeedsDisplay();
     }
 }
@@ -289,7 +306,7 @@ void BuilderMainView::textContentChanged( VKSender* sender)
 void BuilderMainView::colorEditEnded( const GXColor& col)
 {
     _selected->background = col;
-    _selected->setNeedsDisplay();
+    //_selected->setNeedsRedraw();
 }
 
 void BuilderMainView::setIdentifier( const std::string &id)

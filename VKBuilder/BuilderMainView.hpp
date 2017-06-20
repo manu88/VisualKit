@@ -55,8 +55,9 @@ public:
     void actionSave( VKSender* sender);
     void actionLoad( VKSender* sender);
     void textContentChanged( VKSender* sender);
-    void widthContentChanged( VKSender* sender);
-    void heightContentChanged( VKSender* sender);
+    
+    void widthContentChanged( int val);
+    void heightContentChanged( int val );
     
     void setIdentifier( const std::string &id);
     

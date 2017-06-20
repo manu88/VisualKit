@@ -54,6 +54,9 @@ public:
     
     std::string identifier;
     
+    VKView* getChildByIdentifier( const std::string &id) const;
+
+    
 protected:
 
     virtual void paint( GXContext*  , const GXRect& ) override

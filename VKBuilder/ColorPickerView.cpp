@@ -69,12 +69,21 @@ void ColorPickerView::colorEditEnded(VKSender* )
      */
 }
 
-void ColorPickerView::onStoryboardAction(VKSender*)
+void ColorPickerView::onStoryboardAction(VKSender* sender)
 {
+    const VKSlider* slider = dynamic_cast<const VKSlider*>(sender);
+    assert(slider);
     
+    //printf("Slider '%s' val %f \n" , slider->identifier.c_str() ,  slider->getPosition() );
+    
+    _mainView->colorEditEnded(GXColorMake( dynamic_cast<VKSlider*>( getChildByIdentifier("rSlider"))->getPosition(),
+                                           dynamic_cast<VKSlider*>( getChildByIdentifier("gSlider"))->getPosition(),
+                                           dynamic_cast<VKSlider*>( getChildByIdentifier("bSlider"))->getPosition(),
+                                           dynamic_cast<VKSlider*>( getChildByIdentifier("aSlider"))->getPosition()
+                                          ));
 }
 
-bool ColorPickerView::serialize( GB::VariantMap& obj) const
+bool ColorPickerView::serialize( GB::VariantMap& ) const
 {
     return false;
 }
