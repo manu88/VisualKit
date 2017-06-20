@@ -14,10 +14,12 @@
 #include "VKAction.hpp"
 #include "VKImage.hpp"
 #include "VKLabel.hpp"
+#include "VKDropDown.hpp"
+
 #include "ColorPickerView.hpp"
 class BuilderToolBox;
 
-class BuilderMainView : public VKView
+class BuilderMainView : public VKView 
 {
 public:
     BuilderMainView();
@@ -32,10 +34,13 @@ public:
     VKView* createButton( const GB::VariantMap &desc);
     VKView* createImage( const GB::VariantMap &desc);
     VKView* createLabel( const GB::VariantMap &desc);
+    VKView* createTextInput( const GB::VariantMap &desc);
     
-    void addButton(VKSender* sender);
-    void addLabel(VKSender* sender);
-    void addImage(VKSender* sender);
+    void addButton();
+    void addLabel();
+    void addImage();
+    void addTextInput();
+    bool addItem(VKView* v);
     
     bool touchBegan( const GXTouch &t) override;
     bool touchMoved( const GXTouch &t) override;

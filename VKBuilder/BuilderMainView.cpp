@@ -67,23 +67,27 @@ bool BuilderMainView::loadFile( const std::string &file)
             {
                 const GB::VariantMap cDesc = c.getMap();
                 
-                const int type = cDesc.at("Type").toInt();
+                const std::string type = cDesc.at("Type").toString();
                 
                 std::cout << "Got 1 child type " << type << "\n";
                 
                 VKView* ret = nullptr;
                 
-                if( type == VKView::Type::VK_Button)
+                if( type == "VKButton")
                 {
                     ret = createButton(cDesc);
                 }
-                else if( type == VKView::Type::VK_Image)
+                else if( type == "VKImage")
                 {
                     ret = createImage(cDesc);
                 }
-                else if( type == VKView::Type::VK_Label)
+                else if( type == "VKLabel")
                 {
                     ret = createLabel(cDesc);
+                }
+                else if( type == "VKTextInput")
+                {
+                    ret = createTextInput(cDesc);
                 }
                 
                 if( ret)
@@ -162,12 +166,26 @@ VKView* BuilderMainView::createButton( const GB::VariantMap &desc)
     return nullptr;
 }
 
-void BuilderMainView::actionLoad( VKSender* sender)
+VKView* BuilderMainView::createTextInput( const GB::VariantMap &desc)
+{
+    if( desc.empty())
+        return nullptr;
+    
+    VKTextInput* item = new VKTextInput();
+    
+    if( createBase(item, desc))
+    {
+        return item;
+    }
+    return nullptr;
+}
+
+void BuilderMainView::actionLoad( VKSender* )
 {
     loadFile("test.xml");
 }
 
-void BuilderMainView::actionSave( VKSender* sender)
+void BuilderMainView::actionSave( VKSender* )
 {
     printf("Save\n");
     
@@ -189,32 +207,44 @@ void BuilderMainView::actionSave( VKSender* sender)
     }
 }
 
-void BuilderMainView::addButton(VKSender* sender)
+void BuilderMainView::addButton()
 {
     VKButton* item = new VKButton;
     
-    item->setSize(GXSizeMake(60, 20));
-    item->setCenter(getCenter());
-    addChild(item);
+    addItem(item);
     
 }
 
-void BuilderMainView::addLabel(VKSender* sender)
+void BuilderMainView::addLabel()
 {
     VKLabel* item = new VKLabel;
     
-    item->setSize(GXSizeMake(90, 50));
-    item->setCenter(getCenter());
-    addChild(item);
+    addItem(item);
 }
 
-void BuilderMainView::addImage(VKSender* sender)
+void BuilderMainView::addImage()
 {
     VKImage* item = new VKImage;
     
+    addItem(item);
+}
+
+void BuilderMainView::addTextInput()
+{
+    VKTextInput* item = new VKTextInput;
+    
+    addItem(item);
+    
+}
+
+bool BuilderMainView::addItem(VKView* item)
+{
+    assert( item );
+    
     item->setSize(GXSizeMake(90, 50));
     item->setCenter(getCenter());
-    addChild(item);
+    
+    return addChild(item);
 }
 
 bool BuilderMainView::touchBegan( const GXTouch &t)
@@ -291,14 +321,14 @@ void BuilderMainView::itemSelectionChanged()
         _toolBox->_text.setContent( lbl->getContent());
     }
     
-    _toolBox->_text.setNeedsDisplay();
+    _toolBox->_text.setNeedsRedraw();
     
     _toolBox->_inWidth.setContent( std::to_string(_selected->getSize().width));
     _toolBox->_inHeight.setContent( std::to_string(_selected->getSize().height));
     
-    _toolBox->_inHeight.setNeedsDisplay();
-    _toolBox->_inWidth.setNeedsDisplay();
-    
+    _toolBox->_inHeight.setNeedsRedraw();
+    _toolBox->_inWidth.setNeedsRedraw();
+
     _colorView->setColor(_selected->background);
     
 }
@@ -336,19 +366,19 @@ void BuilderMainView::textContentChanged( VKSender* sender)
             if( VKButton* bt = dynamic_cast<VKButton*>(_selected) )
             {
                 bt->setText(_toolBox->_text.getContent());
-                bt->setNeedsDisplay();
+                bt->setNeedsRedraw();
                 
                 return;
             }
             else if( VKImage* img = dynamic_cast<VKImage*>(_selected))
             {
                 img->setFile(_toolBox->_text.getContent());
-                img->setNeedsDisplay();
+                img->setNeedsRedraw();
             }
             else if( VKLabel* lbl = dynamic_cast<VKLabel*>(_selected))
             {
                 lbl->setContent(_toolBox->_text.getContent());
-                lbl->setNeedsDisplay();
+                lbl->setNeedsRedraw();
             }
         }
     }

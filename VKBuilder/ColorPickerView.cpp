@@ -44,10 +44,10 @@ void ColorPickerView::setColor( const GXColor &c)
     _blue.setContent(std::to_string(c.b));
     _alpha.setContent(std::to_string(c.a));
     
-    _red.setNeedsDisplay();
-    _green.setNeedsDisplay();
-    _blue.setNeedsDisplay();
-    _alpha.setNeedsDisplay();
+    _red.setNeedsRedraw();
+    _green.setNeedsRedraw();
+    _blue.setNeedsRedraw();
+    _alpha.setNeedsRedraw();
 
 }
 

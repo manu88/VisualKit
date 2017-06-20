@@ -26,10 +26,12 @@ public:
     
     typedef enum
     {
-        VK_View   = 0,
-        VK_Button = 1,
-        VK_Image  = 2,
-        VK_Label  = 3
+        VK_View      = 0,
+        VK_Button    = 1,
+        VK_Image     = 2,
+        VK_Label     = 3,
+        VK_DropDown  = 4,
+        VK_TextInput = 5,
     } Type;
     
     VKView();

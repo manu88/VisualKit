@@ -60,6 +60,8 @@ protected:
     void paint( GXContext* context , const GXRect& bounds) override;
     void focusChanged() override;
     
+    bool serialize( GB::VariantMap& obj) const override;
+    
     GXPoint _offset;
     GXTextContainer _textContainer;
 

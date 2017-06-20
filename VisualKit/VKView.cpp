@@ -214,7 +214,7 @@ VKWindow* VKView::getWindow() const noexcept
 bool VKView::serialize( GB::VariantMap& obj) const
 {
     
-    obj.insert(std::make_pair("Type", getType() ));
+    obj.insert(std::make_pair("Type", identifier ));
     
     obj.insert(std::make_pair("Bounds", GB::Variant
                               ({ getBounds().origin.x ,getBounds().origin.y,getBounds().size.width , getBounds().size.height }))

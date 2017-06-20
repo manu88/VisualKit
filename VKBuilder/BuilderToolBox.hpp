@@ -12,10 +12,11 @@
 #include "VKButton.hpp"
 #include "VKTextInput.hpp"
 #include "VKView.hpp"
+#include "VKDropDown.hpp"
 #include "ColorPickerView.hpp"
 
 class BuilderMainView;
-class BuilderToolBox : public VKView
+class BuilderToolBox : public VKView 
 {
 public:
     BuilderToolBox(BuilderMainView* mainView);
@@ -24,11 +25,11 @@ public:
     void paint( GXContext* context , const GXRect& bounds) override;
     bool serialize( GB::VariantMap& obj) const override;
     
+    VKDropDown _itemsDropBown;
+    
     VKButton _bttonSave;
     VKButton _bttonLoad;
-    VKButton _bttonAddButton;
-    VKButton _bttonAddLabel;
-    VKButton _bttonAddImg;
+    
     VKTextInput _text;
     
     VKTextInput _inWidth;

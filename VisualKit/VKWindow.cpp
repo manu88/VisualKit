@@ -65,7 +65,7 @@ bool VKWindow::dismissCurrentContextMenu()
     {
         _currentContextMenu->_controller->contextMenuDidDismiss( _currentContextMenu );
     }
-    printf("Remove previous context menu \n");
+    
     _currentContextMenu = nullptr;
     setNeedsRedraw();
     return true;

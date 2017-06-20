@@ -21,6 +21,8 @@ _offset(GXPointMakeNull()),
 _singleLine(false)
 {
     
+    _type = VK_TextInput;
+    
     identifier = "VKTextInput";
     setOpaque(false);
     
@@ -173,3 +175,7 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
     }    
 }
 
+bool VKTextInput::serialize( GB::VariantMap& obj) const
+{
+    return VKView::serialize(obj);
+}

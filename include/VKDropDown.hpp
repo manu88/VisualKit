@@ -40,6 +40,8 @@ public:
     
     void contextMenuDidDismiss( VKContextMenu* menu) override;
 private:
+    bool serialize( GB::VariantMap& obj) const override;
+    
     void paint( GXContext* context , const GXRect& _bounds) override;
 
     bool touchEnded( const GXTouch &t) override;

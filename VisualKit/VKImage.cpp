@@ -98,5 +98,6 @@ void VKImage::paint( GXContext* context , const GXRect& bounds)
 bool VKImage::serialize( GB::VariantMap& obj) const
 {
     obj.insert(std::make_pair("Res", getFile()));
+    
     return VKView::serialize(obj);
 }

@@ -27,26 +27,39 @@ _mainView(mainView)
     addChild(&_bttonLoad);
     
     
+    _itemsDropBown.setBounds(GXRectMake(10, 40, 60, 20));
+    _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput"});
+    _itemsDropBown.selectionDidChange = [this](VKSender* obj)
+    {
+        const VKDropDown* dp = dynamic_cast<const VKDropDown*>(obj);
+        assert(dp);
+        
+        switch (dp->getSelectedIndex())
+        {
+            case 0:
+                _mainView->addButton();
+                break;
+                
+            case 1:
+                _mainView->addLabel();
+                break;
+            case 2:
+                _mainView->addImage();
+                break;
+            case 3:
+                _mainView->addTextInput();
+                break;
+                
+            default:
+                break;
+        }
+        
+    };
     
-    _bttonAddButton.setBounds(GXRectMake(10, 40, 60, 20));
-    _bttonAddButton.setText("Button");
-    _bttonAddButton.onClic = std::bind(&BuilderMainView::addButton, _mainView , std::placeholders::_1);
-    
-    addChild(&_bttonAddButton);
+    addChild(&_itemsDropBown);
     
     
-    _bttonAddLabel.setBounds(GXRectMake(80, 40, 60, 20));
-    _bttonAddLabel.setText("Label");
-    _bttonAddLabel.onClic = std::bind(&BuilderMainView::addLabel, _mainView , std::placeholders::_1);
-    
-    addChild(&_bttonAddLabel);
-    
-    
-    _bttonAddImg.setBounds(GXRectMake(150, 40, 60, 20));
-    _bttonAddImg.setText("Image");
-    _bttonAddImg.onClic = std::bind(&BuilderMainView::addImage, _mainView , std::placeholders::_1);
-    
-    addChild(&_bttonAddImg);
+
     
     
     _text.setSingleLine(true);

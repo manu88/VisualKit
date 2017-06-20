@@ -16,6 +16,7 @@ selectionDidChange(nullptr),
 _selIndex(-1),
 _menu(nullptr)
 {
+    _type = VK_DropDown;
     
     identifier = "VKDropDown";
     background = GXColors::Gray;
@@ -101,4 +102,19 @@ void VKDropDown::paint( GXContext* context , const GXRect& _bounds)
     context->addText(GXPointMake( 10 ,10),/* _bounds.size.width, */_items.at( idx ) );
 
 
+}
+
+bool VKDropDown::serialize( GB::VariantMap& obj) const
+{
+    GB::VariantList l;
+    for( const auto &i : getItems())
+    {
+        l.push_back(i);
+        
+    }
+    
+    obj.insert(std::make_pair("Items", l ));
+    
+    return VKView::serialize(obj);
+    
 }
