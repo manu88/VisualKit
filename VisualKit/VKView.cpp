@@ -241,6 +241,10 @@ bool VKView::serialize( GB::VariantMap& obj) const
                               ({ getBounds().origin.x ,getBounds().origin.y,getBounds().size.width , getBounds().size.height }))
                );
     
+    obj.insert(std::make_pair("Background", GB::Variant
+                              ({ background.r ,background.g,background.b , background.a }))
+               );
+    
     obj.insert(std::make_pair("Z", getZPos()));
     obj.insert(std::make_pair("Opaque", isOpaque() ));
     

@@ -18,6 +18,7 @@ static VKView* createImage( const GB::VariantMap &desc);
 static VKView* createLabel( const GB::VariantMap &desc);
 static VKView* createButton( const GB::VariantMap &desc);
 
+static VKView* createDropDown( const GB::VariantMap &desc , VKStoryboardController* controller);
 static VKView* createTextInput( const GB::VariantMap &desc , VKStoryboardController* controller);
 static VKView* createCheckBox( const GB::VariantMap &desc , VKStoryboardController* controller);
 static VKView* createSlider( const GB::VariantMap &desc , VKStoryboardController* controller);
@@ -31,6 +32,7 @@ static bool createBase(VKView* v , const GB::VariantMap &desc)
     
     const GB::VariantList _bounds = desc.at("Bounds").getList();
     assert(_bounds.size() == 4);
+    v->setBounds(GXRectMake(_bounds.at(0).getInt(), _bounds.at(1).getInt(), _bounds.at(2).getInt(), _bounds.at(3).getInt()));
     
     if( desc.count("Identifier"))
     {
@@ -38,14 +40,19 @@ static bool createBase(VKView* v , const GB::VariantMap &desc)
     }
     
     
-    
+    if( desc.count("Background"))
+    {
+        const GB::VariantList _color = desc.at("Background").getList();
+        assert(_bounds.size() == 4);
+        v->background = GXColorMake(_color.at(0).getFloat(), _color.at(1).getFloat(), _color.at(2).getFloat() , _color.at(3).getFloat());
+    }
     /*
     if( desc.count("Opaque"))
     {
         v->setOpaque(desc.at("Opaque").getInt());
     }
      */
-    v->setBounds(GXRectMake(_bounds.at(0).getInt(), _bounds.at(1).getInt(), _bounds.at(2).getInt(), _bounds.at(3).getInt()));
+    
     
     return true;
 }
@@ -114,6 +121,34 @@ static VKView* createCheckBox( const GB::VariantMap &desc , VKStoryboardControll
         return item;
     }
     
+    return nullptr;
+}
+
+static VKView* createDropDown( const GB::VariantMap &desc , VKStoryboardController* controller)
+{
+    if( desc.empty())
+        return nullptr;
+    
+    VKDropDown* item = new VKDropDown();
+    
+    if( createBase(item, desc))
+    {
+        if( desc.count("Items"))
+        {
+            VKContextMenu::Items items;
+            for( const GB::Variant& v : desc.at("Items").getList())
+            {
+                items.push_back(v.getString());
+            }
+            item->setItems(items);
+            
+            if( controller)
+            {
+                item->selectionDidChange = std::bind(&VKStoryboardController::onStoryboardAction, controller , std::placeholders::_1);
+            }
+        }
+        return item;
+    }
     return nullptr;
 }
 
@@ -205,6 +240,10 @@ static VKView* createSlider( const GB::VariantMap &desc , VKStoryboardController
                 else if( type == "VKCheckBox")
                 {
                     ret = createCheckBox(cDesc , controller);
+                }
+                else if( type == "VKDropDown")
+                {
+                    ret = createDropDown(cDesc , controller);
                 }
                 else
                 {

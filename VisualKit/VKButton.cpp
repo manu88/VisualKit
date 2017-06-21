@@ -14,7 +14,7 @@ VKButton::VKButton():
 _triggerAction (false),
 _state( Inactive )
 {    
-    background = GXColorMake(1, 0, 0 );
+    background = GXColorMake(0.98f, 0.98f, 0.98f);
     setClassName( "VKButton" );
     
     setOpaque(false);
@@ -39,7 +39,7 @@ void VKButton::paint( GXContext* context , const GXRect& _bounds)
     context->beginPath();
     context->addRoundedRect( _bounds , 5);
     context->setStrokeColor( GXColorMake(0.85f, 0.85f, 0.85f));
-    context->setFillColor( GXColorMake(0.98f, 0.98f, 0.98f) );
+    context->setFillColor( background);
     context->fill();
     context->stroke();
     

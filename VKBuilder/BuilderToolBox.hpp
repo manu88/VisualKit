@@ -26,6 +26,8 @@ public:
     void paint( GXContext* context , const GXRect& bounds) override;
     bool serialize( GB::VariantMap& obj) const override;
     
+    
+    void updateSelected( VKView* selected);
     void onStoryboardAction(VKSender* sender) override;
     
     VKDropDown _itemsDropBown;
@@ -33,10 +35,7 @@ public:
     VKButton _bttonSave;
     VKButton _bttonLoad;
     
-    VKTextInput _text;
-    
-    VKTextInput _inWidth;
-    VKTextInput _inHeight;
+
     
     VKView _inView;
     BuilderMainView* _mainView;

@@ -45,17 +45,17 @@ _mainView(mainView)
 
 void ColorPickerView::setColor( const GXColor &c)
 {
-    /*
-    _red.setContent(std::to_string(c.r));
-    _green.setContent(std::to_string(c.g));
-    _blue.setContent(std::to_string(c.b));
-    _alpha.setContent(std::to_string(c.a));
+    getChildByIdentifierAs<VKSlider*>("rSlider")->setPosition(c.r);
+    getChildByIdentifierAs<VKSlider*>("gSlider")->setPosition(c.g);
+    getChildByIdentifierAs<VKSlider*>("bSlider")->setPosition(c.b);
+    getChildByIdentifierAs<VKSlider*>("aSlider")->setPosition(c.a);
     
-    _red.setNeedsRedraw();
-    _green.setNeedsRedraw();
-    _blue.setNeedsRedraw();
-    _alpha.setNeedsRedraw();
-     */
+
+    getChildByIdentifierAs<VKSlider*>("rSlider")->setNeedsRedraw();
+    getChildByIdentifierAs<VKSlider*>("gSlider")->setNeedsRedraw();
+    getChildByIdentifierAs<VKSlider*>("bSlider")->setNeedsRedraw();
+    getChildByIdentifierAs<VKSlider*>("aSlider")->setNeedsRedraw();
+     
 
 }
 
@@ -73,13 +73,11 @@ void ColorPickerView::onStoryboardAction(VKSender* sender)
 {
     const VKSlider* slider = dynamic_cast<const VKSlider*>(sender);
     assert(slider);
-    
-    //printf("Slider '%s' val %f \n" , slider->identifier.c_str() ,  slider->getPosition() );
-    
-    _mainView->colorEditEnded(GXColorMake( dynamic_cast<VKSlider*>( getChildByIdentifier("rSlider"))->getPosition(),
-                                           dynamic_cast<VKSlider*>( getChildByIdentifier("gSlider"))->getPosition(),
-                                           dynamic_cast<VKSlider*>( getChildByIdentifier("bSlider"))->getPosition(),
-                                           dynamic_cast<VKSlider*>( getChildByIdentifier("aSlider"))->getPosition()
+
+    _mainView->colorEditEnded(GXColorMake( getChildByIdentifierAs<const VKSlider*>("rSlider")->getPosition(),
+                                           getChildByIdentifierAs<const VKSlider*>("gSlider")->getPosition(),
+                                           getChildByIdentifierAs<const VKSlider*>("bSlider")->getPosition(),
+                                           getChildByIdentifierAs<const VKSlider*>("aSlider")->getPosition()
                                           ));
 }
 

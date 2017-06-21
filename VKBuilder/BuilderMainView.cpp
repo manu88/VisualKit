@@ -7,11 +7,11 @@
 //
 
 #include <iostream>
+#include <sstream>
 #include <GBXMLDocument.hpp>
 #include "VKStoryboard.hpp"
 #include "BuilderMainView.hpp"
 #include "BuilderToolBox.hpp"
-
 
 BuilderMainView::BuilderMainView():
 _selected(nullptr),
@@ -20,7 +20,7 @@ _movingV( nullptr )
     background = GXColorMake( 0.96f ,0.96f ,0.96f);
     
     _toolBox = new BuilderToolBox( this);
-    _toolBox->setBounds(GXRectMake(0, 0, 300, 400));
+    _toolBox->setBounds(GXRectMake(700, 0, 300, 400));
     addChild(_toolBox);
     
     /*
@@ -207,52 +207,12 @@ bool BuilderMainView::touchEnded( const GXTouch &t)
 
 void BuilderMainView::itemSelectionChanged()
 {
-    
-    if( VKButton* bt = dynamic_cast<VKButton*>(_selected))
-    {
-        _toolBox->_text.setContent(bt->getText());
-        
-        
-    }
-    else if( VKImage* img = dynamic_cast<VKImage*>(_selected))
-    {
-        _toolBox->_text.setContent( img->getFile());
-    }
-    else if( VKLabel* lbl = dynamic_cast<VKLabel*>(_selected))
-    {
-        _toolBox->_text.setContent( lbl->getContent());
-    }
-    
-    _toolBox->_text.setNeedsRedraw();
-    
-    _toolBox->_inWidth.setContent( std::to_string(_selected->getSize().width));
-    _toolBox->_inHeight.setContent( std::to_string(_selected->getSize().height));
-    
-    _toolBox->_inHeight.setNeedsRedraw();
-    _toolBox->_inWidth.setNeedsRedraw();
 
     _colorView->setColor(_selected->background);
-    
+    _toolBox->updateSelected(_selected);
     /* */
     
-    VKTextInput* textW = dynamic_cast<VKTextInput*>( _toolBox->_inView.getChildByIdentifier("widthText") );
-    assert(textW);
-    textW->setContent( std::to_string(_selected->getSize().width));
     
-    
-    //heightText
-    VKTextInput* textH = dynamic_cast<VKTextInput*>( _toolBox->_inView.getChildByIdentifier("heightText") );
-    assert(textH);
-    textH->setContent( std::to_string(_selected->getSize().height));
-    
-    VKTextInput* textID = dynamic_cast<VKTextInput*>( _toolBox->_inView.getChildByIdentifier("idText") );
-    assert(textID);
-    textID->setContent( _selected->identifier);
-    
-    
-    textW->setNeedsRedraw();
-    textH->setNeedsRedraw();
-    textID->setNeedsRedraw();
 }
 
 void BuilderMainView::widthContentChanged( int val)
@@ -275,37 +235,60 @@ void BuilderMainView::heightContentChanged( int val)
     }
 }
 
-void BuilderMainView::textContentChanged( VKSender* sender)
+void BuilderMainView::textContentChanged(const std::string &content)
 {
+    printf("Content changed to '%s'\n" ,content.c_str());
+    
+    if( _selected)
+    {
+        
+        if( VKButton* bt = dynamic_cast<VKButton*>(_selected) )
+        {
+            bt->setText( content );
+            bt->setNeedsRedraw();
+            
+            return;
+        }
+        else if( VKImage* img = dynamic_cast<VKImage*>(_selected))
+        {
+            img->setFile( content );
+            img->setNeedsRedraw();
+        }
+        else if( VKLabel* lbl = dynamic_cast<VKLabel*>(_selected))
+        {
+            lbl->setContent(content);
+            lbl->setNeedsRedraw();
+        }
+        else if( VKDropDown* dp = dynamic_cast<VKDropDown*>(_selected))
+        {
+            VKContextMenu::Items items;
+            
+            std::istringstream f(content);
+            
+            std::string s;
+            while (std::getline(f, s, ';'))
+            {
+                items.push_back(s);
+            }
+            
+            dp->setItems(items);
+            dp->setNeedsRedraw();
+            }
+    }
+    
+/*
     if( sender == &_toolBox->_text)
     {
-        if( _selected)
-        {
-            
-            if( VKButton* bt = dynamic_cast<VKButton*>(_selected) )
-            {
-                bt->setText(_toolBox->_text.getContent());
-                bt->setNeedsRedraw();
-                
-                return;
-            }
-            else if( VKImage* img = dynamic_cast<VKImage*>(_selected))
-            {
-                img->setFile(_toolBox->_text.getContent());
-                img->setNeedsRedraw();
-            }
-            else if( VKLabel* lbl = dynamic_cast<VKLabel*>(_selected))
-            {
-                lbl->setContent(_toolBox->_text.getContent());
-                lbl->setNeedsRedraw();
-            }
-        }
+ 
     }
+*/
 }
 
 void BuilderMainView::colorEditEnded( const GXColor& col)
 {
+    
     _selected->background = col;
+    _selected->setNeedsRedraw();
     //_selected->setNeedsRedraw();
 }
 

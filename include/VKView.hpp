@@ -55,6 +55,12 @@ public:
     std::string identifier;
     
     VKView* getChildByIdentifier( const std::string &id) const;
+    
+    template <typename T> T getChildByIdentifierAs(const std::string &id) const
+    {
+        return dynamic_cast<T>(getChildByIdentifier(id));
+    }
+    
 
     
 protected:

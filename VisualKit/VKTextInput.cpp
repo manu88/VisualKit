@@ -174,5 +174,7 @@ void VKTextInput::paint( GXContext* context , const GXRect& bounds)
 
 bool VKTextInput::serialize( GB::VariantMap& obj) const
 {
+    obj.insert(std::make_pair("SingleLine", isSingleLine()));
+    
     return VKView::serialize(obj);
 }

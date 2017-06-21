@@ -54,7 +54,7 @@ public:
     void colorEditEnded( const GXColor& col);
     void actionSave( VKSender* sender);
     void actionLoad( VKSender* sender);
-    void textContentChanged( VKSender* sender);
+    void textContentChanged( const std::string &content);
     
     void widthContentChanged( int val);
     void heightContentChanged( int val );

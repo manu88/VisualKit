@@ -71,27 +71,58 @@ _mainView(mainView)
     addChild(&_itemsDropBown);
     
     
-
-    
-    
-    _text.setSingleLine(true);
-    _text.setBounds(GXRectMake(10, 70, 80, 30));
-    _text.editingEnded = std::bind(&BuilderMainView::textContentChanged , _mainView , std::placeholders::_1);
-    addChild(&_text);
-    
-    _inWidth.setSingleLine(true);
-    _inWidth.setBounds(GXRectMake(10, 110, 80, 30));
-    //_inWidth.editingEnded = std::bind(&BuilderMainView::widthContentChanged , _mainView , std::placeholders::_1);
-    addChild(&_inWidth);
-    
-    _inHeight.setSingleLine(true);
-    _inHeight.setBounds(GXRectMake(100, 80, 80, 30));
-    //_inHeight.editingEnded = std::bind(&BuilderMainView::heightContentChanged , _mainView , std::placeholders::_1);
-    addChild(&_inHeight);
-    
-    _inView.setBounds(GXRectMake(5, 140, 250, 200));
+    _inView.setBounds(GXRectMake(5, 80, 250, 400));
     VKStoryboard::createFromFile(&_inView, "InspectorView.xml" , this);
     addChild(&_inView);
+}
+
+void BuilderToolBox::updateSelected( VKView* selected)
+{
+    assert(selected);
+    
+    VKTextInput* textW = dynamic_cast<VKTextInput*>( _inView.getChildByIdentifier("widthText") );
+    assert(textW);
+    textW->setContent( std::to_string( selected->getSize().width));
+    
+    
+    //heightText
+    VKTextInput* textH = dynamic_cast<VKTextInput*>( _inView.getChildByIdentifier("heightText") );
+    assert(textH);
+    textH->setContent( std::to_string( selected->getSize().height));
+    
+    VKTextInput* textID = dynamic_cast<VKTextInput*>( _inView.getChildByIdentifier("idText") );
+    assert(textID);
+    textID->setContent( selected->identifier);
+    
+    
+    VKTextInput* textSRC = dynamic_cast<VKTextInput*>( _inView.getChildByIdentifier("srcText") );
+    assert(textSRC);
+    
+    if( const VKButton* vt = dynamic_cast<const VKButton*>(selected))
+    {
+        textSRC->setContent(vt->getText());
+    }
+    else if( const VKLabel* lbl = dynamic_cast<const VKLabel*>(selected))
+    {
+        textSRC->setContent(lbl->getContent());
+    }
+    else if( const VKDropDown* dp = dynamic_cast<const VKDropDown*>(selected))
+    {
+        std::string str;
+        for( const auto &item :dp->getItems())
+        {
+            str+= item +";";
+        }
+        
+        textSRC->setContent(str);
+    }
+    
+    
+    textW->setNeedsRedraw();
+    textH->setNeedsRedraw();
+    textID->setNeedsRedraw();
+    textSRC->setNeedsRedraw();
+    
 }
 
 void BuilderToolBox::paint( GXContext* context , const GXRect& bounds)
@@ -132,9 +163,34 @@ void BuilderToolBox::onStoryboardAction(VKSender* sender)
     }
     else if( baseView->identifier == "heightText" )
     {
-        VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
+        const VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
         _mainView->heightContentChanged( std::stoi(view->getContent()));
 
+    }
+    else if( baseView->identifier == "opaqueCheck")
+    {
+        if( _mainView->_selected)
+        {
+            const VKCheckBox* check = dynamic_cast< const VKCheckBox* >(baseView);
+            _mainView->_selected->setOpaque(check->getState());
+        }
+    }
+    else if( baseView->identifier == "singleLineCheck")
+    {
+        if( _mainView->_selected)
+        {
+            const VKCheckBox* check = dynamic_cast< const VKCheckBox* >(baseView);
+            
+            if( VKTextInput* textLine = dynamic_cast<VKTextInput*>(_mainView->_selected))
+            {
+                textLine->setSingleLine(check->getState());
+            }
+        }
+    }
+    else if( baseView->identifier == "srcText")
+    {
+        const VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
+        _mainView->textContentChanged( view->getContent());
     }
     else
     {
