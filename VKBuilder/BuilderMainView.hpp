@@ -58,7 +58,7 @@ public:
     
     void widthContentChanged( int val);
     void heightContentChanged( int val );
-    
+    void zPosChanged(int val);
     void setIdentifier( const std::string &id);
     
     void itemSelectionChanged();

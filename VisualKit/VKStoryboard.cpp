@@ -46,6 +46,11 @@ static bool createBase(VKView* v , const GB::VariantMap &desc)
         assert(_bounds.size() == 4);
         v->background = GXColorMake(_color.at(0).getFloat(), _color.at(1).getFloat(), _color.at(2).getFloat() , _color.at(3).getFloat());
     }
+    
+    if (desc.count("Z"))
+    {
+        v->setZPos( desc.at("Z").getInt());
+    }
     /*
     if( desc.count("Opaque"))
     {

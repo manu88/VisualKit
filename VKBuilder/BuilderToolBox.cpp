@@ -66,6 +66,10 @@ void BuilderToolBox::updateSelected( VKView* selected)
     assert(textID);
     textID->setContent( selected->identifier);
     
+    VKTextInput* textZ = dynamic_cast<VKTextInput*>( _inView.getChildByIdentifier("zText") );
+    assert( textZ );
+    textZ->setContent( std::to_string( selected->getZPos() ) );
+    
     
     VKTextInput* textSRC = dynamic_cast<VKTextInput*>( _inView.getChildByIdentifier("srcText") );
     assert(textSRC);
@@ -94,6 +98,7 @@ void BuilderToolBox::updateSelected( VKView* selected)
     textH->setNeedsRedraw();
     textID->setNeedsRedraw();
     textSRC->setNeedsRedraw();
+    textZ->setNeedsRedraw();
     
 }
 
@@ -167,6 +172,11 @@ void BuilderToolBox::onStoryboardAction(VKSender* sender)
     else if( baseView->identifier == "addWidget")
     {
         _mainView->addItemAction(sender);
+    }
+    else if( baseView->identifier == "zText")
+    {
+        const VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
+        _mainView->zPosChanged(std::stoi(view->getContent()));
     }
     else
     {

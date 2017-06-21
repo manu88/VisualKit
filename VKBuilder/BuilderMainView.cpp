@@ -272,6 +272,14 @@ void BuilderMainView::heightContentChanged( int val)
     }
 }
 
+void BuilderMainView::zPosChanged(int val)
+{
+    if( _selected)
+    {
+        _selected->setZPos(val);
+    }
+}
+
 void BuilderMainView::textContentChanged(const std::string &content)
 {
     printf("Content changed to '%s'\n" ,content.c_str());
