@@ -323,6 +323,8 @@ void BuilderMainView::textContentChanged(const std::string &content)
 
 void BuilderMainView::colorEditEnded( const GXColor& col)
 {
+    if( !_selected)
+        return;
     
     _selected->background = col;
     _selected->setNeedsRedraw();

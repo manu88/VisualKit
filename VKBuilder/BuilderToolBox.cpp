@@ -27,7 +27,7 @@ _mainView(mainView)
     _bttonLoad.onClic = std::bind(&BuilderMainView::actionLoad, _mainView , std::placeholders::_1);
     addChild(&_bttonLoad);
     
-    
+    /*
     _itemsDropBown.setBounds(GXRectMake(10, 40, 60, 20));
     _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput" , "slider" , "dropDown" , "checkBox"});
     
@@ -41,7 +41,7 @@ _mainView(mainView)
     };
     
     addChild(&_itemsDropBown);
-    
+    */
     
     _inView.setBounds(GXRectMake(5, 80, 250, 400));
     VKStoryboard::createFromFile(&_inView, "InspectorView.xml" , this);

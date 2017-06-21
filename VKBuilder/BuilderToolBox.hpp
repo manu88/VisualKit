@@ -30,7 +30,7 @@ public:
     void updateSelected( VKView* selected);
     void onStoryboardAction(VKSender* sender) override;
     
-    VKDropDown _itemsDropBown;
+//    VKDropDown _itemsDropBown;
     
     VKButton _bttonSave;
     VKButton _bttonLoad;

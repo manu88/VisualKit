@@ -71,14 +71,36 @@ void ColorPickerView::colorEditEnded(VKSender* )
 
 void ColorPickerView::onStoryboardAction(VKSender* sender)
 {
-    const VKSlider* slider = dynamic_cast<const VKSlider*>(sender);
-    assert(slider);
+    assert(sender);
+    const VKView* base = dynamic_cast<const VKView*>(sender);
+
+    if( base->getClassName() == "VKSlider")
+    {
 
     _mainView->colorEditEnded(GXColorMake( getChildByIdentifierAs<const VKSlider*>("rSlider")->getPosition(),
                                            getChildByIdentifierAs<const VKSlider*>("gSlider")->getPosition(),
                                            getChildByIdentifierAs<const VKSlider*>("bSlider")->getPosition(),
                                            getChildByIdentifierAs<const VKSlider*>("aSlider")->getPosition()
                                           ));
+    }
+    else if( base->identifier == "preset")
+    {
+        
+        const VKDropDown* dp = dynamic_cast<const VKDropDown*>(sender);
+        
+        const auto colorName = dp->getSelectedItem();//.c_str();
+        printf("Select preset color : '%s'\n" ,colorName.c_str() );
+        
+        
+        if( GXColors::ColorsNames.count(colorName.c_str()))
+        {
+            _mainView->colorEditEnded( GXColors::ColorsNames.at( colorName ));
+        }
+        else
+        {
+            printf("Color '%s' not found \n" , colorName.c_str());
+        }
+    }
 }
 
 bool ColorPickerView::serialize( GB::VariantMap& ) const

@@ -20,6 +20,8 @@ _menu(nullptr)
     setClassName( "VKDropDown");
     background = GXColors::Gray;
     setOpaque(false);
+    
+    setItems({"Item1"});
 
 }
 
