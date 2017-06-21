@@ -87,6 +87,43 @@ void BuilderMainView::actionSave( VKSender* )
     }
 }
 
+void BuilderMainView::addItemAction( VKSender* sender )
+{
+    const VKDropDown* dp = dynamic_cast<const VKDropDown*>(sender);
+    assert(dp);
+    
+    switch (dp->getSelectedIndex())
+    {
+        case 0:
+            addButton();
+            break;
+            
+        case 1:
+            addLabel();
+            break;
+        case 2:
+            addImage();
+            break;
+        case 3:
+            addTextInput();
+            break;
+            
+        case 4:
+            addSlider();
+            break;
+            
+        case 5:
+            addDropDown();
+            break;
+        case 6:
+            addCheckBox();
+            break;
+            
+        default:
+            break;
+    }
+}
+
 void BuilderMainView::addButton()
 {
     VKButton* item = new VKButton;

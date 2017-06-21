@@ -30,41 +30,13 @@ _mainView(mainView)
     
     _itemsDropBown.setBounds(GXRectMake(10, 40, 60, 20));
     _itemsDropBown.setItems({ "Button" , "Label" , "Image" , "TextInput" , "slider" , "dropDown" , "checkBox"});
+    
     _itemsDropBown.selectionDidChange = [this](VKSender* obj)
     {
-        const VKDropDown* dp = dynamic_cast<const VKDropDown*>(obj);
-        assert(dp);
+
         
-        switch (dp->getSelectedIndex())
-        {
-            case 0:
-                _mainView->addButton();
-                break;
-                
-            case 1:
-                _mainView->addLabel();
-                break;
-            case 2:
-                _mainView->addImage();
-                break;
-            case 3:
-                _mainView->addTextInput();
-                break;
-                
-            case 4:
-                _mainView->addSlider();
-                break;
-                
-            case 5:
-                _mainView->addDropDown();
-                break;
-            case 6:
-                _mainView->addCheckBox();
-                break;
-                
-            default:
-                break;
-        }
+        _mainView->addItemAction(obj);
+        
         
     };
     
@@ -191,6 +163,10 @@ void BuilderToolBox::onStoryboardAction(VKSender* sender)
     {
         const VKTextInput* view = dynamic_cast<VKTextInput* >(baseView);
         _mainView->textContentChanged( view->getContent());
+    }
+    else if( baseView->identifier == "addWidget")
+    {
+        _mainView->addItemAction(sender);
     }
     else
     {

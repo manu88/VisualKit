@@ -29,7 +29,7 @@ void VKContextMenu::setItems( const VKContextMenu::Items &items) noexcept
     if( _items.size() != items.size())
     {
         const size_t count = items.size() == 0? 1 : items.size();
-        setSize( GXSizeMake(100, count  * 20 ));
+        setSize( GXSizeMake(getSize().width, count  * 20 ));
     }
     _items = items;
     

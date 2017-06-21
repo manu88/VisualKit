@@ -33,7 +33,7 @@ public:
     
 
 
-    
+    void addItemAction( VKSender* );
     void addButton();
     void addLabel();
     void addImage();

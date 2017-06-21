@@ -58,9 +58,10 @@ bool VKDropDown::touchEnded( const GXTouch &t)
         
         const GXPoint c = getCoordsInParent(win);
         
-        _menu->setSize(GXSizeMake(getSize().width, 200));
+
         _menu->setPos( c  );
         _menu->setItems( _items );
+        _menu->setSize( GXSizeMake( getSize().width, _menu->getSize().height) );
         win->pushContextMenu(_menu);
     }
     else
